@@ -1,31 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
-import { UserApiService } from '../services/user-api.service';
 import { Router } from '@angular/router';
+import { UserApiService } from '../services/user-api.service';
+
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class RegisterComponent implements OnInit 
+export class ProfileComponent implements OnInit 
 {
-  user = new User();
+  user: User;
+  isLoggedIn: boolean;
+  authType;
   errors = [];
 
   constructor(
-    private apiUser: UserApiService,
     private router: Router,
+    private apiUser: UserApiService,
   ) { }
 
   ngOnInit() {
+    let str = sessionStorage.getItem("geov_user");
+    if (str != null)
+    {
+      this.user = JSON.parse(str);
+      this.isLoggedIn = true;
+      this.authType = "session";
+    }
+    else
+    {
+      let str2 = localStorage.getItem("geov_user");
+      if (str2 != null)
+      {
+        this.user = JSON.parse(str2);
+        this.isLoggedIn = true;
+        this.authType = "local";
+      }
+      else
+      {
+        this.user = null;
+        this.isLoggedIn = false;
+      }
+    }
+    if (!this.isLoggedIn)
+    {
+      this.router.navigateByUrl("/");
+    }
   }
 
-  register(myform, agree, confirm_pass) 
+  updateProfile(confirmedPass)
   {
+    console.log(this.user);
     let finalCheck = true;
 
-    if (this.user.email == null)
+    if (this.user.email == "")
     {
       let found = false;
       this.errors.forEach(element => {
@@ -57,7 +87,7 @@ export class RegisterComponent implements OnInit
 
     let emailValidation = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.user.email);
 
-    if ((!emailValidation) && (this.user.email != null))
+    if ((!emailValidation) && (this.user.email != ""))
     {
       let found = false;
       this.errors.forEach(element => {
@@ -87,7 +117,7 @@ export class RegisterComponent implements OnInit
       }
     }
 
-    if (this.user.username == null)
+    if (this.user.username == "")
     {
       let found = false;
       this.errors.forEach(element => {
@@ -117,7 +147,7 @@ export class RegisterComponent implements OnInit
       }
     }
 
-    if (this.user.password == null)
+    if (this.user.password == "")
     {
       let found = false;
       this.errors.forEach(element => {
@@ -147,7 +177,7 @@ export class RegisterComponent implements OnInit
       }
     }
 
-    if ((this.user.password != confirm_pass) && (this.user.password != null))
+    if ((this.user.password != confirmedPass) && (this.user.password != ""))
     {
       let found = false;
       this.errors.forEach(element => {
@@ -207,36 +237,6 @@ export class RegisterComponent implements OnInit
       }
     }
 
-    if (!agree)
-    {
-      let found = false;
-      this.errors.forEach(element => {
-        if (element === "You must agree with our terms of use.")
-        {
-          found = true;
-        }
-      });
-      if (!found)
-      {
-        this.errors.push("You must agree with our terms of use.");
-      }
-      finalCheck = false;
-    }
-    else
-    {
-      let found = false;
-      this.errors.forEach(element => {
-        if (element === "You must agree with our terms of use.")
-        {
-          found = true;
-        }
-      });
-      if (found)
-      {
-        this.errors.splice(this.errors.indexOf("You must agree with our terms of use."), 1);
-      }
-    }
-
     let today = new Date();
     let formatDay = new Date(this.user.dob);
     console.log("today : " + today);
@@ -271,10 +271,9 @@ export class RegisterComponent implements OnInit
         this.errors.splice(this.errors.indexOf("Date of birth is invalid."), 1);
       }
     }
-    
+
     if (finalCheck)
     {
-      this.user.role = "user";
       this.user.status = "inactive";
       if (this.user.firstName == null)
       {
@@ -284,10 +283,8 @@ export class RegisterComponent implements OnInit
       {
         this.user.lastName = "";
       }
-      this.apiUser.createUser(this.user).subscribe(response =>
+      this.apiUser.updateUser(this.user).subscribe(response =>
         {
-          console.log(response);
-          console.log("type is : "+typeof(response));
           if (response === "Username or email already used.")
           {
             let found = false;
@@ -305,11 +302,14 @@ export class RegisterComponent implements OnInit
           else
           {
             this.errors.splice(this.errors.indexOf("Username or email already used."), 1);
-            this.user.id_user = response;
-            sessionStorage.setItem("geov_user", JSON.stringify(this.user));
-            this.router.navigateByUrl("account-registered").then(() => {
-              window.location.reload();
-            });
+            if (this.authType === "session")
+            {
+              sessionStorage.setItem("geov_user", JSON.stringify(this.user));
+            }
+            else
+            {
+              localStorage.setItem("geov_user", JSON.stringify(this.user));
+            }
           }
         }
       );

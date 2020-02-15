@@ -55,4 +55,13 @@ export class UserApiService
       catchError(this.handleError)
     )
   }
+
+  updateUser(user): Observable<string> {
+    return this.http
+    .put<string>(this.base_path+"/user/update", JSON.stringify(user), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
 }

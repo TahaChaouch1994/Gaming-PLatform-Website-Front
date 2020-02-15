@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountAddedComponent } from './account-added/account-added.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { AccountAddedComponent } from './account-added/account-added.component';
     HeaderComponent,
     FooterComponent,
     RegisterComponent,
-    AccountAddedComponent
+    AccountAddedComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

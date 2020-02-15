@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,9 @@ export class HeaderComponent implements OnInit {
   user;
   isLoggedIn: boolean = false;
   
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit()
   {
@@ -34,8 +37,6 @@ export class HeaderComponent implements OnInit {
         this.isLoggedIn = false;
       }
     }
-    console.log(this.user);
-    console.log(this.isLoggedIn);
   }
 
   logoutUser()
@@ -43,6 +44,11 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem("geov_user");
     sessionStorage.removeItem("geov_user");
     location.reload();
+  }
+
+  goToSettings()
+  {
+    this.router.navigateByUrl("profile");
   }
 
 }

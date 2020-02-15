@@ -1,0 +1,87 @@
+<ul class="nk-breadcrumbs">
+    <li><span>Profile</span></li>
+</ul>
+<div class="nk-gap-1"></div>
+<div class="nk-tabs">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" href="#profile-1-1" role="tab" data-toggle="tab">Account</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#profile-1-2" role="tab" data-toggle="tab">Stream</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade show active" id="profile-1-1">
+            <div class="nk-gap"></div>
+            <div class="nk-info-box nk-info-box-noicon">
+                <form (ngSubmit)="updateProfile(confirm_pass.value)">
+                    <div class="col-md-12">
+
+                        <div class="nk-info-box text-warning" *ngIf="user.status == 'inactive'">
+                            <div class="nk-info-box-icon">
+                                <i class="ion-android-notifications-none"></i>
+                            </div>
+                            <h3>Warning!</h3>
+                            <em>Your account is still not verified to this moment, some features are disabled until you verify your account.</em>
+                        </div>
+
+                        <ul class="text-main-1 pl-20" *ngIf="errors.length > 0">
+                            <li class="text-white" *ngFor="let error of errors"><span>{{ error }}</span></li>
+                        </ul>
+
+                        <label>Email</label>
+                        <input type="email" required name="email" class="form-control" placeholder="Email (required)" [(ngModel)]="user.email">
+                        <div class="nk-gap"></div>
+
+                        <label>Username</label>
+                        <input type="text" required name="username" class="form-control" placeholder="Username (required)" [(ngModel)]="user.username">
+                        <div class="nk-gap"></div>
+
+                        <div class="row vertical-gap sm-gap">
+                            <div class="col-md-6">
+                                <label>Password</label>
+                                <input type="password" required name="password" class="form-control" placeholder="Password (required)" [(ngModel)]="user.password">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Confirm Password</label>
+                                <input type="password" required name="confirm_pass" class="form-control" placeholder="Confirm (required)" #confirm_pass>
+                            </div>
+                        </div>
+                        <div class="nk-gap"></div>
+
+                        <label>Date of birth</label>
+                        <input type="date" required name="dob" class="form-control" [(ngModel)]="user.dob">
+                        <div class="nk-gap"></div>
+
+                        <div class="row vertical-gap sm-gap">
+                            <div class="col-md-6">
+                                <label>First Name</label>
+                                <input type="text" value="" name="firstName" class="form-control" placeholder="First Name" [(ngModel)]="user.firstName">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Last Name</label>
+                                <input type="text" value="" name="lastName" class="form-control" placeholder="Last Name" [(ngModel)]="user.lastName">
+                            </div>
+                        </div>
+                        <div class="nk-gap"></div>
+                        
+                        <button type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-hover-color-info">
+                            <span class="icon ion-paper-airplane"></span>
+                            Update</button>
+
+                        <div class="nk-gap"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="nk-gap"></div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="profile-1-2">
+            <div class="nk-gap"></div>
+            <div class="nk-info-box nk-info-box-noicon">
+                <p>Profile 2</p>
+            </div>
+            <div class="nk-gap"></div>
+        </div>
+    </div>
+</div>

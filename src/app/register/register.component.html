@@ -1,4 +1,4 @@
-<form action="#" class="nk-form text-white" #myform="ngForm">
+<form action="#" class="nk-form text-white" #myform="ngForm" (ngSubmit)="register(myform, agree.checked, confirm_pass.value)">
 
     <ul class="text-main-1 pl-20" *ngIf="errors.length > 0">
         <li class="text-white" *ngFor="let error of errors"><span>{{ error }}</span></li>
@@ -34,7 +34,7 @@
             <div class="nk-gap"></div>
             <input type="checkbox" value="agreed" name="agreed" #agree> I agree with the terms of use.
             <div class="nk-gap"></div>
-            <button type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block" (click)="register(myform, agree.checked, confirm_pass.value)">Sign Up</button>
+            <input type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block" value="Sign Up" >
         </div>
     </div>
 </form>

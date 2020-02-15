@@ -1,16 +1,22 @@
-<form action="#" class="nk-form text-white">
+<form class="nk-form text-white" #logform="ngForm" (ngSubmit)="verifyLogin(login.value, password.value, rememberme.checked)">
+
+    <ul class="text-main-1 pl-20" *ngIf="errors.length > 0">
+        <li class="text-white" *ngFor="let error of errors"><span>{{ error }}</span></li>
+    </ul>
+
+
     <div class="row vertical-gap">
         <div class="col-md-6">
             Use email and password:
 
             <div class="nk-gap"></div>
-            <input type="email" value="" name="email" class=" form-control" placeholder="Email">
+            <input type="email" value="" name="email" class="form-control" placeholder="Email or Username" #login>
 
             <div class="nk-gap"></div>
-            <input type="password" value="" name="password" class="required form-control" placeholder="Password">
+            <input type="password" value="" name="password" class="required form-control" placeholder="Password" #password>
 
             <div class="nk-gap"></div>
-            <input type="checkbox" value="Test"> Remember me
+            <input type="checkbox" value="remember" #rememberme> Remember me
         </div>
         <div class="col-md-6">
             Or social account:
@@ -28,7 +34,7 @@
     <div class="nk-gap-1"></div>
     <div class="row vertical-gap">
         <div class="col-md-6">
-            <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block">Sign In</a>
+            <input type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block" value="Sign In" >
         </div>
         <div class="col-md-6">
             <div class="mnt-5">

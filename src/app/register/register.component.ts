@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { Validators } from '@angular/forms';
+import { UserApiService } from '../services/user-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +14,10 @@ export class RegisterComponent implements OnInit
   user = new User();
   errors = [];
 
-  constructor() { }
+  constructor(
+    private apiUser: UserApiService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
   }
@@ -269,6 +274,41 @@ export class RegisterComponent implements OnInit
     }
 
     console.log(finalCheck);
+
+    if (finalCheck)
+    {
+      this.user.role = "user";
+      this.user.status = "inactive";
+      this.apiUser.createUser(this.user).subscribe(response =>
+        {
+          console.log(response);
+          console.log("type is : "+typeof(response));
+          if (response === "Username or email already used.")
+          {
+            let found = false;
+            this.errors.forEach(element => {
+              if (element === "Username or email already used.")
+              {
+                found = true;
+              }
+            });
+            if (!found)
+            {
+              this.errors.push("Username or email already used.");
+            }
+          }
+          else
+          {
+            this.errors.splice(this.errors.indexOf("Username or email already used."), 1);
+            this.user.id_user = response;
+            sessionStorage.setItem("geov_user", JSON.stringify(this.user));
+            this.router.navigateByUrl("account-registered").then(() => {
+              window.location.reload();
+            });
+          }
+        }
+      );
+    }
   }
 
 }

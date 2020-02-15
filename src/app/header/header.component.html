@@ -49,12 +49,15 @@
                     </li>
 
 
-                    <li>
+                    <li *ngIf="!isLoggedIn">
                         <a href="#" data-toggle="modal" data-target="#modalLogin">
                             <span class="fa fa-user"></span>
                         </a>
                     </li>
 
+                    <li *ngIf="isLoggedIn">
+                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" (click)="logoutUser()">Logout</button>
+                    </li>
 
                     <li>
                         <span class="nk-cart-toggle">

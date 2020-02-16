@@ -53,7 +53,7 @@ export class RtournamentformComponent implements OnInit {
   maxteams='';
   createtype='';
   
-
+//ok
 
 
   justClick() {

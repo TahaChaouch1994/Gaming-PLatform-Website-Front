@@ -13,6 +13,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { RequestTournamentComponent } from './request-tournament/request-tournament.component';
 import { RtournamentformComponent } from './rtournamentform/rtournamentform.component';
 import { VerifyUserComponent } from './verify-user/verify-user.component';
+import { ForumHomeComponent } from './forum-home/forum-home.component';
+import { ListThreadsComponent } from './list-threads/list-threads.component';
+import { ThreadDetailsComponent } from './thread-details/thread-details.component';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { VerifyUserComponent } from './verify-user/verify-user.component';
     ProfileComponent,
     RequestTournamentComponent,
     RtournamentformComponent,
-    VerifyUserComponent
+    VerifyUserComponent,
+    ForumHomeComponent,
+    ListThreadsComponent,
+    ThreadDetailsComponent
   ],
   imports: [
     BrowserModule,

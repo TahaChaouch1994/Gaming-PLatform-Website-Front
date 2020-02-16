@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccountAddedComponent } from './account-added/account-added.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RequestTournamentComponent } from './request-tournament/request-tournament.component';
+import { RtournamentformComponent } from './rtournamentform/rtournamentform.component';
 
 
 const routes: Routes = [
   { path: 'account-registered', component: AccountAddedComponent },
   { path: 'profile', component: ProfileComponent },
+  {path: 'requesttournament',component: RequestTournamentComponent},
+  {path: 'requesttournamentform',component: RtournamentformComponent}
 ];
 
 @NgModule({

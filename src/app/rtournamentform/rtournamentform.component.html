@@ -1,0 +1,152 @@
+
+<div class="container">
+    <div class="nk-footer">
+        <label style="margin-left: 420px;margin-top: 30px;" > <h4>Create New Tournament </h4></label>
+<form action="#" class="nk-form text-white" #myform="ngForm">
+
+
+    <div class="row vertical-gap">
+        <div class="col-md-12">
+            <div class="nk-gap"></div>
+            
+            
+
+            <label style="margin-left: 55px;">Selected Game</label>
+            <input readonly="true" class="form-control"   style="width: 280px;margin-left: 50px;color: black;" placeholder="League Of Legend"  >
+            <br/><br/>
+            
+            <div class="row vertical-gap sm-gap">
+                <div class="col-md-2">
+                    <label style="margin-left: 55px;">Type : </label>
+                </div>
+
+                <div class="col-md-2">
+                <input type="radio" id="male" name="gender" value="male" class=""> &nbsp;&nbsp;
+                <label for="single" style="color: darkgray;">private</label> <br/>
+                <input type="radio" id="male" name="gender" value="male" class=""> &nbsp;&nbsp;
+                <label for="team" style="color: darkgray;">public</label>
+                </div>
+
+            </div>
+            
+
+            <br/>
+            <label style="margin-left: 55px;">Tournament Name</label>
+            <input type="email" value="" required name="email" class="form-control"   style="width: 280px;margin-left: 50px;">
+            <br/>
+
+            <div class="row vertical-gap sm-gap">
+                <div class="col-md-2">
+                    <label style="margin-left: 55px;">Start Date</label>
+                    <input type="date"   class="form-control"   style="width: 160px;margin-left: 50px;">
+                </div>
+                <div class="col-md-2">
+                    <label style="margin-left: 55px;">Start Time </label>
+                    <input type="time"  required name="email" class="form-control"   style="width: 90px;margin-left: 50px;">
+                </div>
+            </div>
+             <br/>
+
+            <div class="row vertical-gap sm-gap">
+                <div class="col-md-4">
+                    <label style="margin-left: 55px;">Game Region/Server</label>
+                    <select id="royaume" style="width: 280px;margin-left: 50px;height: 33px;">
+                        <option value="Brazil">Brazil</option>
+                        <option value="EU Nordic &  East">EU Nordic &  East</option>
+                        <option value="EU West" >EU West</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Korea">Korea</option>
+                        <option value="Latin America North">Latin America North</option>
+                        <option value="Latin America South">Latin America South</option>
+                        <option value="North America">North America</option>
+                        <option value="Oceania">Oceania</option>
+                        <option value="Russia">Russia</option>
+                        <option value="Turkey">Turkey</option>
+                      </select>
+
+
+                </div>
+                <div class="col-md-4">
+                    <label style="margin-left: 55px;">Game Map </label>
+                    <select id="map" style="width: 280px;margin-left: 50px;height: 33px;">
+                        <option value="Summoners Rift">Summoners Rift</option>
+                        <option value="Twisted Treeline">Twisted Treeline</option>
+                        <option value="Howling Abyss">Howling Abyss</option>
+                      </select>
+                </div>
+                <div class="col-md-4">
+                    <label style="margin-left: 55px;"> Game Format </label>
+                    <select id="map" style="width: 280px;margin-left: 50px;height: 33px;">
+                        <option value="Tournament Draft">Tournament Draft</option>
+                        <option value="Blind Pick">Blind Pick</option>
+                        <option value="Draft Mode">Draft Mode</option>
+                        <option value="All Random Abyss">All Random Abyss</option>
+                      </select>
+                </div>
+            </div>
+            <br/><br/>
+
+            <div class="row vertical-gap sm-gap">
+                <div class="col-md-2">
+                    <label style="margin-left: 55px;">Entry : </label>
+                </div>
+
+                <div class="col-md-2">
+                <input type="radio" id="male" name="gender" value="male" class=""> &nbsp;&nbsp;
+                <label for="single" style="color: darkgray;">Single Player</label> <br/>
+                <input type="radio" id="male" name="gender" value="male" class=""> &nbsp;&nbsp;
+                <label for="team" style="color: darkgray;">Team</label>
+                </div>
+
+            </div>
+
+
+            <br/><br/>
+
+            <div class="row vertical-gap sm-gap">
+                <div class="col-md-3">
+                    <label style="margin-left: 50px;">Entry fee (per person) ESD :</label>
+                    <input type="number" class="form-control" min="1" step="any"  value="1" style="width: 80px;margin-left: 50px;"/>
+                </div>
+
+
+                <div class="col-md-3">
+                    <label style="margin-left: 55px;">Minimum Teams </label>
+                    <input type="number" class="form-control" min="1" step="any"  value="2" max="16" style="width: 80px;margin-left: 50px;"/>
+                </div>
+                <div class="col-md-3">
+                    <label style="margin-left: 55px;"> Maximum Teams </label>
+                    <input type="number" class="form-control" min="1" step="any"  value="2" max="32" style="width: 80px;margin-left: 50px;"/>
+                </div>
+            </div>
+
+            <br/> <br/> <br/>
+
+            <div class="row vertical-gap sm-gap">
+                <div class="col-md-3">
+                    <label style="margin-left: 55px;">You Are Creating This Tournament As A  : </label>
+                </div>
+
+                <div class="col-md-3">
+                <input type="radio" id="male" name="gender" value="male" class=""> &nbsp;&nbsp;
+                <label for="single" style="color: darkgray;">Spectator</label> <br/>
+                <input type="radio" id="male" name="gender" value="male" class=""> &nbsp;&nbsp;
+                <label for="team" style="color: darkgray;">Participant</label>
+                </div>
+
+            </div>
+            <br/><br/>
+
+            <button type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block" style="width: 200px;margin-left: 450px;" >Submit</button>
+            <br/>
+             <br/>
+
+  
+
+        </div>
+    </div>
+</form>
+
+</div>
+</div>
+<br/> <br/> <br/>

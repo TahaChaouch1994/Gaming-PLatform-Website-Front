@@ -22,6 +22,48 @@ export class UserApiService
     })
   }
 
+  getLoggedInUser(): User
+  {
+    let str = sessionStorage.getItem("geov_user");
+    if (str != null)
+    {
+      return JSON.parse(str);
+    }
+    else
+    {
+      let str2 = localStorage.getItem("geov_user");
+      if (str2 != null)
+      {
+        return JSON.parse(str2);
+      }
+      else
+      {
+        return null;
+      }
+    }
+  }
+
+  getSessionInfo(): string
+  {
+    let str = sessionStorage.getItem("geov_user");
+    if (str != null)
+    {
+      return "session";
+    }
+    else
+    {
+      let str2 = localStorage.getItem("geov_user");
+      if (str2 != null)
+      {
+        return "local";
+      }
+      else
+      {
+        return null;
+      }
+    }
+  }
+
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -59,6 +101,15 @@ export class UserApiService
   updateUser(user): Observable<string> {
     return this.http
     .put<string>(this.base_path+"/user/update", JSON.stringify(user), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
+  verifyUser(id, key): Observable<string> {
+    return this.http
+    .get<string>(this.base_path+"/user/verify?id="+id+"&key="+key, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

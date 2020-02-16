@@ -18,6 +18,14 @@
                 <form (ngSubmit)="updateProfile(confirm_pass.value)">
                     <div class="col-md-12">
 
+                        <div class="nk-info-box text-success" *ngIf="updatedSucess">
+                            <div class="nk-info-box-icon">
+                                <i class="ion-checkmark-round"></i>
+                            </div>
+                            <h3>Success!</h3>
+                            <em>Your account has been updated successfully.</em>
+                        </div>
+
                         <div class="nk-info-box text-warning" *ngIf="user.status == 'inactive'">
                             <div class="nk-info-box-icon">
                                 <i class="ion-android-notifications-none"></i>

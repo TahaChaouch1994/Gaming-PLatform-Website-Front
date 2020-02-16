@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit
   user: User;
   isLoggedIn: boolean;
   authType;
+  updatedSucess: boolean = false;
   errors = [];
 
   constructor(
@@ -301,6 +302,7 @@ export class ProfileComponent implements OnInit
           }
           else
           {
+            this.updatedSucess = true;
             this.errors.splice(this.errors.indexOf("Username or email already used."), 1);
             if (this.authType === "session")
             {

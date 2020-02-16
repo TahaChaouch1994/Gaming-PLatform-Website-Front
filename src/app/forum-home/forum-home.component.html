@@ -1,0 +1,133 @@
+
+<div class="nk-gap-1"></div>
+<div class="container">
+    <ul class="nk-breadcrumbs">
+       
+        <li><span>Gaming Lounge</span></li>
+    </ul>
+</div>
+<div class="nk-gap-1"></div>
+
+<ul class="nk-forum">
+
+       <div  *ngFor="let item of listcat">
+        <div  class="nk-accordion" id="accordion-1" role="tablist" aria-multiselectable="true">
+              
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="accordion-1-2-heading">
+                    <a data-toggle="collapse" data-parent="#accordion-1"href="#accordion-1-{{item.id}}" aria-expanded="false" aria-controls="accordion-1-2">
+                        {{item.name}} <span class="panel-heading-arrow fa fa-angle-down"></span>
+                    </a>
+                </div>
+                <div id="accordion-1-{{item.id}}" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="accordion-1-2-heading">
+                        <ul class="nk-forum">  
+                             <li *ngFor="let subs of item.subreddits " >
+                                <div class="nk-forum-icon">
+                                  
+                                        <span class="ion-xbox"></span>
+                                 
+                                </div>
+                                <div class="nk-forum-title">
+                                    <h3><a href="forum-topics.html">{{subs.Topicname}}</a></h3>
+                                    <div class="nk-forum-title-sub">{{subs.description}}</div>
+                                </div>
+                                <div class="nk-forum-count">
+                                    1267 threads
+                                </div>
+                                <div class="nk-forum-activity-avatar">
+                                    <a href="forum-single-topic.html">
+                                        <img src="assets/images/avatar-1.jpg" alt="Hitman">
+                                    </a>
+                                </div>
+                                <div class="nk-forum-activity">
+                                    <div class="nk-forum-activity-title" title="GodLike the only game that I want to play!">
+                                        <a href="forum-single-topic.html">GodLike the only game that I want to play!</a>
+                                    </div>
+                                    <div class="nk-forum-activity-date">
+                                        September 11, 2018
+                                    </div>
+                                </div>
+                            
+                             </ul>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+   
+    <li>
+        <div class="nk-forum-icon">
+            <span class="ion-xbox"></span>
+        </div>
+        <div class="nk-forum-title">
+            <h3><a href="forum-topics.html">GodLike on Xbox One</a></h3>
+            <div class="nk-forum-title-sub">Made replenish set man appear seed moveth let above in</div>
+        </div>
+        <div class="nk-forum-count">
+            321 threads
+        </div>
+        <div class="nk-forum-activity-avatar">
+            <a href="forum-single-topic.html">
+                <img src="assets/images/avatar-2.jpg" alt="Witch Murder">
+            </a>
+        </div>
+        <div class="nk-forum-activity">
+            <div class="nk-forum-activity-title" title="I want game quality like on PC!!!">
+                <a href="forum-single-topic.html">I want game quality like on PC!!!</a>
+            </div>
+            <div class="nk-forum-activity-date">
+                Jule 28, 2018
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="nk-forum-icon">
+            <span class="ion-steam"></span>
+        </div>
+        <div class="nk-forum-title">
+            <h3><a href="forum-topics.html">GodLike on PC (Steam)</a></h3>
+            <div class="nk-forum-title-sub">Make beginning creeping fly divided</div>
+        </div>
+        <div class="nk-forum-count">
+            156 threads
+        </div>
+        <div class="nk-forum-activity-avatar">
+            <a href="forum-single-topic.html">
+                <img src="assets/images/avatar-1.jpg" alt="Hitman">
+            </a>
+        </div>
+        <div class="nk-forum-activity">
+            <div class="nk-forum-activity-title" title="60fps - easy">
+                <a href="forum-single-topic.html">60fps - easy</a>
+            </div>
+            <div class="nk-forum-activity-date">
+                August 18, 2018
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="nk-forum-icon">
+            <span class="ion-fireball"></span>
+        </div>
+        <div class="nk-forum-title">
+            <h3><a href="forum-topics.html">Flame</a></h3>
+            <div class="nk-forum-title-sub">Dominion. Our seasons creepeth so seed which forth gathering second</div>
+        </div>
+        <div class="nk-forum-count">
+            1872 threads
+        </div>
+        <div class="nk-forum-activity-avatar">
+            <a href="forum-single-topic.html">
+                <img src="assets/images/avatar-1.jpg" alt="Hitman">
+            </a>
+        </div>
+        <div class="nk-forum-activity">
+            <div class="nk-forum-activity-title" title="Download game for free?">
+                <a href="forum-single-topic.html">Download game for free?</a>
+            </div>
+            <div class="nk-forum-activity-date">
+                September 5, 2018
+            </div>
+        </div>
+    </li>
+</ul>

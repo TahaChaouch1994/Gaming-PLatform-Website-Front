@@ -10,23 +10,26 @@
 
 <ul class="nk-forum">
 
-       
-        <div class="nk-accordion" id="accordion-1" role="tablist" aria-multiselectable="true">
+       <div  *ngFor="let item of listcat">
+        <div  class="nk-accordion" id="accordion-1" role="tablist" aria-multiselectable="true">
               
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="accordion-1-2-heading">
-                    <a data-toggle="collapse" data-parent="#accordion-1" href="#accordion-1-2" aria-expanded="false" aria-controls="accordion-1-2">
-                        Collapsible 2 <span class="panel-heading-arrow fa fa-angle-down"></span>
+                    <a data-toggle="collapse" data-parent="#accordion-1"href="#accordion-1-{{item.id}}" aria-expanded="false" aria-controls="accordion-1-2">
+                        {{item.name}} <span class="panel-heading-arrow fa fa-angle-down"></span>
                     </a>
                 </div>
-                <div id="accordion-1-2" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="accordion-1-2-heading">
-                        <ul class="nk-forum">   <li>
+                <div id="accordion-1-{{item.id}}" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="accordion-1-2-heading">
+                        <ul class="nk-forum">  
+                             <li *ngFor="let subs of item.subreddits " >
                                 <div class="nk-forum-icon">
-                                    <span class="ion-ios-game-controller-b"></span>
+                                  
+                                        <span class="ion-xbox"></span>
+                                 
                                 </div>
                                 <div class="nk-forum-title">
-                                    <h3><a href="forum-topics.html">Main Game Discussions</a></h3>
-                                    <div class="nk-forum-title-sub">Be seed is air female greater was multiply saying great</div>
+                                    <h3><a href="forum-topics.html">{{subs.Topicname}}</a></h3>
+                                    <div class="nk-forum-title-sub">{{subs.description}}</div>
                                 </div>
                                 <div class="nk-forum-count">
                                     1267 threads
@@ -44,62 +47,13 @@
                                         September 11, 2018
                                     </div>
                                 </div>
-                            </li>
-                            <li class="nk-forum">
-                                <div class="nk-forum-icon">
-                                    <span class="ion-help-buoy"></span>
-                                </div>
-                                <div class="nk-forum-title">
-                                    <h3><a href="forum-topics.html">Guides and Tips</a></h3>
-                                    <div class="nk-forum-title-sub">Lesser saying shall place fifth very winged own made midst</div>
-                                </div>
-                                <div class="nk-forum-count">
-                                    78 threads
-                                </div>
-                                <div class="nk-forum-activity-avatar">
-                                    <a href="forum-single-topic.html">
-                                        <img src="assets/images/avatar-2.jpg" alt="Witch Murder">
-                                    </a>
-                                </div>
-                                <div class="nk-forum-activity">
-                                    <div class="nk-forum-activity-title" title="Install on Windows 95">
-                                        <a href="forum-single-topic.html">Install on Windows 95</a>
-                                    </div>
-                                    <div class="nk-forum-activity-date">
-                                        March 2, 2018
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="nk-forum-icon">
-                                    <span class="ion-playstation"></span>
-                                </div>
-                                <div class="nk-forum-title">
-                                    <h3><a href="forum-topics.html">GodLike on PS4</a></h3>
-                                    <div class="nk-forum-title-sub">Heaven had gathering a seed his won't light firmament of</div>
-                                </div>
-                                <div class="nk-forum-count">
-                                    433 threads
-                                </div>
-                                <div class="nk-forum-activity-avatar">
-                                    <a href="forum-single-topic.html">
-                                        <img src="assets/images/avatar-3.jpg" alt="Wolfenstein">
-                                    </a>
-                                </div>
-                                <div class="nk-forum-activity">
-                                    <div class="nk-forum-activity-title" title="How to solve error with PS Network?">
-                                        <a href="forum-single-topic.html">How to solve error with PS Network?</a>
-                                    </div>
-                                    <div class="nk-forum-activity-date">
-                                        May 19, 2018
-                                    </div>
-                                </div>
-                            </li> </ul>
+                            
+                             </ul>
                 </div>
             </div>
            
         </div>
-    
+    </div>
    
     <li>
         <div class="nk-forum-icon">

@@ -27,13 +27,14 @@ public getallcategories()
 
     let cate = new ForumCategories();
    cate.id = element._id;
-   cate.name = element.nameCategory;
+   cate.name = element.NameCategory;
    
    element.reddiDetails.forEach(z => {
      let sub=new Subreddits();
    sub.id = z._id;
    sub.addtime = z.added;
-   sub.description = z.description;
+   sub.Topicname = z.TopicName
+   sub.description = z.Description;
    sub.category = cate
    cate.subreddits.push(sub);
   

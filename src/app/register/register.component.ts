@@ -306,7 +306,6 @@ export class RegisterComponent implements OnInit
           {
             this.errors.splice(this.errors.indexOf("Username or email already used."), 1);
             this.user.id_user = response;
-            sessionStorage.setItem("geov_user", JSON.stringify(this.user));
             this.router.navigateByUrl("account-registered").then(() => {
               window.location.reload();
             });

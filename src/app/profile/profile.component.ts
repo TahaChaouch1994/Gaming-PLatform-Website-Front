@@ -3,6 +3,7 @@ import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { UserApiService } from '../services/user-api.service';
 import { WalletApiService } from '../services/wallet-api.service';
+import { StreamkeyApiService } from '../services/streamkey-api.service';
 
 
 @Component({
@@ -21,12 +22,14 @@ export class ProfileComponent implements OnInit
   walletBalance = "0";
   askForPassword: boolean = false;
   unlinkError;
+  streamKey;
   errors = [];
 
   constructor(
     private router: Router,
     private apiUser: UserApiService,
     private apiWallet: WalletApiService,
+    private apiStream: StreamkeyApiService,
   ) { }
 
   ngOnInit() {
@@ -38,7 +41,6 @@ export class ProfileComponent implements OnInit
     }
     else
     {
-      console.log(this.user);
       this.apiWallet.userHasWallet(this.user.id_user).subscribe(response => {
         console.log(response);
         if (response === "None")
@@ -51,6 +53,9 @@ export class ProfileComponent implements OnInit
           this.walletBalance = response;
         }
       });
+      this.apiStream.getUserStreamKey(this.user.id_user).subscribe(response => {
+        this.streamKey = response["streamKey"];
+      })
     }
   }
 
@@ -375,6 +380,20 @@ export class ProfileComponent implements OnInit
   closeUnlinkForm()
   {
     this.askForPassword = false;
+  }
+
+  copyStreamKey(inputElement){
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+  }
+
+  resetStreamKey()
+  {
+    this.apiStream.updateUserStreamKey(this.user.id_user).subscribe(response =>
+    {
+      this.streamKey = response;
+    });
   }
 
 }

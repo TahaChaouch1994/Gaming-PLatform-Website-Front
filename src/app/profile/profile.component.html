@@ -89,7 +89,31 @@
         <div role="tabpanel" class="tab-pane fade" id="profile-1-2">
             <div class="nk-gap"></div>
             <div class="nk-info-box nk-info-box-noicon">
-                <p>Profile 2</p>
+                <div class="nk-info-box text-warning" *ngIf="user.status == 'inactive'">
+                    <div class="nk-info-box-icon">
+                        <i class="ion-android-notifications-none"></i>
+                    </div>
+                    <h3>Warning!</h3>
+                    <em>Your account is still not verified to this moment, some features are disabled until you verify your account.</em>
+                </div>
+                <div *ngIf="user.status == 'activated'">
+                    <label>Your stream key</label>
+                    <div class="row vertical-gap sm-gap">
+                        <div class="col-md-10">
+                            <input type="text" style="background-color: transparent;" disabled name="stream_key" class="form-control" value="{{ streamKey }}" #stream_key >
+                            <div class="nk-gap"></div>
+                        </div>
+                        <div class="col-md-1">
+                            <button (click)="copyStreamKey(stream_key)" class="nk-btn nk-btn-outline nk-btn-color-success">Copy</button>
+                            <div class="nk-gap"></div>
+                        </div>
+                        <div class="col-md-1">
+                            <button (click)="resetStreamKey()" class="nk-btn nk-btn-rounded nk-btn-color-main-1">Reset</button>
+                            <div class="nk-gap"></div>
+                        </div>
+                        <label style="color: red;">You should never share your stream key, even our platform's administration team would never ask for it.</label>
+                    </div>
+                </div>
             </div>
             <div class="nk-gap"></div>
         </div>

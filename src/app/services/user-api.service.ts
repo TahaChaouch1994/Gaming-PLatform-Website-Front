@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { User } from '../models/user';
+import { cpus } from 'os';
 
 
 @Injectable({
@@ -27,6 +28,7 @@ export class UserApiService
     let str = sessionStorage.getItem("geov_user");
     if (str != null)
     {
+      console.log("user found");
       return JSON.parse(str);
     }
     else

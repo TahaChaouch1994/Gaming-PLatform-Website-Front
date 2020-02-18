@@ -10,6 +10,9 @@
         <li class="nav-item">
             <a class="nav-link" href="#profile-1-2" role="tab" data-toggle="tab">Stream</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#profile-1-3" role="tab" data-toggle="tab">Wallet</a>
+        </li>
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade show active" id="profile-1-1">
@@ -17,7 +20,6 @@
             <div class="nk-info-box nk-info-box-noicon">
                 <form (ngSubmit)="updateProfile(confirm_pass.value)">
                     <div class="col-md-12">
-
                         <div class="nk-info-box text-success" *ngIf="updatedSucess">
                             <div class="nk-info-box-icon">
                                 <i class="ion-checkmark-round"></i>
@@ -88,6 +90,59 @@
             <div class="nk-gap"></div>
             <div class="nk-info-box nk-info-box-noicon">
                 <p>Profile 2</p>
+            </div>
+            <div class="nk-gap"></div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="profile-1-3">
+            <div class="nk-gap"></div>
+            <div class="nk-info-box nk-info-box-noicon">
+                <div class="nk-info-box text-warning" *ngIf="user.status == 'inactive'">
+                    <div class="nk-info-box-icon">
+                        <i class="ion-android-notifications-none"></i>
+                    </div>
+                    <h3>Warning!</h3>
+                    <em>Your account is still not verified to this moment, some features are disabled until you verify your account.</em>
+                </div>
+                <div *ngIf="user.status == 'activated'">
+                    <div *ngIf="!hasWallet">
+                        <p>Your account isn't linked to a wallet, you may choose to either create a wallet using our platform or using your own personal wallet.</p>
+                        <p>If you choose to create your wallet using our platform, you will receive an email containing information about your wallet.</p>
+                        <div class="col-md-12">
+                            <form class="nk-form text-white" *ngIf="!getWalletTab" #walletForm="ngForm" (ngSubmit)="walletFirstForm(here.checked, there.checked)">
+                                <input type="radio" name="wallet" value="here" selected="" #here> Create a wallet<br>
+                                <div class="nk-gap"></div>
+                                <input type="radio" name="wallet" value="there" #there> Import your wallet<br>
+                                <div class="nk-gap"></div>
+                                <input type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block" value="Next" >
+                            </form>
+                            <form class="nk-form text-white" *ngIf="getWalletTab" #secondWalletForm="ngForm" (ngSubmit)="walletSecondForm(private_key.value)" >
+                                <label>Private Key</label>
+                                <input type="text" required name="private_key" class="form-control" placeholder="Private key (required)" #private_key >
+                                <div class="nk-gap"></div>
+                                <input type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block" value="Get Wallet" >
+                                <div class="nk-gap"></div>
+                                <input type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block" (click)="goBackToFirstWalletForm()" value="Go Back" >
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="hasWallet">
+                    <p>Your current balance is: {{ walletBalance.balance }} ESD</p>
+                    <p>Your public address is: {{ walletBalance.adr }}</p>
+                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" (click)="unlink()">Unlink Wallet</button>
+                    <div class="nk-gap"></div>
+                    <form class="nk-form text-white" *ngIf="askForPassword" #unlinkForm="ngForm">
+                        <label>Please type your password, please note that unlinking your wallet is irreversible.</label>
+                        <input type="password" required name="password" class="form-control" placeholder="Password (required)" #password >
+                        <div class="nk-gap"></div>
+                        <div *ngIf="unlinkError != ''">
+                            {{ unlinkError }}
+                        </div>
+                        <input type="submit" class="nk-btn nk-btn-rounded nk-btn-color-main-1 nk-btn-block" (click)="confirmUnlink(password.value)" value="Unlink" >
+                        <div class="nk-gap"></div>
+                        <input type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block" (click)="closeUnlinkForm()" value="Go Back" >
+                    </form>
+                </div>
             </div>
             <div class="nk-gap"></div>
         </div>

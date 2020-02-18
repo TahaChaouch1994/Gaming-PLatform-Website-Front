@@ -122,13 +122,34 @@ export class LoginComponent implements OnInit
         {
           this.errors.splice(this.errors.indexOf("Account not found."), 1);
           this.errors.splice(this.errors.indexOf("Wrong password."), 1);
+          console.log(response);
           if (remember)
           {
-            localStorage.setItem("geov_user", JSON.stringify(response));
+            let user = new User();
+            user.id_user = response["_id"];
+            user.email = response["email"];
+            user.dob = response["dob"];
+            user.username = response["username"];
+            user.password = response["password"];
+            user.role = response["role"];
+            user.status = response["status"];
+            user.firstName = response["firstName"];
+            user.lastName = response["lastName"];
+            localStorage.setItem("geov_user", JSON.stringify(user));
           }
           else
           {
-            sessionStorage.setItem("geov_user", JSON.stringify(response));
+            let user = new User();
+            user.id_user = response["_id"];
+            user.email = response["email"];
+            user.dob = response["dob"];
+            user.username = response["username"];
+            user.password = response["password"];
+            user.role = response["role"];
+            user.status = response["status"];
+            user.firstName = response["firstName"];
+            user.lastName = response["lastName"];
+            sessionStorage.setItem("geov_user", JSON.stringify(user));
           }
           this.router.navigateByUrl("/").then(() => {
             window.location.reload();

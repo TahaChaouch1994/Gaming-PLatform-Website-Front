@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserApiService } from '../services/user-api.service';
 import { WalletApiService } from '../services/wallet-api.service';
 import { StreamkeyApiService } from '../services/streamkey-api.service';
-
+import { ClipboardService } from 'ngx-clipboard'
 
 @Component({
   selector: 'app-profile',
@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit
     private apiUser: UserApiService,
     private apiWallet: WalletApiService,
     private apiStream: StreamkeyApiService,
+    private _clipboardService: ClipboardService
   ) { }
 
   ngOnInit() {
@@ -385,7 +386,10 @@ export class ProfileComponent implements OnInit
   copyStreamKey(inputElement){
     inputElement.select();
     document.execCommand('copy');
-    inputElement.setSelectionRange(0, 0);
+  }
+
+  copy(text: string){
+    this._clipboardService.copyFromContent(this.streamKey);
   }
 
   resetStreamKey()

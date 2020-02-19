@@ -8,7 +8,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class WalletApiService {
 
-  base_path = 'http://localhost:1337';
+  base_path = 'http://51.178.25.45:1337';
 
   constructor(private http: HttpClient) { }
  

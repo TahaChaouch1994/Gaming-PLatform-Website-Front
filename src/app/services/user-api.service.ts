@@ -11,7 +11,7 @@ import { User } from '../models/user';
 export class UserApiService 
 {
 
-  base_path = 'http://localhost:1337';
+  base_path = 'http://51.178.25.45:1337';
 
   constructor(private http: HttpClient) { }
  

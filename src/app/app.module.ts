@@ -17,6 +17,7 @@ import { ForumHomeComponent } from './forum-home/forum-home.component';
 import { ListThreadsComponent } from './list-threads/list-threads.component';
 import { ThreadDetailsComponent } from './thread-details/thread-details.component';
 import { StreamVideoComponent } from './stream-video/stream-video.component';
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { StreamVideoComponent } from './stream-video/stream-video.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ClipboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,7 +16,8 @@ import { VerifyUserComponent } from './verify-user/verify-user.component';
 import { ForumHomeComponent } from './forum-home/forum-home.component';
 import { ListThreadsComponent } from './list-threads/list-threads.component';
 import { ThreadDetailsComponent } from './thread-details/thread-details.component';
-import { ClipboardModule } from 'ngx-clipboard';
+import { StreamVideoComponent } from './stream-video/stream-video.component';
+
 
 @NgModule({
   declarations: [
@@ -33,13 +34,13 @@ import { ClipboardModule } from 'ngx-clipboard';
     ForumHomeComponent,
     ListThreadsComponent,
     ThreadDetailsComponent,
+    StreamVideoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

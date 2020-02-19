@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import flvjs from "flv.js/d.ts/flv"
 
 @Component({
   selector: 'app-root',

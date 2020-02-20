@@ -116,4 +116,13 @@ export class UserApiService
       catchError(this.handleError)
     )
   }
+
+  getUserFromId(id): Observable<string> {
+    return this.http
+    .get<string>(this.base_path+"/user/find?id="+id, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
 }

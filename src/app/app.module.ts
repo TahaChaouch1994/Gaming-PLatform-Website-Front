@@ -18,6 +18,7 @@ import { ListThreadsComponent } from './list-threads/list-threads.component';
 import { ThreadDetailsComponent } from './thread-details/thread-details.component';
 import { StreamVideoComponent } from './stream-video/stream-video.component';
 import { ClipboardModule } from 'ngx-clipboard';
+import { ShowProfileComponent } from './show-profile/show-profile.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     ForumHomeComponent,
     ListThreadsComponent,
     ThreadDetailsComponent,
-    StreamVideoComponent
+    StreamVideoComponent,
+    ShowProfileComponent
   ],
   imports: [
     BrowserModule,

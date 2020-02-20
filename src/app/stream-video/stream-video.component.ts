@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import FlvJs from 'flv.js';
 import { StreamkeyApiService } from '../services/streamkey-api.service';
+import { UserApiService } from '../services/user-api.service';
 
 @Component({
   selector: 'app-stream-video',
@@ -11,9 +12,11 @@ import { StreamkeyApiService } from '../services/streamkey-api.service';
 export class StreamVideoComponent implements OnInit {
 
   userId;
+  user;
 
   constructor(
     private route: ActivatedRoute,
+    private userApi: UserApiService,
     private streamApi: StreamkeyApiService
   ) { }
   
@@ -21,7 +24,9 @@ export class StreamVideoComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.userId = params['id'];
     });
-
+    this.userApi.getUserFromId(this.userId).subscribe(response => {
+      this.user = response;
+    })
     this.streamApi.getUserStreamKey(this.userId).subscribe(response => {
       if (FlvJs.isSupported()) {
         console.log(response["streamKey"]);

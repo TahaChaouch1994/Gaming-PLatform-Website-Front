@@ -35,6 +35,7 @@ export class StreamVideoComponent implements OnInit {
         this.streamApi.getAllStreams(response["streamKey"]).subscribe(resp2 => {
           if (resp2["live"][response["streamKey"]] != undefined)
           {
+            this.isStreaming = true;
             const videoElement =  <HTMLAudioElement>document.getElementById('videoElement');
             const flvPlayer = FlvJs.createPlayer({
               type: 'flv',
@@ -43,7 +44,6 @@ export class StreamVideoComponent implements OnInit {
             flvPlayer.attachMediaElement(videoElement);
             flvPlayer.load();
             flvPlayer.play();
-            this.isStreaming = true;
           }
         });
       }

@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit
   streamKey;
   errors = [];
   avatarUrl;
+  showOrHideStr : string = "Show";
 
   constructor(
     private router: Router,
@@ -400,6 +401,20 @@ export class ProfileComponent implements OnInit
     {
       this.streamKey = response;
     });
+  }
+
+  showOrHide(input)
+  {
+    if (input.type === "text")
+    {
+      this.showOrHideStr = "Show";
+      input.type = "password";
+    }
+    else
+    {
+      this.showOrHideStr = "Hide";
+      input.type = "text";
+    }
   }
 
   onSelectFile(files: FileList) {

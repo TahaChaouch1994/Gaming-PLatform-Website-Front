@@ -116,12 +116,16 @@
                 <div *ngIf="user.status == 'activated'">
                     <label>Your stream key</label>
                     <div class="row vertical-gap sm-gap">
-                        <div class="col-md-10">
-                            <input type="text" style="background-color: transparent;" disabled name="stream_key" class="form-control" value="{{ streamKey }}" #stream_key >
+                        <div class="col-md-9">
+                            <input type="password" style="background-color: transparent;" disabled name="stream_key" class="form-control" value="{{ streamKey }}" #stream_key >
                             <div class="nk-gap"></div>
                         </div>
                         <div class="col-md-1">
                             <button (click)="copy()" class="nk-btn nk-btn-outline nk-btn-color-success">Copy</button>
+                            <div class="nk-gap"></div>
+                        </div>
+                        <div class="col-md-1">
+                            <button (click)="showOrHide(stream_key)" class="nk-btn nk-btn-color-primary">{{ showOrHideStr }}</button>
                             <div class="nk-gap"></div>
                         </div>
                         <div class="col-md-1">

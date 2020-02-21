@@ -125,4 +125,11 @@ export class UserApiService
       catchError(this.handleError)
     )
   }
+
+  uploadUserAvatar(formData) {
+    return this.http.post<any>(this.base_path+"/user/uploadAvatar", formData).pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
 }

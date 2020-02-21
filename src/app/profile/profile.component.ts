@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit
   unlinkError;
   streamKey;
   errors = [];
+  avatarUrl;
 
   constructor(
     private router: Router,
@@ -57,6 +58,7 @@ export class ProfileComponent implements OnInit
       this.apiStream.getUserStreamKey(this.user.id_user).subscribe(response => {
         this.streamKey = response["streamKey"];
       })
+      this.avatarUrl = "http://51.178.25.45:1337/avatars/"+this.user.id_user+".jpg";
     }
   }
 
@@ -398,6 +400,18 @@ export class ProfileComponent implements OnInit
     {
       this.streamKey = response;
     });
+  }
+
+  onSelectFile(files: FileList) {
+    if (files.item(0)) 
+    {
+      const formData = new FormData();  
+      formData.append('file', files.item(0), this.user.id_user+'.jpg');
+      this.apiUser.uploadUserAvatar(formData).subscribe(response => {
+        console.log(response);
+        this.avatarUrl = "http://51.178.25.45:1337/avatars/"+this.user.id_user+".jpg?"+(new Date()).getTime();
+      })
+    }
   }
 
 }

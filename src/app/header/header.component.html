@@ -45,6 +45,12 @@
             <div class="nk-contacts-right">
                 <ul class="nk-contacts-icons">
 
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#modalSearch">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </li>
+
                     <li *ngIf="!isLoggedIn">
                         <a href="#" data-toggle="modal" data-target="#modalLogin">
                             <span class="fa fa-user"></span>
@@ -52,11 +58,17 @@
                     </li>
 
                     <li *ngIf="isLoggedIn">
-                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" (click)="logoutUser()">Logout</button>
-                    </li>
-
-                    <li *ngIf="isLoggedIn">
-                        <button class="nk-btn nk-btn-color-primary" (click)="goToSettings()">Account</button>
+                        <span class="nk-cart-toggle">
+                            <img [src]="avatarUrl" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="20">
+                        </span>
+                        <div class="nk-cart-dropdown">
+                            <div class="text-center">
+                                <p>Hello, {{ this.user.username }}.</p>
+                                <button class="nk-btn nk-btn-color-primary" (click)="goToSettings()">Account</button>
+                                <div class="nk-gap-2"></div>
+                                <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" (click)="logoutUser()">Logout</button>
+                            </div>
+                        </div>
                     </li>
 
                     <li>

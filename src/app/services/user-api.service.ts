@@ -11,7 +11,7 @@ import { User } from '../models/user';
 export class UserApiService 
 {
 
-  base_path = 'http://localhost:1337';
+  base_path = 'http://51.178.25.45:1337';
 
   constructor(private http: HttpClient) { }
  
@@ -27,6 +27,7 @@ export class UserApiService
     let str = sessionStorage.getItem("geov_user");
     if (str != null)
     {
+      console.log("user found");
       return JSON.parse(str);
     }
     else
@@ -111,6 +112,22 @@ export class UserApiService
     return this.http
     .get<string>(this.base_path+"/user/verify?id="+id+"&key="+key, this.httpOptions)
     .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
+  getUserFromId(id): Observable<string> {
+    return this.http
+    .get<string>(this.base_path+"/user/find?id="+id, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
+  uploadUserAvatar(formData) {
+    return this.http.post<any>(this.base_path+"/user/uploadAvatar", formData).pipe(
       retry(1),
       catchError(this.handleError)
     )

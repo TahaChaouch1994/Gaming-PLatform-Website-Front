@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserApiService } from '../services/user-api.service';
 
 @Component({
   selector: 'app-header',
@@ -10,33 +11,25 @@ export class HeaderComponent implements OnInit {
 
   user;
   isLoggedIn: boolean = false;
+  avatarUrl;
   
   constructor(
-    private router: Router
+    private router: Router,
+    private apiUser: UserApiService
   ) { }
 
   ngOnInit()
   {
-    let str = sessionStorage.getItem("geov_user");
-    if (str != null)
+    this.user = this.apiUser.getLoggedInUser();
+    if (this.user == null)
     {
-      this.user = JSON.parse(str);
-      this.isLoggedIn = true;
+      this.isLoggedIn = false;
     }
     else
     {
-      let str2 = localStorage.getItem("geov_user");
-      if (str2 != null)
-      {
-        this.user = JSON.parse(str2);
-        this.isLoggedIn = true;
-      }
-      else
-      {
-        this.user = null;
-        this.isLoggedIn = false;
-      }
+      this.isLoggedIn = true;
     }
+    this.avatarUrl = "http://51.178.25.45:1337/avatars/"+this.user.id_user+".jpg";
   }
 
   logoutUser()

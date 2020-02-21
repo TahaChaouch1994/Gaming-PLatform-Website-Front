@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { UserApiService } from '../services/user-api.service';
-
+import { WalletApiService } from '../services/wallet-api.service';
+import { StreamkeyApiService } from '../services/streamkey-api.service';
+import { ClipboardService } from 'ngx-clipboard'
 
 @Component({
   selector: 'app-profile',
@@ -15,39 +17,48 @@ export class ProfileComponent implements OnInit
   isLoggedIn: boolean;
   authType;
   updatedSucess: boolean = false;
+  hasWallet: boolean;
+  getWalletTab: boolean = false;
+  walletBalance = "0";
+  askForPassword: boolean = false;
+  unlinkError;
+  streamKey;
   errors = [];
+  avatarUrl;
 
   constructor(
     private router: Router,
     private apiUser: UserApiService,
+    private apiWallet: WalletApiService,
+    private apiStream: StreamkeyApiService,
+    private _clipboardService: ClipboardService
   ) { }
 
   ngOnInit() {
-    let str = sessionStorage.getItem("geov_user");
-    if (str != null)
+    this.user = this.apiUser.getLoggedInUser();
+    this.authType = this.apiUser.getSessionInfo();
+    if (this.user == null)
     {
-      this.user = JSON.parse(str);
-      this.isLoggedIn = true;
-      this.authType = "session";
+      this.router.navigateByUrl("/");
     }
     else
     {
-      let str2 = localStorage.getItem("geov_user");
-      if (str2 != null)
-      {
-        this.user = JSON.parse(str2);
-        this.isLoggedIn = true;
-        this.authType = "local";
-      }
-      else
-      {
-        this.user = null;
-        this.isLoggedIn = false;
-      }
-    }
-    if (!this.isLoggedIn)
-    {
-      this.router.navigateByUrl("/");
+      this.apiWallet.userHasWallet(this.user.id_user).subscribe(response => {
+        console.log(response);
+        if (response === "None")
+        {
+          this.hasWallet = false;
+        }
+        else
+        {
+          this.hasWallet = true;
+          this.walletBalance = response;
+        }
+      });
+      this.apiStream.getUserStreamKey(this.user.id_user).subscribe(response => {
+        this.streamKey = response["streamKey"];
+      })
+      this.avatarUrl = "http://51.178.25.45:1337/avatars/"+this.user.id_user+".jpg";
     }
   }
 
@@ -315,6 +326,91 @@ export class ProfileComponent implements OnInit
           }
         }
       );
+    }
+  }
+
+  walletFirstForm(here, there) 
+  {
+    if (there == true)
+    {
+      this.getWalletTab = true;
+    }
+    else if (here == true)
+    {
+      this.apiWallet.createWallet(this.user.id_user, this.user.email).subscribe(response => {
+        console.log(response);
+        location.reload();
+      })
+    }
+  }
+
+  walletSecondForm(private_key)
+  {
+    console.log(private_key);
+    this.apiWallet.privateKeyToAccount(this.user.id_user, private_key).subscribe(response => {
+      console.log(response);
+      location.reload();
+    })
+  }
+
+  goBackToFirstWalletForm()
+  {
+    this.getWalletTab = false;
+  }
+
+  unlink()
+  {
+    this.askForPassword = true;
+  }
+
+  confirmUnlink(password)
+  {
+    console.log(password);
+    if (password === this.user.password)
+    {
+      this.apiWallet.unlinkWallet(this.user.id_user).subscribe(response =>
+        {
+          console.log(response);
+          location.reload();
+        });
+    }
+    else
+    {
+      this.unlinkError = "Wrong password";
+    }
+  }
+
+  closeUnlinkForm()
+  {
+    this.askForPassword = false;
+  }
+
+  copyStreamKey(inputElement){
+    inputElement.select();
+    document.execCommand('copy');
+  }
+
+  copy(text: string){
+    this._clipboardService.copyFromContent(this.streamKey);
+  }
+
+  resetStreamKey()
+  {
+    this.apiStream.updateUserStreamKey(this.user.id_user).subscribe(response =>
+    {
+      this.streamKey = response;
+    });
+  }
+
+  onSelectFile(files: FileList) {
+    if (files.item(0)) 
+    {
+      const formData = new FormData();  
+      formData.append('file', files.item(0), this.user.id_user+'.jpg');
+      this.apiUser.uploadUserAvatar(formData).subscribe(response => {
+        console.log(response);
+        this.avatarUrl = "http://51.178.25.45:1337/avatars/"+this.user.id_user+".jpg?"+(new Date()).getTime();
+      })
     }
   }
 

@@ -16,8 +16,15 @@ import { VerifyUserComponent } from './verify-user/verify-user.component';
 import { ForumHomeComponent } from './forum-home/forum-home.component';
 import { ListThreadsComponent } from './list-threads/list-threads.component';
 import { ThreadDetailsComponent } from './thread-details/thread-details.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
+
+import { StreamVideoComponent } from './stream-video/stream-video.component';
+import { ClipboardModule } from 'ngx-clipboard';
+import { ShowProfileComponent } from './show-profile/show-profile.component';
+import { ManageMerchComponent } from './manage-merch/manage-merch.component';
+
 
 
 @NgModule({
@@ -34,15 +41,22 @@ import { MatSliderModule } from '@angular/material/slider';
     VerifyUserComponent,
     ForumHomeComponent,
     ListThreadsComponent,
-    ThreadDetailsComponent
+    ThreadDetailsComponent,
+    StreamVideoComponent,
+    ShowProfileComponent,
+    ManageMerchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+
     MatSliderModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
+    ClipboardModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

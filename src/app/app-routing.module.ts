@@ -8,6 +8,7 @@ import { VerifyUserComponent } from './verify-user/verify-user.component';
 import { ForumHomeComponent } from './forum-home/forum-home.component';
 import { ThreadDetailsComponent } from './thread-details/thread-details.component';
 import { ListThreadsComponent } from './list-threads/list-threads.component';
+import { StreamVideoComponent } from './stream-video/stream-video.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'requesttournamentform',component: RtournamentformComponent},
   {path: 'ForumHome',component: ForumHomeComponent},
   {path: 'ThreadDetails',component: ThreadDetailsComponent},
-  {path: 'ThreadList',component: ListThreadsComponent}
+  {path: 'ThreadList',component: ListThreadsComponent},
+  {path: 'streamvideo',component: StreamVideoComponent},
 ];
 
 @NgModule({

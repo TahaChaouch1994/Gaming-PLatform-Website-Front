@@ -14,7 +14,9 @@
               <div class="col-md-8 col-lg-8">
                   <div class="nk-widget nk-widget-highlighted">
                       <h4 class="nk-widget-title"><span><span class="text-main-1">Streaming</span> Video</span></h4>
+                      
                       <div class="nk-widget-content">
+                        <p style="color: white;"><img [src]="avatarUrl" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="30"> {{ user.username }}</p>
                           <div class="embed-responsive embed-responsive-16by9">
                               <video id="videoElement" controls #videoPlayer autoplay loop controls>
 

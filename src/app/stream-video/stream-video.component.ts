@@ -13,7 +13,8 @@ export class StreamVideoComponent implements OnInit {
 
   userId;
   user;
-
+  avatarUrl;
+  
   constructor(
     private route: ActivatedRoute,
     private userApi: UserApiService,
@@ -40,6 +41,7 @@ export class StreamVideoComponent implements OnInit {
         flvPlayer.play();
       }
     })
+    this.avatarUrl = "http://51.178.25.45:1337/avatars/"+this.userId+".jpg?"+(new Date()).getTime();
   }
 
   @ViewChild("videoPlayer", { static: false }) videoplayer: ElementRef;

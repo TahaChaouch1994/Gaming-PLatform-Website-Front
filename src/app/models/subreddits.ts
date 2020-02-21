@@ -5,4 +5,5 @@ export class Subreddits {
     Topicname : string
     category:ForumCategories
     addtime:Date
+    
 }

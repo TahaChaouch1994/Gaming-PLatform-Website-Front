@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ForumServicesService } from '../services/forum-services.service';
 import { ForumCategories } from '../models/forum-categories';
 import { Subreddits } from '../models/subreddits';
+import {Router} from "@angular/router"
 @Component({
   selector: 'app-forum-home',
   templateUrl: './forum-home.component.html',
@@ -10,6 +11,7 @@ import { Subreddits } from '../models/subreddits';
 export class ForumHomeComponent implements OnInit {
   listcat=[];
   constructor(
+    private router : Router,
     public fser:ForumServicesService
   ) { }
 
@@ -37,7 +39,7 @@ public getallcategories()
    sub.description = z.Description;
    sub.category = cate
    cate.subreddits.push(sub);
-  
+ 
    });
      this.listcat.push(cate);
     
@@ -45,5 +47,10 @@ public getallcategories()
     console.log(this.listcat);
   });
   
+}
+test(subs)
+{
+  this.router.navigate([ "/ThreadList" ,{id : subs.id}]);
+  console.log(subs)
 }
 }

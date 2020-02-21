@@ -4,7 +4,7 @@ import { Subreddits } from '../models/subreddits';
 import { UserApiService } from './user-api.service';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 @Injectable({
@@ -50,6 +50,15 @@ export class ForumServicesService {
         return throwError(
           'Something bad happened; please try again later.');
       };
+
+      createThread(item): Observable<any> {
+        return this.http
+          .post<any>(this.base_path+"/thread/add", JSON.stringify(item), this.httpOptions)
+          .pipe(
+            retry(1),
+            catchError(this.handleError)
+          )
+      }
     }
     
 

@@ -35,6 +35,15 @@ export class UsermerchService {
       'Something bad happened; please try again later.');
   };
 
+  getUserMerch(user): Observable<string> {
+    return this.http
+    .get<string>(this.base_path+"/merch/list?user="+user, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
   addNewUserMerch(merch): Observable<string> {
     return this.http
       .post<string>(this.base_path+"/merch/add", JSON.stringify(merch), this.httpOptions)
@@ -50,4 +59,14 @@ export class UsermerchService {
       catchError(this.handleError)
     )
   }
+
+  updateMerch(merch): Observable<string> {
+    return this.http
+      .put<string>(this.base_path+"/merch/update", JSON.stringify(merch), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
 }

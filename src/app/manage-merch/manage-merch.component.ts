@@ -15,6 +15,7 @@ export class ManageMerchComponent implements OnInit
   user : User;
   addedMerch : UserMerch = new UserMerch();
   url = '';
+  listMerch;
   avatarImage: any = "https://www.w3schools.com/w3images/avatar2.png";
 
   constructor(
@@ -25,6 +26,9 @@ export class ManageMerchComponent implements OnInit
   ngOnInit() {
     this.user = this.userApi.getLoggedInUser();
     this.addedMerch.user = this.user.id_user;
+    this.merchApi.getUserMerch(this.user.id_user).subscribe(response => {
+      this.listMerch = response;
+    });
   }
 
   changeState()
@@ -57,6 +61,13 @@ export class ManageMerchComponent implements OnInit
         location.reload();
       });
     })
+  }
+
+  updateMerch(merch)
+  {
+    this.merchApi.updateMerch(merch).subscribe(response => {
+      location.reload();
+    });
   }
 
 }

@@ -1,5 +1,3 @@
-
-
 <div class="nk-tabs">
     <ul class="nav nav-tabs" role="tablist">
        <li class="nav-item">
@@ -11,8 +9,7 @@
     </ul>
     <div class="tab-content">
        <div role="tabpanel" class="tab-pane fade show active" id="profile-1-1">
-          <div class="nk-gap"></div>
-          <div class="row vertical-gap sm-gap">
+          <div class="row vertical-gap">
              <div class="col-md-8 col-lg-8">
                 <div class="nk-widget nk-widget-highlighted">
                    <h4 class="nk-widget-title"><span><span class="text-main-1">Streaming</span> Video</span></h4>
@@ -20,11 +17,12 @@
                       <div class="nk-post-by">
                          <img [src]="avatarUrl" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="35"> <a href="https://nkdev.info/"> {{ user.username }}</a>
                          <div class="nk-post-categories">
-                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1">Action 1</button>
-                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1">Action 2</button>
+                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1">Add as Friend</button>&nbsp;
+                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1">Follow</button>&nbsp;
+                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1">Subscribe</button>
                          </div>
                       </div>
-                      <div class="nk-gap"></div>
+                      <div class="nk-gap-2"></div>
                       <div class="embed-responsive embed-responsive-16by9">
                          <video id="videoElement" controls #videoPlayer autoplay loop controls>
                          </video>

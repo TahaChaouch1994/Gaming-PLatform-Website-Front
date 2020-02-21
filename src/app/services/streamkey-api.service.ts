@@ -53,4 +53,14 @@ export class StreamkeyApiService {
         catchError(this.handleError)
       )
   }
+
+  getAllStreams(key): Observable<string>
+  {
+    return this.http
+    .get<string>("http://51.178.25.45:1338/api/streams", this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
 }

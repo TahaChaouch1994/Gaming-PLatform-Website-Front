@@ -14,7 +14,8 @@ export class StreamVideoComponent implements OnInit {
   userId;
   user;
   avatarUrl;
-  
+  isStreaming: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private userApi: UserApiService,
@@ -31,14 +32,20 @@ export class StreamVideoComponent implements OnInit {
     this.streamApi.getUserStreamKey(this.userId).subscribe(response => {
       if (FlvJs.isSupported()) {
         console.log(response["streamKey"]);
-        const videoElement =  <HTMLAudioElement>document.getElementById('videoElement');
-        const flvPlayer = FlvJs.createPlayer({
-          type: 'flv',
-          url: 'http://51.178.25.45:1338/live/'+response["streamKey"]+'.flv'
+        this.streamApi.getAllStreams(response["streamKey"]).subscribe(resp2 => {
+          if (resp2["live"][response["streamKey"]] != undefined)
+          {
+            const videoElement =  <HTMLAudioElement>document.getElementById('videoElement');
+            const flvPlayer = FlvJs.createPlayer({
+              type: 'flv',
+              url: 'http://51.178.25.45:1338/live/'+response["streamKey"]+'.flv'
+            });
+            flvPlayer.attachMediaElement(videoElement);
+            flvPlayer.load();
+            flvPlayer.play();
+            this.isStreaming = true;
+          }
         });
-        flvPlayer.attachMediaElement(videoElement);
-        flvPlayer.load();
-        flvPlayer.play();
       }
     })
     this.avatarUrl = "http://51.178.25.45:1337/avatars/"+this.userId+".jpg?"+(new Date()).getTime();

@@ -19,6 +19,7 @@ import { ThreadDetailsComponent } from './thread-details/thread-details.componen
 import { StreamVideoComponent } from './stream-video/stream-video.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ShowProfileComponent } from './show-profile/show-profile.component';
+import { ManageMerchComponent } from './manage-merch/manage-merch.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ShowProfileComponent } from './show-profile/show-profile.component';
     ListThreadsComponent,
     ThreadDetailsComponent,
     StreamVideoComponent,
-    ShowProfileComponent
+    ShowProfileComponent,
+    ManageMerchComponent
   ],
   imports: [
     BrowserModule,

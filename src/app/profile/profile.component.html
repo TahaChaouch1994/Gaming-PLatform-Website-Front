@@ -13,6 +13,9 @@
         <li class="nav-item">
             <a class="nav-link" href="#profile-1-3" role="tab" data-toggle="tab">Wallet</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#profile-1-4" role="tab" data-toggle="tab">My Merch</a>
+        </li>
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade show active" id="profile-1-1">
@@ -42,12 +45,14 @@
 
                         <div class="row vertical-gap sm-gap">
                             <div class="col-md-12">
-                                <label class="hoverable" for="fileInput">
-                                    <img [src]="avatarUrl" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="150">
-                                    <div class="hover-text">Choose file</div>
-                                    <div class="background"></div>
-                                </label>
-                                <input id="fileInput" type='file' (change)="onSelectFile($event.target.files)">
+                                <div class="d-flex justify-content-center">
+                                    <label class="hoverable" for="fileInput">
+                                        <img [src]="avatarUrl" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="150">
+                                        <div class="hover-text">Change Avatar</div>
+                                        <div class="background"></div>
+                                    </label>
+                                    <input id="fileInput" type='file' (change)="onSelectFile($event.target.files)">
+                                </div>
                                 <div class="nk-gap"></div>
                             </div>
                         </div>
@@ -178,6 +183,23 @@
                         <div class="nk-gap"></div>
                         <input type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block" (click)="closeUnlinkForm()" value="Go Back" >
                     </form>
+                </div>
+            </div>
+            <div class="nk-gap"></div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane fade" id="profile-1-4">
+            <div class="nk-gap"></div>
+            <div class="nk-info-box nk-info-box-noicon">
+                <div class="nk-info-box text-warning" *ngIf="user.status == 'inactive'">
+                    <div class="nk-info-box-icon">
+                        <i class="ion-android-notifications-none"></i>
+                    </div>
+                    <h3>Warning!</h3>
+                    <em>Your account is still not verified to this moment, some features are disabled until you verify your account.</em>
+                </div>
+                <div *ngIf="user.status == 'activated'">
+                    <app-manage-merch></app-manage-merch>
                 </div>
             </div>
             <div class="nk-gap"></div>

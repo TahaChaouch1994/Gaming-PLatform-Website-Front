@@ -68,6 +68,36 @@
                         </div>
                     </li>
 
+                    <li *ngIf="isLoggedIn">
+                        <span class="nk-cart-toggle">
+                            <span class="fa fa-user"></span>
+                            <span class="nk-badge">{{ friendshipRequests.length }}</span>
+                        </span>
+                        <div class="nk-cart-dropdown">
+                            <div class="nk-gap-2"></div>
+                            <div class="text-center">
+                                <div class="nk-widget-post" *ngFor="let request of friendshipRequests">
+                                    <a class="nk-post-image">
+                                        <img src="http://51.178.25.45:1337/avatars/{{ request.sender }}.jpg" alt="In all revolutions of">
+                                    </a>
+                                    <h3 class="nk-post-title">
+                                        <a href="store-product.html">{{ request.senderDetail[0].username }}</a>
+                                        <div class="nk-product-price">{{ request.date|date:'short' }}</div>
+                                    </h3>
+                                    <div class="nk-gap-1"></div>
+                                    <div class="row vertical-gap sm-gap">
+                                        <div class="col-md-12">
+                                            <button (click)="acceptRequest(request)" class="nk-btn nk-btn-rounded nk-btn-color-main-1">Accept</button>
+                                            <div class="nk-gap-1"></div>
+                                            <button (click)="deleteRequest(request)" class="nk-btn nk-btn-rounded nk-btn-color-main-1">Delete</button>
+                                        </div>
+                                    </div>
+                                    <div class="nk-gap-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
                     <li>
                         <span class="nk-cart-toggle">
                             <span class="fa fa-shopping-cart"></span>

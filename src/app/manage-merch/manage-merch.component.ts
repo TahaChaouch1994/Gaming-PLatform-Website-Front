@@ -70,4 +70,11 @@ export class ManageMerchComponent implements OnInit
     });
   }
 
+  deleteMerch(merch)
+  {
+    this.merchApi.deleteMerch(merch._id).subscribe(response => {
+      location.reload();
+    });
+  }
+
 }

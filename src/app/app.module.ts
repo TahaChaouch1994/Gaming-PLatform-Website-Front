@@ -20,6 +20,7 @@ import { StreamVideoComponent } from './stream-video/stream-video.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ShowProfileComponent } from './show-profile/show-profile.component';
 import { ManageMerchComponent } from './manage-merch/manage-merch.component';
+import { MyfriendsComponent } from './myfriends/myfriends.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ManageMerchComponent } from './manage-merch/manage-merch.component';
     ThreadDetailsComponent,
     StreamVideoComponent,
     ShowProfileComponent,
-    ManageMerchComponent
+    ManageMerchComponent,
+    MyfriendsComponent
   ],
   imports: [
     BrowserModule,

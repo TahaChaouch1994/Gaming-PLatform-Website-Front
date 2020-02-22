@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserApiService } from '../services/user-api.service';
+import { FriendRequestService } from '../services/friend-request.service';
+import { FriendRequest } from '../models/friend-request';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +14,13 @@ export class HeaderComponent implements OnInit {
   user;
   isLoggedIn: boolean = false;
   avatarUrl;
-  
+  friendshipRequests:FriendRequest[] = [];
+  friendshipUsers;
+
   constructor(
     private router: Router,
-    private apiUser: UserApiService
+    private apiUser: UserApiService,
+    private friendsApi : FriendRequestService
   ) { }
 
   ngOnInit()
@@ -30,6 +35,13 @@ export class HeaderComponent implements OnInit {
       this.isLoggedIn = true;
     }
     this.avatarUrl = "http://51.178.25.45:1337/avatars/"+this.user.id_user+".jpg";
+    this.friendsApi.getUserFriendRequests(this.user.id_user).subscribe(response =>
+      {
+        const myArray = <FriendRequest[]><unknown>response;
+        this.friendshipRequests =  myArray;
+        console.log(myArray);
+      }
+    )
   }
 
   logoutUser()
@@ -42,6 +54,34 @@ export class HeaderComponent implements OnInit {
   goToSettings()
   {
     this.router.navigateByUrl("profile");
+  }
+
+  acceptRequest(request)
+  {
+    console.log(request);
+    this.friendsApi.acceptFriendRequest(request).subscribe(response =>
+      {
+        this.friendshipRequests.forEach((element, index) =>
+        {
+          if (request._id === element._id)
+          {
+            this.friendshipRequests.splice(index, 1);
+          }
+        });
+      });
+  }
+
+  deleteRequest(request)
+  {
+    this.friendsApi.revokeFriendRequest(request._id).subscribe(response => {
+      this.friendshipRequests.forEach((element, index) =>
+      {
+        if (request._id === element._id)
+        {
+          this.friendshipRequests.splice(index, 1);
+        }
+      })
+    })
   }
 
 }

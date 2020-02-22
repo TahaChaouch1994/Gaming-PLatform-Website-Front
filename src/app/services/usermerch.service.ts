@@ -69,4 +69,13 @@ export class UsermerchService {
       )
   }
 
+  deleteMerch(merch): Observable<string> {
+    return this.http
+      .delete<string>(this.base_path+"/merch/delete?id="+merch, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
 }

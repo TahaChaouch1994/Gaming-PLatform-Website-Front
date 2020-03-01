@@ -19,6 +19,9 @@
         <li class="nav-item">
             <a class="nav-link" href="#profile-1-5" role="tab" data-toggle="tab">My Friends</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#profile-1-6" role="tab" data-toggle="tab">Steam Link</a>
+        </li>
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade show active" id="profile-1-1">
@@ -224,6 +227,23 @@
                 </div>
                 <div *ngIf="user.status == 'activated'">
                     <app-myfriends></app-myfriends>
+                </div>
+            </div>
+            <div class="nk-gap"></div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane fade" id="profile-1-6">
+            <div class="nk-gap"></div>
+            <div class="nk-info-box nk-info-box-noicon">
+                <div class="nk-info-box text-warning" *ngIf="user.status == 'inactive'">
+                    <div class="nk-info-box-icon">
+                        <i class="ion-android-notifications-none"></i>
+                    </div>
+                    <h3>Warning!</h3>
+                    <em>Your account is still not verified to this moment, some features are disabled until you verify your account.</em>
+                </div>
+                <div *ngIf="user.status == 'activated'">
+                    <app-steamlink></app-steamlink>
                 </div>
             </div>
             <div class="nk-gap"></div>

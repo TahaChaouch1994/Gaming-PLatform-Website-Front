@@ -21,6 +21,9 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { ShowProfileComponent } from './show-profile/show-profile.component';
 import { ManageMerchComponent } from './manage-merch/manage-merch.component';
 import { MyfriendsComponent } from './myfriends/myfriends.component';
+import { SteamlinkComponent } from './steamlink/steamlink.component';
+import { SearchComponent } from './search/search.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 
 @NgModule({
@@ -41,7 +44,10 @@ import { MyfriendsComponent } from './myfriends/myfriends.component';
     StreamVideoComponent,
     ShowProfileComponent,
     ManageMerchComponent,
-    MyfriendsComponent
+    MyfriendsComponent,
+    SteamlinkComponent,
+    SearchComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,

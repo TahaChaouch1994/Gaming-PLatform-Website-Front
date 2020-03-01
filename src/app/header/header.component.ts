@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { UserApiService } from '../services/user-api.service';
 import { FriendRequestService } from '../services/friend-request.service';
 import { FriendRequest } from '../models/friend-request';
+import { CartApiService } from '../services/cart-api.service';
+import { UserMerch } from '../models/user-merch';
 
 @Component({
   selector: 'app-header',
@@ -16,15 +18,20 @@ export class HeaderComponent implements OnInit {
   avatarUrl;
   friendshipRequests:FriendRequest[] = [];
   friendshipUsers;
+  cartMerch = "";
 
   constructor(
     private router: Router,
     private apiUser: UserApiService,
-    private friendsApi : FriendRequestService
+    private friendsApi : FriendRequestService,
+    private cartApi : CartApiService
   ) { }
 
   ngOnInit()
   {
+    this.cartApi.convertMerchIDsToObjects().subscribe(response => {
+      this.cartMerch = response;
+    })
     this.user = this.apiUser.getLoggedInUser();
     if (this.user == null)
     {
@@ -84,4 +91,12 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+  deleteFromCart(merch)
+  {
+    const myArray = <UserMerch[]><unknown>this.cartMerch;
+    this.cartApi.removeItemFromCart(merch._id);
+    let index = myArray.indexOf(merch);
+    myArray.splice(index, 1);
+    this.cartMerch = <string><unknown>myArray;
+  }
 }

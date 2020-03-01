@@ -13,7 +13,9 @@
                 <div class="nk-gap-1"></div>
                 <div class="nk-product-price">Quantity: {{ merch.quantity }}</div>
                 <div class="nk-gap-1"></div>
-                <button (click)="addToCart(merch)" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1"> <span class="icon ion-paper-airplane"></span> Add To Cart</button>
+                <input required max="{{merch.quantity}}" placeholder="Desired quantity" type="number" class="form-control" #qte>
+                <div class="nk-gap-1"></div>
+                <button (click)="addToCart(merch, qte.value)" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1"> <span class="icon ion-paper-airplane"></span> Add To Cart</button>
             </div>
         </div>
     </div>

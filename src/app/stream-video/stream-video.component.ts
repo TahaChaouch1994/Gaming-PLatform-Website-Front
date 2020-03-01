@@ -14,7 +14,7 @@ import { FriendRequest } from '../models/friend-request';
 export class StreamVideoComponent implements OnInit {
 
   userId;
-  user;
+  user = "";
   avatarUrl;
   isStreaming: boolean = false;
   canSendRequest: boolean = false;
@@ -31,6 +31,41 @@ export class StreamVideoComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.userId = params['id'];
+      this.avatarUrl = "http://51.178.25.45:1337/avatars/"+this.userId+".jpg?"+(new Date()).getTime();
+      this.friendsApi.getUserFriends(this.userApi.getLoggedInUser().id_user).subscribe(response2 => {
+        let friendships = response2[0]["friendsList"];
+        this.canSendRequest = true;
+        this.addFriendButtonText = "Add as friend";
+        friendships.forEach(element => {
+          if (element._id === this.userId)
+          {
+            this.canSendRequest = false;
+          }
+        });
+        if (this.canSendRequest === true)
+        {
+          if (this.userId != this.userApi.getLoggedInUser().id_user)
+          {
+            this.friendsApi.hasRequestForReceiver(this.userApi.getLoggedInUser().id_user, this.userId).subscribe(response => 
+            {
+              if (response.length == 0)
+              {
+                this.canSendRequest = true;
+                this.addFriendButtonText = "Add as friend";
+              }
+              else
+              {
+                this.canSendRequest = true;
+                this.addFriendButtonText = "Delete Request";
+                this.friendRequest._id = response[0]["_id"];
+                this.friendRequest.date = response[0]["date"];
+                this.friendRequest.sender = this.userApi.getLoggedInUser().id_user;
+                this.friendRequest.receiver = this.userId;
+              }
+          })
+          }
+        }
+      })
     });
     this.userApi.getUserFromId(this.userId).subscribe(response => {
       this.user = response;
@@ -39,42 +74,24 @@ export class StreamVideoComponent implements OnInit {
       if (FlvJs.isSupported()) {
         console.log(response["streamKey"]);
         this.streamApi.getAllStreams(response["streamKey"]).subscribe(resp2 => {
-          if (resp2["live"][response["streamKey"]] != undefined)
+          if (resp2["live"] != undefined)
           {
-            this.isStreaming = true;
-            const videoElement =  <HTMLAudioElement>document.getElementById('videoElement');
-            const flvPlayer = FlvJs.createPlayer({
-              type: 'flv',
-              url: 'http://51.178.25.45:1338/live/'+response["streamKey"]+'.flv'
-            });
-            flvPlayer.attachMediaElement(videoElement);
-            flvPlayer.load();
-            flvPlayer.play();
+            if (resp2["live"][response["streamKey"]] != undefined)
+            {
+              this.isStreaming = true;
+              const videoElement =  <HTMLAudioElement>document.getElementById('videoElement');
+              const flvPlayer = FlvJs.createPlayer({
+                type: 'flv',
+                url: 'http://51.178.25.45:1338/live/'+response["streamKey"]+'.flv'
+              });
+              flvPlayer.attachMediaElement(videoElement);
+              flvPlayer.load();
+              flvPlayer.play();
+            }
           }
         });
       }
     })
-    this.avatarUrl = "http://51.178.25.45:1337/avatars/"+this.userId+".jpg?"+(new Date()).getTime();
-    if (this.userId != this.userApi.getLoggedInUser().id_user)
-    {
-      this.friendsApi.hasRequestForReceiver(this.userApi.getLoggedInUser().id_user, this.userId).subscribe(response => {
-        if (response.length == 0)
-        {
-          this.canSendRequest = true;
-          this.addFriendButtonText = "Add as friend";
-        }
-        else
-        {
-          this.canSendRequest = true;
-          this.addFriendButtonText = "Delete Request";
-          this.friendRequest._id = response[0]["_id"];
-          this.friendRequest.date = response[0]["date"];
-          this.friendRequest.sender = this.userApi.getLoggedInUser().id_user;
-          this.friendRequest.receiver = this.userId;
-        }
-        console.log(response);
-    })
-    }
   }
 
   @ViewChild("videoPlayer", { static: false }) videoplayer: ElementRef;

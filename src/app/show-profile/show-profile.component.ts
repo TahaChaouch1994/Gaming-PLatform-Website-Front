@@ -4,6 +4,8 @@ import { UserApiService } from '../services/user-api.service';
 import { UserMerch } from '../models/user-merch';
 import { UsermerchService } from '../services/usermerch.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Cart } from '../models/cart';
+import { CartApiService } from '../services/cart-api.service';
 
 @Component({
   selector: 'app-show-profile',
@@ -12,14 +14,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ShowProfileComponent implements OnInit {
 
-  userId;
-  listMerch;
-  user;
+  userId = "";
+  listMerch = "";
+  user = "";
   
   constructor(
     private route: ActivatedRoute,
-    public userApi : UserApiService,
-    public merchApi : UsermerchService,
+    private userApi : UserApiService,
+    private merchApi : UsermerchService,
+    private cartApi : CartApiService,
   ) { }
 
   ngOnInit() {
@@ -32,6 +35,11 @@ export class ShowProfileComponent implements OnInit {
         });
       })
     });
+  }
+
+  addToCart(merch, qte)
+  {
+    this.cartApi.addItemToCart(merch._id, qte);
   }
 
 }

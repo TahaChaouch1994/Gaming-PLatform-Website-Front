@@ -132,4 +132,13 @@ export class UserApiService
       catchError(this.handleError)
     )
   }
+
+  searchForUsers(username): Observable<string> {
+    return this.http
+    .get<string>(this.base_path+"/user/searchByUsername?username="+username, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
 }

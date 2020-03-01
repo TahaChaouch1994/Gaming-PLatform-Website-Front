@@ -9,6 +9,7 @@ import { ForumHomeComponent } from './forum-home/forum-home.component';
 import { ThreadDetailsComponent } from './thread-details/thread-details.component';
 import { ListThreadsComponent } from './list-threads/list-threads.component';
 import { StreamVideoComponent } from './stream-video/stream-video.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'ThreadDetails',component: ThreadDetailsComponent},
   {path: 'ThreadList',component: ListThreadsComponent},
   {path: 'streamvideo',component: StreamVideoComponent},
+  { path: 'search', component: SearchResultComponent },
 ];
 
 @NgModule({

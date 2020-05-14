@@ -5,6 +5,7 @@ import { UserApiService } from '../services/user-api.service';
 import { WalletApiService } from '../services/wallet-api.service';
 import { StreamkeyApiService } from '../services/streamkey-api.service';
 import { ClipboardService } from 'ngx-clipboard'
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit
   errors = [];
   avatarUrl;
   showOrHideStr : string = "Show";
+  encryptSecretKey = "6IAVE+56U5t7USZhb+9wCcqrTyJHqAu09j0t6fBngNo=";
 
   constructor(
     private router: Router,
@@ -59,7 +61,7 @@ export class ProfileComponent implements OnInit
       this.apiStream.getUserStreamKey(this.user.id_user).subscribe(response => {
         this.streamKey = response["streamKey"];
       })
-      this.avatarUrl = "http://51.178.25.45:1337/avatars/"+this.user.id_user+".jpg";
+      this.avatarUrl = "http://localhost:1337/avatars/"+this.user.id_user+".jpg";
     }
   }
 
@@ -345,10 +347,14 @@ export class ProfileComponent implements OnInit
     }
   }
 
+  encryptData(data) 
+  {
+    return CryptoJS.AES.encrypt(data.trim(), this.encryptSecretKey.trim()).toString();  
+  }
+
   walletSecondForm(private_key)
   {
-    console.log(private_key);
-    this.apiWallet.privateKeyToAccount(this.user.id_user, private_key).subscribe(response => {
+    this.apiWallet.privateKeyToAccount(this.user.id_user, this.encryptData(private_key)).subscribe(response => {
       console.log(response);
       location.reload();
     })
@@ -424,7 +430,7 @@ export class ProfileComponent implements OnInit
       formData.append('file', files.item(0), this.user.id_user+'.jpg');
       this.apiUser.uploadUserAvatar(formData).subscribe(response => {
         console.log(response);
-        this.avatarUrl = "http://51.178.25.45:1337/avatars/"+this.user.id_user+".jpg?"+(new Date()).getTime();
+        this.avatarUrl = "http://localhost:1337/avatars/"+this.user.id_user+".jpg?"+(new Date()).getTime();
       })
     }
   }

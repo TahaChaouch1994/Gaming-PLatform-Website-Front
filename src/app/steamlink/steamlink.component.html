@@ -21,8 +21,10 @@
                     <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" (click)="unlinkSteam()">Unlink Account</button>
                 </div>
                 <div class="nk-gap-3"></div>
+                <h3 class="text-main-1">Owned Games</h3>
+                <div class="nk-gap-1"></div>
                 <div class="row vertical-gap">
-                    <div class="col-lg-6" *ngFor="let game of ownedGames">
+                    <div class="col-lg-6" *ngFor="let game of ownedGames | paginate: { itemsPerPage: 6, currentPage: p }">
                         <div class="nk-product-cat">
                             <a class="nk-product-image">
                                 <img [src]="game.logoURL" alt="{{ game.name }}">
@@ -35,6 +37,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="nk-gap-1"></div>
+                <div class="d-flex justify-content-center">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
             </div>
         </div>

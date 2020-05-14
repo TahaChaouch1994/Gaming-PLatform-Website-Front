@@ -11,9 +11,10 @@
 </div>
 
 <app-footer></app-footer>
+
 <img class="nk-page-background-top" src="assets/images/bg-top-5.png" alt="">
     <img class="nk-page-background-bottom" src="assets/images/bg-bottom.png" alt="">
-
+    <ng-chat *ngIf="userId" [adapter]="adapter" [userId]="userId" [historyEnabled]="false" [fileUploadUrl]="'http://localhost:1337/uploadFile'" [theme]="'dark-theme'"></ng-chat>
 <!-- START: Login Modal -->
 <div class="nk-modal modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-hidden="true">
    <div class="modal-dialog modal-sm" role="document">

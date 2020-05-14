@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { Order } from '../models/order';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SteamlinkService {
+export class OrderApiService {
 
   base_path = 'http://localhost:1337';
 
@@ -35,32 +36,22 @@ export class SteamlinkService {
       'Something bad happened; please try again later.');
   };
 
-  getUserSteamId(user): Observable<string>
+  checkoutCart(order: Order): Observable<string>
   {
     return this.http
-    .get<string>(this.base_path+"/user/steamKey?user="+user, this.httpOptions)
+    .post<string>(this.base_path+"/cart/buyMerch", JSON.stringify(order), this.httpOptions)
     .pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError)
     )
   }
 
-  deleteSteamAccount(user): Observable<string>
+  getUserOrderHistory(userId): Observable<string>
   {
     return this.http
-    .delete<string>(this.base_path+"/user/unlinkSteam?user="+user, this.httpOptions)
+    .get<string>(this.base_path+"/orders/history?user="+userId, this.httpOptions)
     .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
-  }
-
-  getPlayerGames(steamId): Observable<string>
-  {
-    return this.http
-    .get<string>(this.base_path+"/user/getPlayerGames?steamId="+steamId, this.httpOptions)
-    .pipe(
-      retry(1),
+      retry(0),
       catchError(this.handleError)
     )
   }

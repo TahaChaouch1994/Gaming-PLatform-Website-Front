@@ -11,7 +11,7 @@ import { User } from '../models/user';
 export class UserApiService 
 {
 
-  base_path = 'http://51.178.25.45:1337';
+  base_path = 'http://localhost:1337';
 
   constructor(private http: HttpClient) { }
  
@@ -102,6 +102,15 @@ export class UserApiService
   updateUser(user): Observable<string> {
     return this.http
     .put<string>(this.base_path+"/user/update", JSON.stringify(user), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
+  updateUserActvity(user: User): Observable<string> {
+    return this.http
+    .put<string>(this.base_path+"/user/updateActivity", JSON.stringify({"id_user": user.id_user, "status": user.activity, "lastActive": user.lastActive}), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

@@ -10,7 +10,7 @@ import { UserMerch } from '../models/user-merch';
 })
 export class CartApiService 
 {
-  base_path = 'http://51.178.25.45:1337';
+  base_path = 'http://localhost:1337';
 
   constructor(private http: HttpClient) { }
  
@@ -63,7 +63,7 @@ export class CartApiService
     }
     else
     {
-      cart.orderList[item] = qte;
+      cart.orderList[item] = Number(qte);
     }
     localStorage.setItem("geeks_cart", JSON.stringify(cart));
   }

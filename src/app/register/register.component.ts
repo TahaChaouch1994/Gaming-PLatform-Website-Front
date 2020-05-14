@@ -276,6 +276,8 @@ export class RegisterComponent implements OnInit
     {
       this.user.role = "user";
       this.user.status = "inactive";
+      this.user.activity = "OFFLINE";
+      this.user.lastActive = new Date();
       if (this.user.firstName == null)
       {
         this.user.firstName = "";

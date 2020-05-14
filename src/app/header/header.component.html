@@ -61,9 +61,14 @@
                         <div class="nk-cart-dropdown">
                             <div class="text-center">
                                 <p>Hello, {{ this.user.username }}.</p>
-                                <button class="nk-btn nk-btn-color-primary" (click)="goToSettings()">Account</button>
-                                <div class="nk-gap-2"></div>
-                                <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" (click)="logoutUser()">Logout</button>
+                                    <li class="nk-drop-item">
+                                        <a class="nk-btn nk-btn-color-primary" (click)="goToSettings()">Account</a>
+                                    </li>
+                                    <div class="nk-gap-1"></div>
+                                    <li class="nk-drop-item">
+                                        <a class="nk-btn nk-btn-color-main-1" (click)="logoutUser()">Logout</a>
+                                    </li>
+                                    <div class="nk-gap-1"></div>
                             </div>
                         </div>
                     </li>
@@ -78,7 +83,7 @@
                             <div class="text-center">
                                 <div class="nk-widget-post" *ngFor="let request of friendshipRequests">
                                     <a class="nk-post-image">
-                                        <img src="http://51.178.25.45:1337/avatars/{{ request.sender }}.jpg" alt="In all revolutions of">
+                                        <img src="http://localhost:1337/avatars/{{ request.sender }}.jpg" alt="In all revolutions of">
                                     </a>
                                     <h3 class="nk-post-title">
                                         <a href="store-product.html">{{ request.senderDetail[0].username }}</a>
@@ -108,7 +113,7 @@
                             <div class="text-center">
                                 <div class="nk-widget-post" *ngFor="let merch of cartMerch">
                                     <a class="nk-post-image">
-                                        <img src="http://51.178.25.45:1337/user_merch/{{ merch._id }}.jpg" alt="In all revolutions of">
+                                        <img src="http://localhost:1337/user_merch/{{ merch._id }}.jpg" alt="In all revolutions of">
                                     </a>
                                     <h3 class="nk-post-title">
                                         <a (click)="deleteFromCart(merch)" class="nk-cart-remove-item"><span class="ion-android-close"></span></a>
@@ -117,7 +122,7 @@
                                     <div class="nk-gap-1"></div>
                                 </div>
                                 <div class="nk-gap-1"></div>
-                                <a href="store-checkout.html"
+                                <a routerLink="/checkout"
                                     class="nk-btn nk-btn-rounded nk-btn-color-main-1 nk-btn-hover-color-white">Proceed
                                     to Checkout</a>
                             </div>

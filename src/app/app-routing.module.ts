@@ -10,6 +10,7 @@ import { ThreadDetailsComponent } from './thread-details/thread-details.componen
 import { ListThreadsComponent } from './list-threads/list-threads.component';
 import { StreamVideoComponent } from './stream-video/stream-video.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'ThreadList',component: ListThreadsComponent},
   {path: 'streamvideo',component: StreamVideoComponent},
   { path: 'search', component: SearchResultComponent },
+  { path: 'checkout', component: CheckoutComponent },
 ];
 
 @NgModule({

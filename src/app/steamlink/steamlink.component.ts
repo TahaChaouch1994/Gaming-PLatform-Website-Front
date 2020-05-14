@@ -42,7 +42,7 @@ export class SteamlinkComponent implements OnInit {
 
   goToSteam()
   {
-    window.location.href = "http://51.178.25.45:1337/auth/steam?user="+this.user.id_user;
+    window.location.href = "http://localhost:1337/auth/steam?user="+this.user.id_user;
   }
 
   unlinkSteam()

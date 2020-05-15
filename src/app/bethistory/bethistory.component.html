@@ -1,0 +1,60 @@
+<ul class="nk-breadcrumbs">
+    <li><span>BET.GG</span></li>
+</ul>
+<div class="nk-gap-1"></div>
+<div class="nk-tabs  ">
+    
+    <div class="nk-gap"></div>
+
+    <div class="row">
+        <div class="nk-gap"></div>
+
+    <div class="tab-content col-10">
+       
+
+
+
+        <div role="tabpanel"  class="tab-pane  active show" id="profile-1-1">
+            <div class="nk-info-box nk-info-box-noicon">
+              
+                <div   class="mx-auto">
+                    <div class="nk-gap-2"></div>
+                    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Bet  </span>  History</span></h3>
+                    <div class="nk-gap"></div>
+                   
+                    <div class="nk-gap"></div>
+
+                    
+                    <div class="nk-gap"></div>
+                    <table class="table table-dark">
+                        <thead>
+                          <tr>
+                        
+                            <th scope="col">Coupon id </th>
+                            <th scope="col">Played at </th>
+                            <th scope="col">Bet AMOUNT</th>
+                            <th scope="col">Potentiel Gain</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of bets" >
+                           
+                            <td>{{item._id}}</td>
+                            <td>{{item.validatetime}}</td>
+                            <td>{{item.montant}}</td>
+                            <td>{{item.potentielgain}}</td>
+                            
+                            <td>  <span  class="nk-forum-action-btn">
+                                <a class="nk-anchor" id="{{item._id}}"  (click)="showcoupondetails(item._id)"  ><span class="fas fa-info-circle"   ></span> details</a>
+                            </span> </td>
+                          </tr>
+                        
+                        
+                        </tbody>
+                      </table>
+            </div>
+          
+            <div class="nk-gap"></div>
+        </div>
+    </div>

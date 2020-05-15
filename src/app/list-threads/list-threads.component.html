@@ -8,170 +8,54 @@
         
     
         
-        <li><span>Main Topic Discussions</span></li>
+        <li><span>Main {{tpc.Topicname}} Discussions</span></li>
         
     </ul>
 </div>
 <div class="nk-gap-1"></div>
 <div class="row justify-content-end">
     <div class="col-md-3 text-right">
-        <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalThread" >New Threads</a>
+        <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white" data-toggle="modal" data-target="#modalThread" >New Thread</a>
     </div>
 </div>
 <!-- END: Pagination -->
 <div class="nk-gap-2"></div>
+
+<div  *ngFor="let item of listviewstops">
+    
 <ul class="nk-forum">
-    <li>
+   <li>
         <div class="nk-forum-icon">
             <span class="ion-pin"></span>
         </div>
         <div class="nk-forum-title">
-            <h3><a href="forum-single-topic.html">Suggestions</a></h3>
-            <div class="nk-forum-title-sub">Started by <a href="#">nK</a> on January 17, 2018</div>
+            <h3><a (click)="gotoyhreadsdetail(item)">{{item.title}}</a></h3>
+            <div class="nk-forum-title-sub">Started by <a href="#">{{item.sender.username}}</a> {{ item.addtime|date:'short' }}</div>
         </div>
-        <div class="nk-forum-count">
-            178 posts
+        <div class="nk-forum-count" *ngIf="item.lastpost" >
+            posts : {{item.numberofposts}}
         </div>
         <div class="nk-forum-activity-avatar">
             <a href="forum-single-topic.html">
-                <img src="assets/images/avatar-1.jpg" alt="Hitman">
+                <img  *ngIf="item.lastpost"   src="http://localhost:1337/avatars/{{item.lastpost.sender.id_user}}.jpg" >
             </a>
         </div>
         <div class="nk-forum-activity">
             <div class="nk-forum-activity-title" title="Hitman">
-                <a href="#">Hitman</a>
+                <a href="#"></a>
             </div>
-            <div class="nk-forum-activity-date">
-                September 11, 2018
-            </div>
-        </div>
-    </li>
-    <li class="nk-forum-locked">
-        <div class="nk-forum-icon">
-            <span class="ion-locked"></span>
-        </div>
-        <div class="nk-forum-title">
-            <h3><a href="forum-single-topic.html">Are you ready for 2.0 release?</a></h3>
-            <div class="nk-forum-title-sub">Started by <a href="#">Hitman</a> on August 23, 2018</div>
-        </div>
-        <div class="nk-forum-count">
-            3 posts
-        </div>
-        <div class="nk-forum-activity-avatar">
-            <a href="forum-single-topic.html">
-                <img src="assets/images/avatar-2.jpg" alt="Witch Murder">
-            </a>
-        </div>
-        <div class="nk-forum-activity">
-            <div class="nk-forum-activity-title" title="Witch Murder">
-                <a href="#">Witch Murder</a>
-            </div>
-            <div class="nk-forum-activity-date">
-                August 26, 2018
+            <div *ngIf="item.lastpost" class="nk-forum-activity-date">
+                last post by : {{item.lastpost.sender.username}}
+                {{item.lastpost.replytime | date:'short'}}
             </div>
         </div>
     </li>
-    <li>
-        <div class="nk-forum-icon">
-            <span class="ion-chatboxes"></span>
-        </div>
-        <div class="nk-forum-title">
-            <h3><a href="forum-single-topic.html">When will be next closed beta?</a></h3>
-            <div class="nk-forum-title-sub">Started by <a href="#">Hitman</a> on August 9, 2018</div>
-        </div>
-        <div class="nk-forum-count">
-            4 posts
-        </div>
-        <div class="nk-forum-activity-avatar">
-            <a href="forum-single-topic.html">
-                <img src="assets/images/avatar-3.jpg" alt="Wolfenstein">
-            </a>
-        </div>
-        <div class="nk-forum-activity">
-            <div class="nk-forum-activity-title" title="Wolfenstein">
-                <a href="#">Wolfenstein</a>
-            </div>
-            <div class="nk-forum-activity-date">
-                August 15, 2018
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="nk-forum-icon">
-            <span class="ion-chatboxes"></span>
-        </div>
-        <div class="nk-forum-title">
-            <h3><a href="forum-single-topic.html">Add new post types</a></h3>
-            <div class="nk-forum-title-sub">Started by <a href="#">Witch Murder</a> on Jule 28, 2018</div>
-        </div>
-        <div class="nk-forum-count">
-            1 post
-        </div>
-        <div class="nk-forum-activity-avatar">
-            <a href="forum-single-topic.html">
-                <img src="assets/images/avatar-2.jpg" alt="Witch Murder">
-            </a>
-        </div>
-        <div class="nk-forum-activity">
-            <div class="nk-forum-activity-title" title="Witch Murder">
-                <a href="#">Witch Murder</a>
-            </div>
-            <div class="nk-forum-activity-date">
-                Jule 28, 2018
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="nk-forum-icon">
-            <span class="ion-chatboxes"></span>
-        </div>
-        <div class="nk-forum-title">
-            <h3><a href="forum-single-topic.html">Clan Wars functionality</a></h3>
-            <div class="nk-forum-title-sub">Started by <a href="#">Hitman</a> on June 17, 2018</div>
-        </div>
-        <div class="nk-forum-count">
-            8 posts
-        </div>
-        <div class="nk-forum-activity-avatar">
-            <a href="forum-single-topic.html">
-                <img src="assets/images/avatar-1.jpg" alt="Hitman">
-            </a>
-        </div>
-        <div class="nk-forum-activity">
-            <div class="nk-forum-activity-title" title="Hitman">
-                <a href="#">Hitman</a>
-            </div>
-            <div class="nk-forum-activity-date">
-                Jule 6, 2018
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="nk-forum-icon">
-            <span class="ion-chatboxes"></span>
-        </div>
-        <div class="nk-forum-title">
-            <h3><a href="forum-single-topic.html">Some questions before start</a></h3>
-            <div class="nk-forum-title-sub">Started by <a href="#">Hitman</a> on June 28, 2018</div>
-        </div>
-        <div class="nk-forum-count">
-            1 post
-        </div>
-        <div class="nk-forum-activity-avatar">
-            <a href="forum-single-topic.html">
-                <img src="assets/images/avatar-1.jpg" alt="Hitman">
-            </a>
-        </div>
-        <div class="nk-forum-activity">
-            <div class="nk-forum-activity-title" title="Hitman">
-                <a href="#">Hitman</a>
-            </div>
-            <div class="nk-forum-activity-date">
-                June 28, 2018
-            </div>
-        </div>
-    </li>
-</ul>
+
+    
+    
+    
+    </ul>
+</div>
 <div class="nk-gap-1"></div>
 <div class="row justify-content-end">
     <div class="col-md-3 text-right">
@@ -240,7 +124,7 @@
                     <div class="nk-gap-1"></div>
                     <div class="row vertical-gap">
                         <div class="col-md-6">
-                            <a (click)="addattachemnt(title.value,description.value)"  class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block">send attachement</a>
+                            <a (click)="addattachemnt(title.value,description.value)" data-dismiss="modal"  class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block">send attachement</a>
                         </div>
                        
                     </div>

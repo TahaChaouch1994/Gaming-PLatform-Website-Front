@@ -8,7 +8,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class StreamkeyApiService {
 
-  base_path = 'http://51.178.25.45:1337';
+  base_path = 'http://localhost:1337';
 
   constructor(private http: HttpClient) { }
  
@@ -57,7 +57,7 @@ export class StreamkeyApiService {
   getAllStreams(key): Observable<string>
   {
     return this.http
-    .get<string>("http://51.178.25.45:1338/api/streams", this.httpOptions)
+    .get<string>("http://localhost:1338/api/streams", this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

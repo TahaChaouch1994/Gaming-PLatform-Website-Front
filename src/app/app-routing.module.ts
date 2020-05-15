@@ -15,6 +15,10 @@ import { CoachDetailComponent } from './coach-detail/coach-detail.component';
 import { RecruteplayersComponent } from './recruteplayers/recruteplayers.component';
 import { BethistoryComponent } from './bethistory/bethistory.component';
 import { CoupondetailsComponent } from './coupondetails/coupondetails.component';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+
+
 const routes: Routes = [
   { path: 'account-registered', component: AccountAddedComponent },
   { path: 'profile', component: ProfileComponent },
@@ -30,8 +34,12 @@ const routes: Routes = [
   {path: 'players',component: RecruteplayersComponent},
   {path: 'coachDetail',component: CoachDetailComponent},
   {path: 'bethistory',component: BethistoryComponent},
-  {path: 'coupondetails',component: CoupondetailsComponent}
+  {path: 'coupondetails',component: CoupondetailsComponent},
  
+  {path: 'ThreadList',component: ListThreadsComponent},
+  {path: 'streamvideo',component: StreamVideoComponent},
+  { path: 'search', component: SearchResultComponent },
+  { path: 'checkout', component: CheckoutComponent },
 ];
 
 @NgModule({

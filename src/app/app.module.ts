@@ -34,7 +34,18 @@ import { CoachDetailComponent } from './coach-detail/coach-detail.component';
 import { RecruteplayersComponent } from './recruteplayers/recruteplayers.component';
 import { BethistoryComponent } from './bethistory/bethistory.component';
 import { CoupondetailsComponent } from './coupondetails/coupondetails.component';
+import { MyfriendsComponent } from './myfriends/myfriends.component';
+import { SteamlinkComponent } from './steamlink/steamlink.component';
+import { SearchComponent } from './search/search.component';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { UserIdleModule } from 'angular-user-idle';
+import { NgChatModule } from 'ng-chat';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
 
+const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
 
 @NgModule({
   declarations: [
@@ -59,7 +70,13 @@ import { CoupondetailsComponent } from './coupondetails/coupondetails.component'
     CoachDetailComponent,
     RecruteplayersComponent,
     BethistoryComponent,
-    CoupondetailsComponent
+    CoupondetailsComponent,
+    MyfriendsComponent,
+    SteamlinkComponent,
+    SearchComponent,
+    SearchResultComponent,
+    CheckoutComponent,
+    OrderhistoryComponent
   ],
   imports: [
     CarouselModule, WavesModule,
@@ -72,6 +89,10 @@ import { CoupondetailsComponent } from './coupondetails/coupondetails.component'
     MatSliderModule,
     BrowserAnimationsModule,
     ClipboardModule,
+    NgxPaginationModule,
+    UserIdleModule.forRoot({idle: 10, timeout: 20, ping: 120}),
+    NgChatModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

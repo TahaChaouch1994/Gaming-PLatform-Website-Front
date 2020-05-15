@@ -7,5 +7,7 @@ export class User {
     dob: Date;
     password: string;
     role: string;
+    activity: string;
+    lastActive: Date;
     status: string;
 }

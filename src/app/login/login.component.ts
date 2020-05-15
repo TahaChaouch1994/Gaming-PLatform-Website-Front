@@ -135,7 +135,14 @@ export class LoginComponent implements OnInit
             user.status = response["status"];
             user.firstName = response["firstName"];
             user.lastName = response["lastName"];
+            user.lastActive = new Date();
+            user.activity = "ONLINE";
             localStorage.setItem("geov_user", JSON.stringify(user));
+            this.apiUser.updateUserActvity(user).subscribe(secondResponse => {
+              this.router.navigateByUrl("/").then(() => {
+                window.location.reload();
+              });
+            })
           }
           else
           {
@@ -149,11 +156,15 @@ export class LoginComponent implements OnInit
             user.status = response["status"];
             user.firstName = response["firstName"];
             user.lastName = response["lastName"];
+            user.lastActive = new Date();
+            user.activity = "ONLINE";
             sessionStorage.setItem("geov_user", JSON.stringify(user));
+            this.apiUser.updateUserActvity(user).subscribe(secondResponse => {
+              this.router.navigateByUrl("/").then(() => {
+                window.location.reload();
+              });
+            })
           }
-          this.router.navigateByUrl("/").then(() => {
-            window.location.reload();
-          });
         }
       });
     }

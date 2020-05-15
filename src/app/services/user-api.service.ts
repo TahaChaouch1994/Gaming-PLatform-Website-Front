@@ -11,7 +11,7 @@ import { User } from '../models/user';
 export class UserApiService 
 {
 
-  base_path = 'http://51.178.25.45:1337';
+  base_path = 'http://localhost:1337';
 
   constructor(private http: HttpClient) { }
  
@@ -108,6 +108,15 @@ export class UserApiService
     )
   }
 
+  updateUserActvity(user: User): Observable<string> {
+    return this.http
+    .put<string>(this.base_path+"/user/updateActivity", JSON.stringify({"id_user": user.id_user, "status": user.activity, "lastActive": user.lastActive}), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
   verifyUser(id, key): Observable<string> {
     return this.http
     .get<string>(this.base_path+"/user/verify?id="+id+"&key="+key, this.httpOptions)
@@ -128,6 +137,15 @@ export class UserApiService
 
   uploadUserAvatar(formData) {
     return this.http.post<any>(this.base_path+"/user/uploadAvatar", formData).pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
+  searchForUsers(username): Observable<string> {
+    return this.http
+    .get<string>(this.base_path+"/user/searchByUsername?username="+username, this.httpOptions)
+    .pipe(
       retry(1),
       catchError(this.handleError)
     )

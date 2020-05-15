@@ -8,7 +8,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class UsermerchService {
 
-  base_path = 'http://51.178.25.45:1337';
+  base_path = 'http://localhost:1337';
 
   constructor(private http: HttpClient) { }
  
@@ -63,6 +63,15 @@ export class UsermerchService {
   updateMerch(merch): Observable<string> {
     return this.http
       .put<string>(this.base_path+"/merch/update", JSON.stringify(merch), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  deleteMerch(merch): Observable<string> {
+    return this.http
+      .delete<string>(this.base_path+"/merch/delete?id="+merch, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

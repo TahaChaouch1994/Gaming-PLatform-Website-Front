@@ -133,6 +133,49 @@ export class LoginComponent implements OnInit
           this.router.navigateByUrl("/").then(() => {
             window.location.reload();
           });
+          console.log(response);
+          if (remember)
+          {
+            let user = new User();
+            user.id_user = response["_id"];
+            user.email = response["email"];
+            user.dob = response["dob"];
+            user.username = response["username"];
+            user.password = response["password"];
+            user.role = response["role"];
+            user.status = response["status"];
+            user.firstName = response["firstName"];
+            user.lastName = response["lastName"];
+            user.lastActive = new Date();
+            user.activity = "ONLINE";
+            localStorage.setItem("geov_user", JSON.stringify(user));
+            this.apiUser.updateUserActvity(user).subscribe(secondResponse => {
+              this.router.navigateByUrl("/").then(() => {
+                window.location.reload();
+              });
+            })
+          }
+          else
+          {
+            let user = new User();
+            user.id_user = response["_id"];
+            user.email = response["email"];
+            user.dob = response["dob"];
+            user.username = response["username"];
+            user.password = response["password"];
+            user.role = response["role"];
+            user.status = response["status"];
+            user.firstName = response["firstName"];
+            user.lastName = response["lastName"];
+            user.lastActive = new Date();
+            user.activity = "ONLINE";
+            sessionStorage.setItem("geov_user", JSON.stringify(user));
+            this.apiUser.updateUserActvity(user).subscribe(secondResponse => {
+              this.router.navigateByUrl("/").then(() => {
+                window.location.reload();
+              });
+            })
+          }
         }
       });
     }

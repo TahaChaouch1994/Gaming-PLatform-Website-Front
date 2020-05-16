@@ -13,6 +13,12 @@
 <img class="nk-page-background-top" src="assets/images/bg-top-5.png" alt="">
     <img class="nk-page-background-bottom" src="assets/images/bg-bottom.png" alt="">
 
+
+<app-footer></app-footer>
+
+<img class="nk-page-background-top" src="assets/images/bg-top-5.png" alt="">
+    <img class="nk-page-background-bottom" src="assets/images/bg-bottom.png" alt="">
+    <ng-chat *ngIf="userId" [adapter]="adapter" [userId]="userId" [historyEnabled]="false" [fileUploadUrl]="'http://localhost:1337/uploadFile'" [theme]="'dark-theme'"></ng-chat>
 <!-- START: Login Modal -->
 <div class="nk-modal modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-hidden="true">
    <div class="modal-dialog modal-sm" role="document">
@@ -32,6 +38,7 @@
                </ul>
                <div class="tab-content">
                   <div div role="tabpanel" class="tab-pane fade show active" id="tabs-1-1">
+                  <div role="tabpanel" class="tab-pane fade show active" id="tabs-1-1">
                     <div class="nk-gap-1"></div>
                      <h4 class="mb-0"><span class="text-main-1">Sign</span> In</h4>
                      <div class="nk-gap-1"></div>
@@ -49,3 +56,5 @@
    </div>
 </div>
 
+<!-- START: Search Modal -->
+<app-search></app-search>

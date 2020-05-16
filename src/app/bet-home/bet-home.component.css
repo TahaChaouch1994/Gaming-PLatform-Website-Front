@@ -1,0 +1,14 @@
+.padding{
+ padding-left: 0px !important ;
+ padding-right: 20px !important;
+
+}
+.backgroundGreen{
+    background-color: green !important;
+}
+.disabledBackgroundColor{
+    background-color: #aab5bf38 !important
+}
+.tableItemsPadding {
+    padding : 14px 18px
+}

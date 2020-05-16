@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 import { Component, OnInit, HostListener } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {GameRegion} from './gameregion';
 import { TournamentService } from '../services/tournament.service';
 import { Router } from '@angular/router';
+=======
+import { Component, OnInit } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {GameRegion} from './gameregion';
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
 
 @Component({
   selector: 'app-rtournamentform',
@@ -16,9 +22,12 @@ export class RtournamentformComponent implements OnInit {
   selectedMap: string ='';
   selectedFormat: string='';
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
   //event handler for the select element's change event
   selectChangeHandler (event: any) {
     //update the ui
@@ -35,11 +44,15 @@ export class RtournamentformComponent implements OnInit {
     this.selectedFormat = event.target.value;
   }
 
+<<<<<<< HEAD
   hel  ='';
+=======
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
   
    message = this.http.get<any[]>('http://localhost:3005/tournament');
   
 
+<<<<<<< HEAD
   constructor(private http: HttpClient,private tourService : TournamentService,private router: Router) { }
 
   ngOnInit() {
@@ -50,6 +63,14 @@ export class RtournamentformComponent implements OnInit {
 
   iduser="5e4a89793d2c1f100cc86574";
   gamename='League Of Legends';
+=======
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() {
+  }
+  iduser=1;
+  gamename='lol';
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
   type='';
   tournamentname='';
   startdate='';
@@ -59,6 +80,7 @@ export class RtournamentformComponent implements OnInit {
   gameformat = this.selectedFormat ;
   entry ='';
   entryfee='';
+<<<<<<< HEAD
   tournamentfee : any;
   minteams='';
   maxteams='';
@@ -110,11 +132,27 @@ export class RtournamentformComponent implements OnInit {
 
    this.router.navigate(['mytournaments']);
    
+=======
+  minteams='';
+  maxteams='';
+  createtype='';
+  
+//ok
+
+
+  justClick() {
+   const nametest = 'hahah';
+
+    this.http.get<any>('http://localhost:3005/tournament/createtournament/'+this.iduser+'/'+this.gamename+'/'+this.type+'/'+this.tournamentname+'/'+this.startdate+'/'+this.starttime+'/'+this.selectedDay+'/'+this.selectedMap+'/'+this.selectedFormat+'/'+this.entry+'/'+this.entryfee+'/'+this.minteams+'/'+this.maxteams+'/'+this.createtype).subscribe();
+     
+    console.log("GAME REGION ISSSSS" + this.selectedDay);
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
   
   }
 
 
 
+<<<<<<< HEAD
 
   justTest()
   {
@@ -131,6 +169,8 @@ export class RtournamentformComponent implements OnInit {
 
 
 
+=======
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
   
 
 

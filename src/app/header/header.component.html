@@ -1,3 +1,6 @@
+
+
+<div class="nk-gap-2"></div>
 <header class="nk-header nk-header-opaque">
     <!-- START: Top Contacts -->
     <div class="nk-contacts-top">
@@ -42,6 +45,12 @@
             <div class="nk-contacts-right">
                 <ul class="nk-contacts-icons">
 
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#modalSearch">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </li>
+
                     <li *ngIf="!isLoggedIn">
                         <a href="#" data-toggle="modal" data-target="#modalLogin">
                             <span class="fa fa-user"></span>
@@ -54,17 +63,76 @@
 
                     <li *ngIf="isLoggedIn">
                         <button class="nk-btn nk-btn-color-primary" (click)="goToSettings()">Account</button>
+                        <span class="nk-cart-toggle">
+                            <img [src]="avatarUrl" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="20">
+                        </span>
+                        <div class="nk-cart-dropdown">
+                            <div class="text-center">
+                                <p>Hello, {{ this.user.username }}.</p>
+                                    <li class="nk-drop-item">
+                                        <a class="nk-btn nk-btn-color-primary" (click)="goToSettings()">Account</a>
+                                    </li>
+                                    <div class="nk-gap-1"></div>
+                                    <li class="nk-drop-item">
+                                        <a class="nk-btn nk-btn-color-main-1" (click)="logoutUser()">Logout</a>
+                                    </li>
+                                    <div class="nk-gap-1"></div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li *ngIf="isLoggedIn">
+                        <span class="nk-cart-toggle">
+                            <span class="fa fa-user"></span>
+                            <span class="nk-badge" *ngIf="friendshipRequests.length > 0">{{ friendshipRequests.length }}</span>
+                        </span>
+                        <div class="nk-cart-dropdown" *ngIf="friendshipRequests.length > 0">
+                            <div class="nk-gap-2"></div>
+                            <div class="text-center">
+                                <div class="nk-widget-post" *ngFor="let request of friendshipRequests">
+                                    <a class="nk-post-image">
+                                        <img src="http://localhost:1337/avatars/{{ request.sender }}.jpg" alt="In all revolutions of">
+                                    </a>
+                                    <h3 class="nk-post-title">
+                                        <a href="store-product.html">{{ request.senderDetail[0].username }}</a>
+                                        <div class="nk-product-price">{{ request.date|date:'short' }}</div>
+                                    </h3>
+                                    <div class="nk-gap-1"></div>
+                                    <div class="row vertical-gap sm-gap">
+                                        <div class="col-md-12">
+                                            <button (click)="acceptRequest(request)" class="nk-btn nk-btn-rounded nk-btn-color-main-1">Accept</button>
+                                            <div class="nk-gap-1"></div>
+                                            <button (click)="deleteRequest(request)" class="nk-btn nk-btn-rounded nk-btn-color-main-1">Delete</button>
+                                        </div>
+                                    </div>
+                                    <div class="nk-gap-1"></div>
+                                </div>
+                            </div>
+                        </div>
                     </li>
 
                     <li>
                         <span class="nk-cart-toggle">
                             <span class="fa fa-shopping-cart"></span>
                             <span class="nk-badge">0</span>
+                            <span class="nk-badge">{{ cartMerch.length }}</span>
                         </span>
                         <div class="nk-cart-dropdown">
                             <div class="nk-gap-2"></div>
                             <div class="text-center">
                                 <a href="store-checkout.html"
+                                <div class="nk-widget-post" *ngFor="let merch of cartMerch">
+                                    <a class="nk-post-image">
+                                        <img src="http://localhost:1337/user_merch/{{ merch._id }}.jpg" alt="In all revolutions of">
+                                    </a>
+                                    <h3 class="nk-post-title">
+                                        <a (click)="deleteFromCart(merch)" class="nk-cart-remove-item"><span class="ion-android-close"></span></a>
+                                        <a href="store-product.html">{{ merch.name }}</a>
+                                    </h3>
+                                    <div class="nk-gap-1"></div>
+                                </div>
+                                <div class="nk-gap-1"></div>
+                                <a routerLink="/checkout"
                                     class="nk-btn nk-btn-rounded nk-btn-color-main-1 nk-btn-hover-color-white">Proceed
                                     to Checkout</a>
                             </div>
@@ -119,6 +187,7 @@
 
                                     <li>
                                         <a href="forum.html">
+                                        <a >
                                             Forum
 
                                         </a>
@@ -166,6 +235,9 @@
                     <li class=" nk-drop-item">
                         <a href="blog-list.html">
                             Blog
+                    <li class=" nk-drop-item" [routerLink]="['/ForumHome']">
+                        <a>
+                            Forum
 
                         </a>
                         <ul class="dropdown">
@@ -261,6 +333,7 @@
                             <li>
                                 <a routerLink="/jointournament">
                                     Join Tournaments
+                                    Create My Tournament
 
                                 </a>
                             </li>
@@ -269,6 +342,9 @@
                     <li class=" nk-drop-item">
                         <a href="store.html">
                             Store
+                    <li class=" nk-drop-item" [routerLink]="['/BetHoMe']">
+                        <a >
+                            Bet.GG
 
                         </a>
                         <ul class="dropdown">
@@ -282,6 +358,15 @@
                             <li>
                                 <a href="store-product.html">
                                     Product
+                            <li [routerLink]="['/BetHoMe']"  >
+                                <a >
+                                    Add a Bet
+
+                                </a>
+                            </li>
+                            <li [routerLink]="['/bethistory']" >
+                                <a >
+                                    My Bet History
 
                                 </a>
                             </li>

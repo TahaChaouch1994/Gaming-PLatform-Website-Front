@@ -1,0 +1,92 @@
+<ul class="nk-forum nk-forum-topic">
+    <div class="nk-gap-1"></div>
+    
+    <li>
+        <div class="nk-forum-topic-author">
+            <a href="#">
+                <img src="http://localhost:1337/avatars/{{uss.id_user}}.jpg" alt="Hitman">
+            </a>
+            <div class="nk-forum-topic-author-name" title="Hitman">
+                <a href="#">{{uss.firstName }}  {{uss.lastName}} </a>
+            </div>
+            <div class="nk-forum-topic-author-role">{{uss.username}}</div>
+            <div class="nk-forum-topic-author-since">
+                {{uss.role}}
+            </div>
+        </div>
+        <div class="nk-forum-topic-content">
+            <p>{{thrp.description}}</p>
+
+            <div class="nk-forum-topic-attachments">
+                <h4 class="h5">Attachments</h4>
+                <div class="nk-news-box-item-image">
+                <img height="260" src="http://localhost:1337/thread_attachements/{{thrp._id}}.jpg">
+            </div>
+                <br>
+                <div class="nk-forum-topic-footer">
+                    <span class="nk-forum-topic-date">{{thrp.addtime| date:'short'}}</span>
+                    <span class="nk-forum-action-btn">
+                        <a class="nk-anchor"  (click)="addliketothread()" *ngIf="didlike == 0"  ><span class="fa fa-thumbs-up"    ></span> Like</a>
+                        <a class="nk-anchor"  *ngIf="didlike == 1"  ><span class="fab fa-gratipay"    ></span> </a>
+
+                    </span> 
+                    <span class="nk-forum-action-btn">
+                        <a> {{thrp.likes}}</a>
+                    </span>
+                  
+                  
+                    
+                </div>  
+            </div>
+         
+        </div>
+       
+    </li>
+
+
+
+    <li *ngFor="let item of listposts">
+        <div class="nk-forum-topic-author">
+            <a href="#">
+                <img src="http://localhost:1337/avatars/{{item.sender.id_user}}.jpg" alt="Witch Murder">
+            </a>
+            <div class="nk-forum-topic-author-name" title="Witch Murder">
+                <a href="#">{{item.sender.username}}</a>
+            </div>
+            <div class="nk-forum-topic-author-role">Participant</div>
+            <div class="nk-forum-topic-author-since">
+                {{item.sender.firstName}} {{item.sender.lastName}}
+            </div>
+        </div>
+        <div class="nk-forum-topic-content">
+            <p>{{item.content}}.</p>
+        </div>
+        <div class="nk-forum-topic-footer">
+            <span class="nk-forum-topic-date">{{item.replytime | date: 'short'}}</span>
+        
+            <span  class="nk-forum-action-btn">
+                <a class="nk-anchor" id="{{item._id}}"  (click)="addlike(item._id)" *ngIf="item.cani == 0"  ><span class="fa fa-thumbs-up"    ></span> Like</a>
+                <a class="nk-anchor"  *ngIf="item.cani != 0"  ><span class="fab fa-gratipay"    ></span> </a>
+            </span> 
+            <span class="nk-forum-action-btn">
+                <a> {{item.likes}}</a>
+            </span>
+           
+        </div>
+    </li>
+   
+</ul>
+
+<!-- END: Pagination -->
+
+<div id="forum-reply"></div>
+<div class="nk-gap-2"></div>
+<!-- START: Reply -->
+<form action="#" novalidate>
+    <h3 class="h4">Reply</h3>
+    <div class="nk-gap-1"></div>
+    <textarea  #content name="reply" cols="30" rows="10" class="nk-summernote form-control"></textarea>
+    <div class="nk-gap-1"></div>
+    <button (click)="addreply(content.value)"  class="nk-btn nk-btn-rounded nk-btn-color-white">Reply</button>
+</form>
+<div class="nk-gap-2"></div>

@@ -276,6 +276,11 @@ export class RegisterComponent implements OnInit
     {
       this.user.role = "user";
       this.user.status = "inactive";
+<<<<<<< HEAD
+=======
+      this.user.activity = "OFFLINE";
+      this.user.lastActive = new Date();
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
       if (this.user.firstName == null)
       {
         this.user.firstName = "";
@@ -306,7 +311,10 @@ export class RegisterComponent implements OnInit
           {
             this.errors.splice(this.errors.indexOf("Username or email already used."), 1);
             this.user.id_user = response;
+<<<<<<< HEAD
             sessionStorage.setItem("geov_user", JSON.stringify(this.user));
+=======
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
             this.router.navigateByUrl("account-registered").then(() => {
               window.location.reload();
             });

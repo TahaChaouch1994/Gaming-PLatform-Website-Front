@@ -19,6 +19,40 @@ import { GetTournamentByKeyComponent } from './get-tournament-by-key/get-tournam
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
+import { VerifyUserComponent } from './verify-user/verify-user.component';
+import { ForumHomeComponent } from './forum-home/forum-home.component';
+import { ListThreadsComponent } from './list-threads/list-threads.component';
+import { ThreadDetailsComponent } from './thread-details/thread-details.component';
+import { CarouselModule, WavesModule } from 'angular-bootstrap-md'
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+
+import { StreamVideoComponent } from './stream-video/stream-video.component';
+import { ClipboardModule } from 'ngx-clipboard';
+import { ShowProfileComponent } from './show-profile/show-profile.component';
+import { ManageMerchComponent } from './manage-merch/manage-merch.component';
+import { BetHomeComponent } from './bet-home/bet-home.component';
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { CoachesDeskComponent } from './coaches-desk/coaches-desk.component';
+import { CoachDetailComponent } from './coach-detail/coach-detail.component';
+import { RecruteplayersComponent } from './recruteplayers/recruteplayers.component';
+import { BethistoryComponent } from './bethistory/bethistory.component';
+import { CoupondetailsComponent } from './coupondetails/coupondetails.component';
+import { MyfriendsComponent } from './myfriends/myfriends.component';
+import { SteamlinkComponent } from './steamlink/steamlink.component';
+import { SearchComponent } from './search/search.component';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { UserIdleModule } from 'angular-user-idle';
+import { NgChatModule } from 'ng-chat';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
+
+const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
 
 @NgModule({
   declarations: [
@@ -37,6 +71,30 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     GetTournamentByKeyComponent
   ],
   imports: [
+    VerifyUserComponent,
+    ForumHomeComponent,
+    ListThreadsComponent,
+    ThreadDetailsComponent,
+    StreamVideoComponent,
+    ShowProfileComponent,
+    ManageMerchComponent,
+    BetHomeComponent,
+    CoachesDeskComponent,
+    CoachDetailComponent,
+    RecruteplayersComponent,
+    BethistoryComponent,
+    CoupondetailsComponent,
+    MyfriendsComponent,
+    SteamlinkComponent,
+    SearchComponent,
+    SearchResultComponent,
+    CheckoutComponent,
+    OrderhistoryComponent
+  ],
+  imports: [
+    CarouselModule, WavesModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -44,6 +102,13 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     [SweetAlert2Module.forRoot()],
     [SweetAlert2Module],
     [SweetAlert2Module.forChild({  })]
+    MatSliderModule,
+    BrowserAnimationsModule,
+    ClipboardModule,
+    NgxPaginationModule,
+    UserIdleModule.forRoot({idle: 10, timeout: 20, ping: 120}),
+    NgChatModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

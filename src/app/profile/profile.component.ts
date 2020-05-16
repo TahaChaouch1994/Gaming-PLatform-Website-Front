@@ -2,7 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { UserApiService } from '../services/user-api.service';
+<<<<<<< HEAD
 
+=======
+import { WalletApiService } from '../services/wallet-api.service';
+import { StreamkeyApiService } from '../services/streamkey-api.service';
+import { ClipboardService } from 'ngx-clipboard'
+import * as CryptoJS from 'crypto-js';
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
 
 @Component({
   selector: 'app-profile',
@@ -14,11 +21,26 @@ export class ProfileComponent implements OnInit
   user: User;
   isLoggedIn: boolean;
   authType;
+<<<<<<< HEAD
   errors = [];
+=======
+  updatedSucess: boolean = false;
+  hasWallet: boolean;
+  getWalletTab: boolean = false;
+  walletBalance = "0";
+  askForPassword: boolean = false;
+  unlinkError;
+  streamKey;
+  errors = [];
+  avatarUrl;
+  showOrHideStr : string = "Show";
+  encryptSecretKey = "6IAVE+56U5t7USZhb+9wCcqrTyJHqAu09j0t6fBngNo=";
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
 
   constructor(
     private router: Router,
     private apiUser: UserApiService,
+<<<<<<< HEAD
   ) { }
 
   ngOnInit() {
@@ -47,6 +69,38 @@ export class ProfileComponent implements OnInit
     if (!this.isLoggedIn)
     {
       this.router.navigateByUrl("/");
+=======
+    private apiWallet: WalletApiService,
+    private apiStream: StreamkeyApiService,
+    private _clipboardService: ClipboardService
+  ) { }
+
+  ngOnInit() {
+    this.user = this.apiUser.getLoggedInUser();
+    this.authType = this.apiUser.getSessionInfo();
+    if (this.user == null)
+    {
+      this.router.navigateByUrl("/");
+    }
+    else
+    {
+      this.apiWallet.userHasWallet(this.user.id_user).subscribe(response => {
+        console.log(response);
+        if (response === "None")
+        {
+          this.hasWallet = false;
+        }
+        else
+        {
+          this.hasWallet = true;
+          this.walletBalance = response;
+        }
+      });
+      this.apiStream.getUserStreamKey(this.user.id_user).subscribe(response => {
+        this.streamKey = response["streamKey"];
+      })
+      this.avatarUrl = "http://localhost:1337/avatars/"+this.user.id_user+".jpg";
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
     }
   }
 
@@ -301,6 +355,10 @@ export class ProfileComponent implements OnInit
           }
           else
           {
+<<<<<<< HEAD
+=======
+            this.updatedSucess = true;
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
             this.errors.splice(this.errors.indexOf("Username or email already used."), 1);
             if (this.authType === "session")
             {
@@ -316,4 +374,110 @@ export class ProfileComponent implements OnInit
     }
   }
 
+<<<<<<< HEAD
+=======
+  walletFirstForm(here, there) 
+  {
+    if (there == true)
+    {
+      this.getWalletTab = true;
+    }
+    else if (here == true)
+    {
+      this.apiWallet.createWallet(this.user.id_user, this.user.email).subscribe(response => {
+        console.log(response);
+        location.reload();
+      })
+    }
+  }
+
+  encryptData(data) 
+  {
+    return CryptoJS.AES.encrypt(data.trim(), this.encryptSecretKey.trim()).toString();  
+  }
+
+  walletSecondForm(private_key)
+  {
+    this.apiWallet.privateKeyToAccount(this.user.id_user, this.encryptData(private_key)).subscribe(response => {
+      console.log(response);
+      location.reload();
+    })
+  }
+
+  goBackToFirstWalletForm()
+  {
+    this.getWalletTab = false;
+  }
+
+  unlink()
+  {
+    this.askForPassword = true;
+  }
+
+  confirmUnlink(password)
+  {
+    console.log(password);
+    if (password === this.user.password)
+    {
+      this.apiWallet.unlinkWallet(this.user.id_user).subscribe(response =>
+        {
+          console.log(response);
+          location.reload();
+        });
+    }
+    else
+    {
+      this.unlinkError = "Wrong password";
+    }
+  }
+
+  closeUnlinkForm()
+  {
+    this.askForPassword = false;
+  }
+
+  copyStreamKey(inputElement){
+    inputElement.select();
+    document.execCommand('copy');
+  }
+
+  copy(text: string){
+    this._clipboardService.copyFromContent(this.streamKey);
+  }
+
+  resetStreamKey()
+  {
+    this.apiStream.updateUserStreamKey(this.user.id_user).subscribe(response =>
+    {
+      this.streamKey = response;
+    });
+  }
+
+  showOrHide(input)
+  {
+    if (input.type === "text")
+    {
+      this.showOrHideStr = "Show";
+      input.type = "password";
+    }
+    else
+    {
+      this.showOrHideStr = "Hide";
+      input.type = "text";
+    }
+  }
+
+  onSelectFile(files: FileList) {
+    if (files.item(0)) 
+    {
+      const formData = new FormData();  
+      formData.append('file', files.item(0), this.user.id_user+'.jpg');
+      this.apiUser.uploadUserAvatar(formData).subscribe(response => {
+        console.log(response);
+        this.avatarUrl = "http://localhost:1337/avatars/"+this.user.id_user+".jpg?"+(new Date()).getTime();
+      })
+    }
+  }
+
+>>>>>>> 92b434ef3e20a4e68a2dd75654e3d8cfd98691f7
 }

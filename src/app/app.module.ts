@@ -43,7 +43,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     HttpClientModule,
     [SweetAlert2Module.forRoot()],
     [SweetAlert2Module],
-    [SweetAlert2Module.forChild({ /* options */ })]
+    [SweetAlert2Module.forChild({  })]
   ],
   providers: [],
   bootstrap: [AppComponent]

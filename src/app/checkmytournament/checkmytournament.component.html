@@ -1,0 +1,200 @@
+
+<div class="container">
+    <div class="nk-footer">
+        <label style="margin-left: 420px;margin-top: 30px;" > <h4>{{data.tournamentname}} </h4></label>
+<form action="#" class="nk-form text-white" #myform="ngForm">
+
+
+    <div class="row vertical-gap">
+        <div class="col-md-12">
+            <div class="nk-gap"></div>
+            
+            
+
+            <label style="margin-left: 55px;">Selected Game :</label>
+            <input   readonly="true" class="form-control"   style="width: 280px;margin-left: 50px;color: black;" placeholder={{data.gamename}}  >
+            <br/><br/>
+            
+            <div class="row vertical-gap sm-gap">
+                <div class="col-md-2">
+                    <label style="margin-left: 55px;">Type : </label>
+                </div>
+
+                
+
+                <div class="col-md-2">
+                    <input  readonly [(ngModel)]="type" type="text"  placeholder={{data.type}} name="gender" class="form-control" style="width: 90%;color: black;">
+
+                </div>
+
+            </div>
+            
+            
+
+            <br/>
+            <label style="margin-left: 55px;">Tournament Name :</label>
+            <input readonly [(ngModel)]="tournamentname"  type="text" value="" placeholder={{data.tournamentname}} required name="email" class="form-control"   style="width: 280px;margin-left: 50px;color: black;">
+            <br/>
+
+            <div class="row vertical-gap sm-gap">
+                <div class="col-md-3">
+                    <label   style="margin-left: 55px;">Start Date :</label>
+                    <input readonly [(ngModel)]="startdate" type="text"  placeholder={{data.startdate}} required name="email" class="form-control"   style="width: 160px;margin-left: 50px;color: black;">
+                
+                </div>
+                <div class="col-md-3">
+                    <label style="margin-left: 55px;">Start Time : </label>
+                    <input readonly [(ngModel)]="starttime" type="text"  placeholder={{data.starttime}} required name="email" class="form-control"   style="width: 90px;margin-left: 50px;color: black;">
+                    
+                </div>
+            </div>
+             <br/>
+
+            <div class="row vertical-gap sm-gap">
+                <div class="col-md-4">
+                    <label style="margin-left: 55px;">Game Region/Server :</label>
+
+                    <input readonly  type="text"  placeholder={{data.gameregion}} required name="email" class="form-control"   style="width: 190px;margin-left: 50px;color: black;">
+                </div>
+                <div class="col-md-4">
+                    <label style="margin-left: 55px;">Game Map :</label>
+                    <input readonly type="text"  placeholder={{data.gamemap}} required name="email" class="form-control"   style="width: 190px;margin-left: 50px;color: black;">
+
+                </div>
+
+
+                <div class="col-md-4">
+                    <label style="margin-left: 55px;"> Game Format :</label>
+                    <input readonly type="text"  placeholder={{data.gameformat}} required name="email" class="form-control"   style="width: 190px;margin-left: 50px;color: black;">
+
+                </div>
+            </div>
+            <br/><br/>
+
+            <div class="row vertical-gap sm-gap">
+                <div class="col-md-2">
+                    <label style="margin-left: 55px;">Entry : </label>
+                </div>
+
+                <div class="col-md-2">
+                    <input readonly type="text"  placeholder={{data.entry}} required name="email" class="form-control"   style="width: 150px;margin-left: 50px;color: black;">
+                </div>
+               
+
+            </div>
+
+
+            <br/><br/>
+
+            <div class="row vertical-gap sm-gap">
+                <div class="col-md-3">
+                    <label style="margin-left: 50px;">Entry fee (per person) ESD :</label>
+                    <input readonly type="text"  placeholder={{data.entryfee}} required name="email" class="form-control"   style="width: 140px;margin-left: 50px;color: black;">
+                </div>
+
+
+                <div class="col-md-3">
+                    <label style="margin-left: 55px;">Minimum Teams: </label>
+                    <input readonly type="text"  placeholder={{data.minteams}} required name="email" class="form-control"   style="width: 190px;margin-left: 50px;color: black;">
+                </div>
+
+                
+                
+                <div class="col-md-3">
+                    <label style="margin-left: 55px;"> Maximum Teams : </label>
+                    <input readonly type="text"  placeholder={{data.maxteams}} required name="email" class="form-control"   style="width: 190px;margin-left: 50px;color: black;">
+                </div>
+
+
+                <div class="col-md-3">
+                    <label style="margin-left: 55px;"> Tournament fee (ESD) : </label>
+                    <input readonly type="text"  placeholder={{data.tournamentfee}} required name="email" class="form-control"   style="width: 190px;margin-left: 50px;color: black;">
+                    
+                </div>
+            </div>
+
+            <br/> <br/> <br/>
+
+            <div class="row vertical-gap sm-gap">
+                <div class="col-md-3">
+                    <label style="margin-left: 55px;">You Created This Tournament As A  : </label>
+                </div>
+
+                <div class="col-md-3">  
+                    <input readonly type="text"  placeholder={{data.createtype}} required name="email" class="form-control"   style="width: 190px;margin-left: 50px;color: black;">
+                </div>
+                
+
+                
+            </div>
+            <br/><br/>
+
+            <div class="row vertical-gap sm-gap">
+                <label style="margin-left: 45%;">Access Code : </label>
+            </div>  
+            <br>
+
+            <div class="row vertical-gap sm-gap">
+                <input readonly type="text" value="{{data.accessCode}}" placeholder="{{data.accessCode}}" class="form-control"  #userinput style="width: 190px;margin-left: 40%;color: black;text-align: center;">
+
+                <button (click)="copyInputMessage(userinput)" value="click to copy"  class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-info icon ion-paper-airplane">Copy</button>
+
+                
+            </div>  
+            <br><br><br><br>
+
+
+  
+
+            <span *ngIf="createtype === 'spectator' ">
+           
+            </span>
+
+               
+        
+
+            <swal 
+                 #deleteSwal
+                 title="Are you sure ?"
+                 text="This Tournament will Cost you : {{lastPrice}}  USD."   
+                 icon="question"
+                 [showCancelButton]="true"
+                 [focusCancel]="true"
+                 (confirm)="justClick(file)"
+                 >
+            </swal>
+
+            <div class="col-lg-4" style="margin-left: 35%;">
+                <div class="nk-feature-2">
+                    <div class="nk-feature-icon">
+                        <div class="nk-count h2 mb-0">{{number2}}</div>
+                    </div>
+                    <div class="nk-feature-cont text-center">
+                        <h3 class="nk-feature-title">Players Joined This Tournament</h3>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            
+     
+
+
+            <button type="submit" class="form-control"  (click)="back()" style="width: 200px;margin-left: 450px; " >Back</button>
+            <br/>
+            
+             <br/>
+
+
+
+
+            
+
+  
+
+        </div>
+    </div>
+</form>
+
+</div>
+</div>
+<br/> <br/> <br/>

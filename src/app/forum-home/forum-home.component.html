@@ -1,0 +1,59 @@
+
+
+<div class="nk-gap-1"></div>
+<div class="container">
+   <ul class="nk-breadcrumbs">
+      <li><span>Gaming Lounge</span></li>
+   </ul>
+</div>
+<div class="nk-gap-1"></div>
+<ul class="nk-forum">
+
+
+       <div  *ngFor="let item of listcat">
+        <div  class="nk-accordion" id="accordion-1" role="tablist" aria-multiselectable="true">
+              
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="accordion-1-2-heading">
+                    <a data-toggle="collapse" data-parent="#accordion-1"href="#accordion-1-{{item.id}}" aria-expanded="false" aria-controls="accordion-1-2">
+                        {{item.name}} <span class="panel-heading-arrow fa fa-angle-down"></span>
+                    </a>
+                </div>
+                <div id="accordion-1-{{item.id}}" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="accordion-1-2-heading">
+                        <ul class="nk-forum">  
+                             <li *ngFor="let subs of item.subreddits " >
+                                <div class="nk-forum-icon">
+                                  
+                                        <span class="ion-xbox"></span>
+                                 
+                                </div>
+                                <div class="nk-forum-title">
+                                    <h3><a (click)="test(subs)">{{subs.Topicname}}</a></h3>
+                                    <div class="nk-forum-title-sub">{{subs.description}}</div>
+                                </div>
+                                <div class="nk-forum-count" *ngIf="subs.lastthread"  >
+                                  Threads :   {{subs.threadsnumber}}
+                                </div>
+                                <div   class="nk-forum-activity-avatar">
+                                    <a href="forum-single-topic.html">
+                                     <img  *ngIf="subs.lastthread"   src="http://localhost:1337/avatars/{{subs.lastthread.sender.id_user}}.jpg" >
+                                    </a>
+                                </div>
+                                <div    class="nk-forum-activity">
+                                    <div    *ngIf="subs.lastthread"   class="nk-forum-activity-title" (click)="gotothreadsdetail(subs.lastthread)" >
+                                        <a >{{subs.lastthread.title}} by : {{subs.lastthread.sender.username}}</a>
+                                    </div>
+                                    <div *ngIf="subs.lastthread">
+                                        <span>{{ subs.lastthread.addtime| date:'short'}}</span>
+                                    </div>
+                                </div>
+                            
+                             </ul>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</ul>
+
+

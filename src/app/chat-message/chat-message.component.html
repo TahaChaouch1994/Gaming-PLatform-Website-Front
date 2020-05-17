@@ -1,0 +1,46 @@
+
+
+<div class="container">
+    <div >
+        <div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-comment"></span>
+                </div>
+                <div class="panel-body">
+                    <ul class="chat">
+                        <li *ngFor="let x of msgList" class="left clearfix"><span class="chat-img pull-left">
+                            <img [src]="avatarUrl" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="20">
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">{{x.user}}</strong> <small class="pull-right text-muted">
+                                        <span class="glyphicon glyphicon-time"></span>{{x.date}}</small>
+                                </div>
+                                <p>
+                                 {{x.msg}}
+                                </p>
+                            </div>
+                        </li>
+                       
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <i class='attachment'
+                    (click)="toggled = !toggled"
+                    [(emojiPickerIf)]="toggled"
+                    [emojiPickerDirection]="'top'"
+                    (emojiPickerSelect)="handleSelection($event)">😄</i>
+                    <div class="input-group">
+                        <input [(ngModel)]="msg" id="btn-input" type="text" class="form-control input-sm" [ngModelOptions]="{standalone: true}"
+                        (keypress)="IsTyping()" placeholder="Write your message..."/>
+                        <span class="input-group-btn">
+                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" id="btn-chat"(click)="sendMessage()" >
+                                Send</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="tab-content">
+ 
+    <div class="wrapper">
+     
+       
+     
+     </div>
+ </div>
+ <div class="container">
+   <div class="row align-items-start">
+     <div class="col">
+     <h4>  import photos from camera</h4>
+     </div>
+     <div class="col">
+     <h4> import photos from desktop </h4>
+     </div>
+   </div>
+   <div class="row align-items-center">
+   
+     <div class="col">
+       <button (click)="addgif()" class="nk-btn nk-btn-rounded nk-btn-color-main-1">addd photo</button>&nbsp;
+                         
+    <img [src]="uploader" onError="this.src='assets/images/team-1.jpg'">
+     
+     </div>
+     <div class="col">
+       <div class="file-upload">
+         <input type="file" name="image" ng2FileSelect [uploader]="uploader" accept="image/x-png,image/gif,image/jpeg" />
+         <button type="button" class="nk-btn nk-btn-rounded nk-btn-color-main-1" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+           Upload
+         </button>
+       </div>
+      </div>
+   </div>
+   <div class="row align-items-end">
+ 
+     <div class="col">
+       <div class="pop"> <h5>image</h5> </div>
+ 
+     </div>
+   
+   </div>
+ </div>

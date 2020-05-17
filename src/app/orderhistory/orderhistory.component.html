@@ -1,0 +1,19 @@
+<table class="nk-table">
+    <thead>
+        <tr>
+            <th colspan="3">Order History</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>State</th>
+        </tr>
+        <tr *ngFor="let order of listOrders">
+            <td>{{ order._id }}</td>
+            <td>{{ order.date|date }}</td>
+            <td class="text-center">{{ order.state }}</td>
+        </tr>
+    </tbody>
+</table>

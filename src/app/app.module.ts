@@ -45,7 +45,7 @@ import { NgChatModule } from 'ng-chat';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
 import { FavorisComponent } from './favoris/favoris.component';
-
+import {  ReactiveFormsModule } from '@angular/forms';
 
 import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -56,6 +56,7 @@ import { ChatMessageComponent } from './chat-message/chat-message.component';
 import { MyEmojiComponent } from './my-emoji/my-emoji.component';
 import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { MytournamentsComponent } from './mytournaments/mytournaments.component';
@@ -118,6 +119,10 @@ const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
     MatSliderModule,
     BrowserAnimationsModule,
     ClipboardModule,
+    FormsModule, 
+    ReactiveFormsModule,
+     HttpClientModule, 
+  
     NgxPaginationModule,
     UserIdleModule.forRoot({idle: 10, timeout: 20, ping: 120}),
     NgChatModule,
@@ -132,6 +137,7 @@ const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
   ],
   providers: [],
   entryComponents: [
+    ThreadDetailsComponent,
     FavorisComponent,
     SubscriptionRequestComponent
   ],

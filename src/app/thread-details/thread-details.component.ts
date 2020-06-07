@@ -1,3 +1,4 @@
+
 import { UserApiService } from './../services/user-api.service';
 import { element } from 'protractor';
 import { Threadreact } from './../models/threadreact';
@@ -8,6 +9,7 @@ import { ForumServicesService } from '../services/forum-services.service';
 import { Thread } from '../models/thread';
 
 import { Replypost } from '../models/replypost';
+import { Replyreport } from '../models/replyreport';
 @Component({
   selector: 'app-thread-details',
   templateUrl: './thread-details.component.html',
@@ -16,7 +18,10 @@ import { Replypost } from '../models/replypost';
 export class ThreadDetailsComponent implements OnInit {
   threadid : any;
   listposts : any
+  listpostss = []
+  listpostsss = []
   didlike : number
+  modalitem :Replypost
   replys = [];
   constructor(
     private route : Router,
@@ -29,7 +34,9 @@ export class ThreadDetailsComponent implements OnInit {
   idth : any
   private thrp : any;
  private uss : any;
+ 
   ngOnInit() {
+    this.listpostss = [];
     this.threadid = this.aroute.params.subscribe((params => {this.idth = params['id']}));
     this.forumapi.threadlikecheck(this.apiUser.getLoggedInUser().id_user,this.idth).subscribe(e=>{
       this.didlike = e ;
@@ -38,32 +45,45 @@ export class ThreadDetailsComponent implements OnInit {
      this.forumapi.getallpostsfromthreadid(this.idth).subscribe(item=>{
      console.log(item)
 this.listposts  = item;
-      item.forEach(element => {
+
+      this.listposts.forEach(element => {
         
-  
         let repz : Replypost
-      repz= new Replypost()
-      repz.replytime = element.replytime
-      repz.content = element.content;
-      repz.sender = element.sender.id_user
-      repz.threadid= element.threadid;
-      repz.likes = element.likes 
-      repz.dislikes = element.dislikes 
+        repz= new Replypost()
+        repz.id = element._id
+        repz.replytime = element.replytime
+          repz.content = element.content;
+          repz.sender = element.sender
+          repz.threadid= element.threadid;
+          repz.likes = element.likes 
+          repz.dislikes = element.dislikes 
+          repz.cani = false;
+
         let m : number ; 
         
 
         this.forumapi.postlikecheck(this.apiUser.getLoggedInUser().id_user,element._id).subscribe(p=>{
-        repz.cani = p
+       
+        
+          if(p == 0 )
+         {
+
+          repz.cani = true;
+         }           
         })
-        if(element._id === this.apiUser.getLoggedInUser().id_user){
-          repz.cani == 1
+
+        if(element.sender.id_user === this.apiUser.getLoggedInUser().id_user){
+         repz.cani = false
+        
         }
-        console.log("kakaka")
-        console.log(repz)
-        console.log("kakaka")
- 
+        else{
+          repz.cani = true 
+        }
+          
+        this.listpostss.push(repz)
         
       });
+   
       
      })
      
@@ -99,9 +119,9 @@ this.getthreadneeded();
 
     addlike(aze){
      
-
+        
       this.forumapi.getpostfromid(aze).subscribe(item=>{
-          
+
                 let likez = item.likes  ;
                 likez++;
                 
@@ -112,10 +132,10 @@ this.getthreadneeded();
                 this.forumapi.addliketopost(aze,likez).subscribe();
                 this.forumapi.addpostraect(rep).subscribe();
                 setTimeout(() => {  }, 3000);
-                this.ngOnInit();
+             
               });
               
-              
+              this.ngOnInit();   
     }
   
    
@@ -142,4 +162,23 @@ setTimeout(() => {  }, 3000);
 this.ngOnInit();
     }
    
+
+
+
+    laodreply(itemp){
+      this.modalitem = itemp;
+      console.log (this.modalitem.content);
+
+    }
+    addreplyreport(mi,title,reportde){
+      let rep : Replyreport
+      rep= new Replyreport()
+   rep.description =reportde;
+   rep.reply = mi;
+   rep.sender = this.apiUser.getLoggedInUser()
+   rep.title = title;
+   rep.addtime =  new Date();
+   this.forumapi.createreplyreport(rep).subscribe();
+
+    }
   }

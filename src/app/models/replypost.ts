@@ -9,6 +9,6 @@ threadid : number
 replytime : Date
 likes :  number 
 dislikes : number 
-cani : number
+cani : boolean
 }
 

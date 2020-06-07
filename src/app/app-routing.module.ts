@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccountAddedComponent } from './account-added/account-added.component';
 import { ProfileComponent } from './profile/profile.component';
+
 import { VerifyUserComponent } from './verify-user/verify-user.component';
 import { ForumHomeComponent } from './forum-home/forum-home.component';
 import { ThreadDetailsComponent } from './thread-details/thread-details.component';
@@ -23,22 +24,26 @@ import { CheckmytournamentComponent } from './checkmytournament/checkmytournamen
 import { GetTournamentByKeyComponent } from './get-tournament-by-key/get-tournament-by-key.component';
 
 
+
+
 const routes: Routes = [
   { path: 'account-registered', component: AccountAddedComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'verifyUser', component: VerifyUserComponent },
-  { path: 'streamvideo',component: StreamVideoComponent },
-  { path: 'ThreadList',component: ListThreadsComponent },
-  { path: 'ForumHome',component: ForumHomeComponent },
-  { path: 'ThreadDetails',component: ThreadDetailsComponent },
-  { path: 'BetHoMe',component: BetHomeComponent },
-  { path: 'coach',component: CoachesDeskComponent },
-  { path: 'players',component: RecruteplayersComponent },
-  { path: 'coachDetail',component: CoachDetailComponent },
-  { path: 'bethistory',component: BethistoryComponent },
-  { path: 'coupondetails',component: CoupondetailsComponent },
-  { path: 'ThreadList',component: ListThreadsComponent },
-  { path: 'streamvideo',component: StreamVideoComponent },
+  {path: 'requesttournament',component: RequestTournamentComponent},
+  {path: 'requesttournamentform',component: RtournamentformComponent},
+  {path: 'streamvideo',component: StreamVideoComponent},
+  {path: 'ThreadList',component: ListThreadsComponent},
+  {path: 'ForumHome',component: ForumHomeComponent},
+  {path: 'ThreadDetails',component: ThreadDetailsComponent},
+  {path: 'BetHoMe',component: BetHomeComponent},
+  {path: 'coach',component: CoachesDeskComponent},
+  {path: 'players',component: RecruteplayersComponent},
+  {path: 'coachDetail',component: CoachDetailComponent},
+  {path: 'bethistory',component: BethistoryComponent},
+  {path: 'coupondetails',component: CoupondetailsComponent},
+  {path: 'ThreadList',component: ListThreadsComponent},
+  {path: 'streamvideo',component: StreamVideoComponent},
   { path: 'search', component: SearchResultComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'requesttournament',component: RequestTournamentComponent },

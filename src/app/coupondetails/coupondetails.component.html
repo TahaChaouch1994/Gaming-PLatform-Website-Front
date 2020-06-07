@@ -64,6 +64,9 @@
                             <td *ngIf="coupstatus === 'won'" > Coupon Status :  <i class="fas fa-check-circle" style="color: springgreen;"></i></td>
                             <td *ngIf="coupstatus === 'lost'" > Coupon Status :  <i class="fas fa-times-circle" style="color:tomato;"></i></td>
                             <td>Pay Status :   {{paystatus}} </td>
+                            <td><span  class="nk-forum-action-btn">
+                              <a class="nk-anchor"     ><span class="fab fa-flag"    data-toggle="modal" data-target="#modalThread"   ></span> </a>
+                          </span></td>
                           </tr>
                         
                         </tbody>
@@ -73,3 +76,51 @@
             <div class="nk-gap"></div>
         </div>
     </div>
+
+    <div class="nk-modal modal fade" id="modalThread" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+              <div class="modal-body">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span class="ion-android-close"></span>
+                  </button>
+  
+                  <h4 class="mb-0"><span class="text-main-1">Coupon Result </span> Report</h4>
+  
+                  <div class="nk-gap-1"></div>
+                  <form action="#" class="nk-form text-white">
+                      <div class="row vertical-gap">
+                          <div class="col-md-9">
+                             
+                              Report title
+  
+                              <div class="nk-gap"></div>
+                              <input  #title type="text" ng-model="inputText" class=" form-control" placeholder="title">
+  
+                              <div class="nk-gap"></div>
+                              Report Description
+                              <div class="nk-gap"></div>
+                              <textarea #description class="form-control required" name="message" rows="5" placeholder="description *"></textarea>
+                          </div>
+                          
+                          
+                                  
+                           
+                         
+                          
+                      </div>
+  
+                      <div class="nk-gap-1"></div>
+                      <div class="row vertical-gap">
+                          <div class="col-md-6">
+                              <a (click)="addcouponreport(title.value,description.value)" data-dismiss="modal"  class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block">send attachement</a>
+                          </div>
+                         
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  

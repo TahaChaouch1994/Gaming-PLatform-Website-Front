@@ -93,4 +93,12 @@ export class BetserviceService {
           catchError(this.handleError)
         )
       }
+      createcouponreport(item): Observable<any> {
+        return this.http
+          .post<any>(this.base_path+"/replycoupon/add", JSON.stringify(item), this.httpOptions)
+          .pipe(
+            retry(1),
+            catchError(this.handleError)
+          )
+      }
     }

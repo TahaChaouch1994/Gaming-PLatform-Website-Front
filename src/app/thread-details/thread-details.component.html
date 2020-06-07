@@ -45,7 +45,7 @@
 
 
 
-    <li *ngFor="let item of listposts">
+    <li *ngFor="let item of listpostss">
         <div class="nk-forum-topic-author">
             <a href="#">
                 <img src="http://localhost:1337/avatars/{{item.sender.id_user}}.jpg" alt="Witch Murder">
@@ -62,16 +62,19 @@
             <p>{{item.content}}.</p>
         </div>
         <div class="nk-forum-topic-footer">
-            <span class="nk-forum-topic-date">{{item.replytime | date: 'short'}}</span>
-        
+            <span class="nk-forum-topic-date">{{item.replytime | date: 'short'}} {{ item.cani}}</span>
             <span  class="nk-forum-action-btn">
-                <a class="nk-anchor" id="{{item._id}}"  (click)="addlike(item._id)" *ngIf="item.cani == 0"  ><span class="fa fa-thumbs-up"    ></span> Like</a>
-                <a class="nk-anchor"  *ngIf="item.cani != 0"  ><span class="fab fa-gratipay"    ></span> </a>
+                <a class="nk-anchor" *ngIf="item.cani == true"  id="{{item._id}}" (click)="addlike(item.id)"><span class="fa fa-thumbs-up"></span> Like </a>
             </span> 
+            <span  class="nk-forum-action-btn">
+                <a class="nk-anchor" *ngIf="item.cani == false"  ><span class="fab fa-gratipay"     ></span> </a>
+            </span>
             <span class="nk-forum-action-btn">
                 <a> {{item.likes}}</a>
             </span>
-           
+            <span  class="nk-forum-action-btn">
+                <a class="nk-anchor"  (click)="laodreply(item)" *ngIf="!item.cani == true"  ><span class="fab fa-flag"    data-toggle="modal" data-target="#modalThread"   ></span> </a>
+            </span>
         </div>
     </li>
    
@@ -90,3 +93,52 @@
     <button (click)="addreply(content.value)"  class="nk-btn nk-btn-rounded nk-btn-color-white">Reply</button>
 </form>
 <div class="nk-gap-2"></div>
+
+
+
+<div class="nk-modal modal fade" id="modalThread" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="ion-android-close"></span>
+                </button>
+
+                <h4 class="mb-0"><span class="text-main-1">Reply </span> Report</h4>
+
+                <div class="nk-gap-1"></div>
+                <form action="#" class="nk-form text-white">
+                    <div class="row vertical-gap">
+                        <div class="col-md-9">
+                           
+                            Report title
+
+                            <div class="nk-gap"></div>
+                            <input  #title type="text" ng-model="inputText" class=" form-control" placeholder="{{modalitem.content}}">
+
+                            <div class="nk-gap"></div>
+                            Report Description
+                            <div class="nk-gap"></div>
+                            <textarea #description class="form-control required" name="message" rows="5" placeholder="description *"></textarea>
+                        </div>
+                        
+                        
+                                
+                         
+                       
+                        
+                    </div>
+
+                    <div class="nk-gap-1"></div>
+                    <div class="row vertical-gap">
+                        <div class="col-md-6">
+                            <a (click)="addreplyreport(modalitem,title.value,description.value)" data-dismiss="modal"  class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block">send attachement</a>
+                        </div>
+                       
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

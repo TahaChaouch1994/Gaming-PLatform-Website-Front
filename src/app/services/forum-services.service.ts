@@ -86,6 +86,14 @@ export class ForumServicesService {
             catchError(this.handleError)
           )
       }
+      createreplyreport(item): Observable<any> {
+        return this.http
+          .post<any>(this.base_path+"/replyreport/add", JSON.stringify(item), this.httpOptions)
+          .pipe(
+            retry(1),
+            catchError(this.handleError)
+          )
+      }
 
 
 

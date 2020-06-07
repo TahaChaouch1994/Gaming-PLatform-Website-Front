@@ -4,7 +4,8 @@ import { BetserviceService } from './../services/betservice.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { element } from 'protractor';
-
+import { Couponreport } from '../models/couponreport';
+import { UserApiService } from './../services/user-api.service';
 @Component({
   selector: 'app-coupondetails',
   templateUrl: './coupondetails.component.html',
@@ -15,6 +16,7 @@ betsz = []
 zz = []
 i  = 0 
 w = 0 
+betc : Betcoupon ;
   sbm = new Matchresultdetails()
 bcop = []
 coupstatus : string
@@ -25,7 +27,8 @@ idth : any
   constructor(
     private route : Router,
     private aroute : ActivatedRoute,
-    public betser : BetserviceService
+    public betser : BetserviceService,
+    private apiUser: UserApiService,
   ) { }
 
   ngOnInit() {
@@ -52,6 +55,7 @@ idth : any
       
       let cpo = new Betcoupon()
       cpo = i ;
+      this.betc = i ;
       cpo.couponid = i._id
       i.coupongames.forEach(element => {
       this.betsz.push(element)  
@@ -144,6 +148,16 @@ idth : any
    } 
 
 
- 
+   addcouponreport(title,reportde){
+    let rep : Couponreport
+    rep= new Couponreport()
+ rep.description =reportde;
+ rep.coupon = this.betc;
+ rep.sender = this.apiUser.getLoggedInUser()
+ rep.title = title;
+ rep.addtime =  new Date();
+ this.betser.createcouponreport(rep).subscribe();
+
+  }
 
 }

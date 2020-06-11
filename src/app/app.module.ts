@@ -68,6 +68,7 @@ import { GetTournamentByKeyComponent } from './get-tournament-by-key/get-tournam
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { KeybetmodalComponent } from './keybetmodal/keybetmodal.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { IndexComponent } from './index/index.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
 
@@ -112,7 +113,8 @@ const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
     CheckmytournamentComponent,
     GetTournamentByKeyComponent,
     SnackbarComponent,
-    KeybetmodalComponent
+    KeybetmodalComponent,
+    IndexComponent
   ],
   imports: [
     MatSnackBarModule,

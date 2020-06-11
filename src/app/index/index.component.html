@@ -1,0 +1,71 @@
+<div role="tabpanel"  class="tab-pane  active show" id="profile-1-1">
+    <div class="nk-info-box nk-info-box-noicon">
+      
+        <div   class="mx-auto">
+            <div class="nk-gap-2"></div>
+            <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Upcomming LoL</span> Matches</span></h3>
+            <div class="nk-gap"></div>
+           
+            <div class="nk-gap"></div>
+
+            <div class="row">
+            <!--<div id="spo" class="col-md-4 offset-2 ">
+                <input   class="form-control " [(ngModel)]="dateselectedlol" (ngModelChange)="eelol()" [min]="startdate" [matDatepicker]="picker" (click)="picker.open()">
+                <mat-datepicker   #picker></mat-datepicker>
+
+            </div> -->
+            <div class="col-md-6 " style="margin-left: auto;margin-right: auto;">
+
+            
+            </div>
+            </div>
+            <div class="nk-gap"></div>
+            <div class="nk-match" *ngFor="let item of betz" >
+                <div class="nk-match-team-left d-flex flex-column">
+                    <a routerLink="/BetHoMe" class="mx-auto">
+                        <span class="nk-match-team-logo">
+                            <img  height="100" width="100" src="{{item.t1flasg}}" alt="">
+                        </span>
+                        <div>
+                        <span class="nk-match-team-name">
+                            {{item.team1}}
+                           
+                        </span>
+                        
+                    </div>
+                    </a>
+                    <div class="nk-gap"></div>
+                    
+                </div>
+                <div class="nk-match-status">
+                    <a href="#">
+                        <span class="nk-match-status-vs">VS</span>
+                        <span class="nk-match-status-date">{{item.time}}</span>
+                        
+                    </a>
+                </div>
+                <div class="nk-match-team-left d-flex flex-column">
+                    <a href="#" class="mx-auto">
+                       
+                        <div>
+                        <span class="nk-match-team-name padding" >
+                           {{item.team2}}
+                           
+                        </span>
+                        <span class="nk-match-team-logo" >
+                            <img height="100" width="100" src="{{item.t2flash}}" alt="" >
+                        </span>
+                    </div>
+                    </a>
+                    <div class="nk-gap"></div>
+                    
+                </div>
+            </div>
+
+            
+
+            
+        </div>
+    </div>
+    <div class="nk-gap"></div>
+</div>

@@ -23,6 +23,7 @@ import { CheckmytournamentComponent } from './checkmytournament/checkmytournamen
 import { GetTournamentByKeyComponent } from './get-tournament-by-key/get-tournament-by-key.component';
 import { ChatMessageComponent } from './chat-message/chat-message.component';
 import { MysubscriptionComponent } from './mysubscription/mysubscription.component';
+import { IndexComponent } from './index/index.component';
 
 
 const routes: Routes = [
@@ -50,7 +51,8 @@ const routes: Routes = [
   { path:'checkmytournament',component:CheckmytournamentComponent },
   { path:'gettourbykey',component:GetTournamentByKeyComponent },
   { path:'chat',component:ChatMessageComponent },
-  { path:'mysubscription',component:MysubscriptionComponent }
+  { path:'mysubscription',component:MysubscriptionComponent },
+  { path:'',component:IndexComponent }
 ];
 
 @NgModule({

@@ -10,6 +10,6 @@ export class Couponreport {
     sender:User
     addtime:Date
     coupon: Betcoupon
-   state :string
+   state = "unchecked"
 
 }

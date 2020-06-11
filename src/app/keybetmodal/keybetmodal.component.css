@@ -1,0 +1,11 @@
+.event-form-dialog .mat-dialog-container {
+    padding: 0 !important;
+    max-width: none;
+    width: 100vw;
+    height: 100vh;
+  }
+ 
+  .event-form-dialog .primary-color-input,
+  .event-form-dialog .secondary-color-input {
+    padding: 6px 8px;
+  }

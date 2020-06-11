@@ -1,3 +1,5 @@
+import { SnackbarComponent } from './../snackbar/snackbar.component';
+import { MatDialog } from '@angular/material/dialog';
 import { UserApiService } from './../services/user-api.service';
 import { Betcoupon } from './../models/betcoupon';
 import { Bettournaments } from './../models/bettournaments';
@@ -7,7 +9,8 @@ import { BetserviceService } from '../services/betservice.service';
 import { LeagueService } from '../services/leauge-service.service';
 import { element } from 'protractor';
 import * as moment from 'moment'
-
+import {MatSnackBar}  from '@angular/material/snack-bar';
+import { KeybetmodalComponent } from '../keybetmodal/keybetmodal.component';
 @Component({
   selector: 'app-bet-home',
   templateUrl: './bet-home.component.html',
@@ -21,6 +24,7 @@ export class BetHomeComponent implements OnInit {
   dateselectedcs  = new Date()
   detectdow : any;
   dateselectow  = new Date()
+  dialogRef  : any ; 
 
 
 
@@ -43,7 +47,10 @@ betdota = []
 betwow = []
 betcsgo = []
 coupon = []
+
   constructor(
+    private matDialog : MatDialog,
+    private snackBar : MatSnackBar,
     public bser:BetserviceService ,
     public lolser: LeagueService,
     public user : UserApiService,
@@ -51,10 +58,26 @@ coupon = []
   ) { }
  
   ngOnInit() {
+    this.total = 1
+this.ammount = 0
+    this.show = []
+   /* this.loltours = []
+    this.cstours = []
+    this.dotatours = []
 
+    this.matches = new Map();
+
+  
+    this.bbet = []
+    this.csbetp = []
+    this.wowbetp=[]
+    this.betdota = []
+    this.betwow = []
+    this.betcsgo = []*/
+    this.coupon = []
   let tm1 : any;
     let tm2 : any;
-    
+    this.bet = []
     this.startdate = new Date()
     this.date = moment(new Date());
 
@@ -309,41 +332,79 @@ deleteItem(item){
 
 }
 
-
+PrivateKey = ""
 registercoupon(){
-if(this.ammount  >= 1 ){
-  console.log(this.ammount)
-  let PublicAddress = "0x1AC7164E008D58bc02a51ea29041bE1f8eAFA8eA"
-  let PrivateKey =  "1eeb169fa03a6fb2e342cc311ada624ca291fe8a79746254eb6d941709cd5629"
-  let geekspublic = "0xb1103661bA1736EC0C83931ce12851158b62875d"
-
-
-    let userbetcoupon = new Betcoupon()
-    userbetcoupon.coupongames = this.coupon 
-    userbetcoupon.couponplayer = this.user.getLoggedInUser().id_user
-    userbetcoupon.montant = this.ammount
-    userbetcoupon.payementstatus = "to check"
-     let x = this.ammount * this.total
-    let res =  Math.round(x*100)/100
+ 
+  
+ 
+ 
+    
+    if(this.ammount  >= 1 ){
+      this.dialogRef = this.matDialog.open(KeybetmodalComponent,{
+        //  width : "80 %" ,
+          panelClass : "custom-dialog-container"
+        })
+        this.dialogRef.afterClosed().subscribe(response =>{
+          if(response != null && this.ammount >0 ){
+          console.log(response)
+          this.PrivateKey = response;
+          console.log(this.coupon)
+      console.log(this.ammount)
+      let PublicAddress = "0x1AC7164E008D58bc02a51ea29041bE1f8eAFA8eA"
+     
+     // let PrivateKey =  "1eeb169fa03a6fb2e342cc311ada624ca291fe8a79746254eb6d941709cd5629"
+      let geekspublic = "0xb1103661bA1736EC0C83931ce12851158b62875d"
+    
+    
+        let userbetcoupon = new Betcoupon()
+        userbetcoupon.coupongames = this.coupon 
+        userbetcoupon.couponplayer = this.user.getLoggedInUser().id_user
+        userbetcoupon.montant = this.ammount
+        userbetcoupon.payementstatus = "to check"
+         let x = this.ammount * this.total
+        let res =  Math.round(x*100)/100
+       
+        userbetcoupon.potentielgain =  res
+        userbetcoupon.status ="en cours"
+        userbetcoupon.userpubkey = PublicAddress
+          var  d = new  Date();  
+        userbetcoupon.validatetime =  d ; 
+        this.bser.addcoupon(userbetcoupon).subscribe(respc =>{
+          
+          
+          userbetcoupon = null
+        }
+        )
+      this.bser.sendcoupon(PublicAddress,geekspublic,this.PrivateKey,this.ammount).subscribe(response => {
+       
+        this.snackBar.openFromComponent(
+          SnackbarComponent,
+          
+          {
+              duration: 3000,
+          }
+          
+      ); 
+ 
    
-    userbetcoupon.potentielgain =  res
-    userbetcoupon.status ="en cours"
-    userbetcoupon.userpubkey = PublicAddress
-      var  d = new  Date();  
-    userbetcoupon.validatetime =  d ; 
-    this.bser.addcoupon(userbetcoupon).subscribe()
-  this.bser.sendcoupon(PublicAddress,geekspublic,PrivateKey,this.ammount).subscribe(response => {
- });
- this.coupon = []
-  this.total  = 0 
-  var drinkSelect = document.getElementById("spoz");
-  drinkSelect.hidden= true
-}
-else{
-  console.log(this.ammount)
-  var drinkSelect = document.getElementById("spoz");
-  drinkSelect.hidden= false ;
-}
+     });
+     
+      
+      var drinkSelect = document.getElementById("spoz");
+      drinkSelect.hidden= true
+      this.ngOnInit();
+    }
+        
+  }) 
+  }
+    else{
+      console.log(this.ammount)
+      var drinkSelect = document.getElementById("spoz");
+      drinkSelect.hidden= false ;
+    }
+  
+ 
+
 }
 
 

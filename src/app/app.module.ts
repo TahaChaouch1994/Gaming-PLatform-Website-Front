@@ -1,3 +1,4 @@
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -63,7 +64,10 @@ import { MytournamentsComponent } from './mytournaments/mytournaments.component'
 import { JointournamentComponent } from './jointournament/jointournament.component';
 import { CheckmytournamentComponent } from './checkmytournament/checkmytournament.component';
 import { GetTournamentByKeyComponent } from './get-tournament-by-key/get-tournament-by-key.component';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
+import { SnackbarComponent } from './snackbar/snackbar.component';
+import { KeybetmodalComponent } from './keybetmodal/keybetmodal.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
 
@@ -106,9 +110,12 @@ const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
     MytournamentsComponent,
     JointournamentComponent,
     CheckmytournamentComponent,
-    GetTournamentByKeyComponent
+    GetTournamentByKeyComponent,
+    SnackbarComponent,
+    KeybetmodalComponent
   ],
   imports: [
+    MatSnackBarModule,
     CarouselModule, WavesModule,
     MatNativeDateModule,
     MatDatepickerModule,
@@ -119,7 +126,7 @@ const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
     MatSliderModule,
     BrowserAnimationsModule,
     ClipboardModule,
-    FormsModule, 
+    FormsModule,  
     ReactiveFormsModule,
      HttpClientModule, 
   
@@ -133,13 +140,15 @@ const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
     NgxEmojiPickerModule,
     [SweetAlert2Module.forRoot()],
     [SweetAlert2Module],
-    [SweetAlert2Module.forChild({  })]
+    [SweetAlert2Module.forChild({ /* option */ })]
   ],
   providers: [],
   entryComponents: [
     ThreadDetailsComponent,
     FavorisComponent,
-    SubscriptionRequestComponent
+    SubscriptionRequestComponent,
+    KeybetmodalComponent,
+    SnackbarComponent
   ],
   bootstrap: [AppComponent]
 })

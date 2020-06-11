@@ -9,7 +9,7 @@
     <div class="row">
         <div class="nk-gap"></div>
 
-    <div class="tab-content col-10">
+    <div class="tab-content col-12">
        
 
 
@@ -27,7 +27,7 @@
                     
                     <div class="nk-gap"></div>
 
-                    <h5 class="nk-decorated-h-2"><span><span class="text-main-1">Coupon  </span>  ID : </span> {{idth}}</h5>
+                    <h5 class="nk-decorated-h-1"><span><span class="text-main-1">Coupon  </span>  ID : </span> {{idth}}</h5>
                     <table class="table table-dark">
                         <thead>
                           <tr >
@@ -55,21 +55,26 @@
                             
                            
                           </tr>
-                          <tr>
-                            <div class="nk-gap"></div>
-                          </tr>
-                          
+                       
+                        
                           <tr>
                             <td *ngIf="coupstatus === 'en cours' " > Coupon Status :  <i  class="fas fa-info-circle" style="color: sandybrown;"></i></td>
                             <td *ngIf="coupstatus === 'won'" > Coupon Status :  <i class="fas fa-check-circle" style="color: springgreen;"></i></td>
                             <td *ngIf="coupstatus === 'lost'" > Coupon Status :  <i class="fas fa-times-circle" style="color:tomato;"></i></td>
-                            <td>Pay Status :   {{paystatus}} </td>
-                            <td><span  class="nk-forum-action-btn">
-                              <a class="nk-anchor"     ><span class="fab fa-flag"    data-toggle="modal" data-target="#modalThread"   ></span> </a>
-                          </span></td>
+                            
+                            
+                          
+                          <td>  Amount played : {{coupp.montant}} ESD </td>
+                          <td> Potentiel  Gain : {{  coupp.potentielgain}} ESD</td>
+                          <td> </td>
+                          <td><span  class="nk-forum-action-btn" style="display: initial;
+                            flex-direction: column;">
+                         you can send  a  report by clicking on this icon 
+                          <a class="nk-anchor"     ><span class="fab fa-flag"    data-toggle="modal" data-target="#modalThread"   ></span> </a>
+                      </span></td>
                           </tr>
                         
-                        </tbody>
+                        </tbody> 
                       </table>
             </div>
           
@@ -78,49 +83,61 @@
     </div>
 
     <div class="nk-modal modal fade" id="modalThread" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-              <div class="modal-body">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span class="ion-android-close"></span>
-                  </button>
-  
-                  <h4 class="mb-0"><span class="text-main-1">Coupon Result </span> Report</h4>
-  
-                  <div class="nk-gap-1"></div>
-                  <form action="#" class="nk-form text-white">
-                      <div class="row vertical-gap">
-                          <div class="col-md-9">
-                             
-                              Report title
-  
-                              <div class="nk-gap"></div>
-                              <input  #title type="text" ng-model="inputText" class=" form-control" placeholder="title">
-  
-                              <div class="nk-gap"></div>
-                              Report Description
-                              <div class="nk-gap"></div>
-                              <textarea #description class="form-control required" name="message" rows="5" placeholder="description *"></textarea>
-                          </div>
-                          
-                          
-                                  
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="ion-android-close"></span>
+                    </button>
+    
+                    <h4 class="mb-0"><span class="text-main-1">Coupon Result </span> Report</h4>
+    
+                    <div class="nk-gap-1"></div>
+                    <form action="#" class="nk-form text-white" [formGroup]="userForm">
+                        <div class="row vertical-gap">
+                            <div class="col-md-9">
+                               
+                                Report title
+    
+                                <input  #title type="text" formControlName="title" ng-model="inputText" class=" form-control" placeholder="title">
+                                <div #ref *ngIf="NameC.invalid && NameC.touched" [ngStyle]="styleClass">  
+                                    <div  *ngIf=" NameC.errors.required">
+                                        title obligatoire
+                                    </div>
+                                    <div  *ngIf=" NameC.errors.minlength" >
+                                      minimum 2 caracteres
+                                      </div>
+                                  </div>
+    
+                                <div class="nk-gap"></div>
+                                Report Description
+                                <div class="nk-gap"></div>
+                              <textarea #description class="form-control required" formControlName="description" name="message" rows="5" placeholder="description *"></textarea>
+                                  <div #ref *ngIf="DescriptionC.invalid && DescriptionC.touched" [ngStyle]="styleClass">  
+                                  <div  *ngIf=" DescriptionC.errors.required">
+                                      description  obligatoire
+                                  </div>
                            
-                         
-                          
-                      </div>
-  
-                      <div class="nk-gap-1"></div>
-                      <div class="row vertical-gap">
-                          <div class="col-md-6">
-                              <a (click)="addcouponreport(title.value,description.value)" data-dismiss="modal"  class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block">send attachement</a>
+                                </div>
                           </div>
-                         
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>
-  </div>
-  
-  
+                            
+                            
+                                    
+                             
+                           
+                            
+                        </div>
+    
+                        <div class="nk-gap-1"></div>
+                        <div class="row vertical-gap">
+                            <div class="col-md-6" *ngIf="(!(NameC.invalid) && !(DescriptionC.invalid))">
+                                <a (click)="addcouponreport(title.value,description.value)" data-dismiss="modal"  class="nk-btn nk-btn-rounded nk-btn-color-black nk-btn-block">send Report</a>
+                            </div>
+                           
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    

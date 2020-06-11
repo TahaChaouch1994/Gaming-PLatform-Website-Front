@@ -10,4 +10,5 @@ export class User {
     activity: string;
     lastActive: Date;
     status: string;
+    forumstate = "1"
 }

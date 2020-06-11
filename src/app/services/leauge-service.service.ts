@@ -12,7 +12,7 @@ export class LeagueService {
 
 
   firstviewpath ="https://api.pandascore.co/lol/matches/upcoming?per_page=25&?&token=ZV-nLY0nNffW68sckRgH761scRf0vc5GfMsjYWYtpfsChM0TnDs"  
- 
+  firstviewpathindex ="https://api.pandascore.co/lol/matches/upcoming?per_page=5&?&token=ZV-nLY0nNffW68sckRgH761scRf0vc5GfMsjYWYtpfsChM0TnDs"
   runnningtournamentslol = "https://api.pandascore.co/lol/tournaments/running?per_page=100&?&token=ZV-nLY0nNffW68sckRgH761scRf0vc5GfMsjYWYtpfsChM0TnDs"
   runningtournamentscsgo ="https://api.pandascore.co/csgo/tournaments/running?per_page=100&?&token=ZV-nLY0nNffW68sckRgH761scRf0vc5GfMsjYWYtpfsChM0TnDs"
  
@@ -151,6 +151,16 @@ export class LeagueService {
       getallleagueplayers(): Observable<any> {
         return this.http
         .get<string>(this.playersleague, this.httpOptions)
+        .pipe(
+          retry(1),
+          catchError(this.handleError)
+        )
+      }
+
+
+      getindexviewmatches(): Observable<any> {
+        return this.http
+        .get<string>(this.firstviewpathindex, this.httpOptions)
         .pipe(
           retry(1),
           catchError(this.handleError)

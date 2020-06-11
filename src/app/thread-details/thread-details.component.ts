@@ -10,12 +10,35 @@ import { Thread } from '../models/thread';
 
 import { Replypost } from '../models/replypost';
 import { Replyreport } from '../models/replyreport';
+import { FormGroup, FormControl, Validators} from '@angular/Forms';
 @Component({
   selector: 'app-thread-details',
   templateUrl: './thread-details.component.html',
   styleUrls: ['./thread-details.component.css']
 })
 export class ThreadDetailsComponent implements OnInit {
+
+  styleClass = {
+    'color' : 'red'
+  }
+  userForm = new FormGroup({
+    title : new FormControl('',[Validators.required,Validators.minLength(2)]),
+    description :new FormControl('',[Validators.required,Validators.minLength(2)]),
+    contentdescription :new FormControl('',[Validators.required,Validators.minLength(2)]),
+    desctitle :new FormControl('',[Validators.required,Validators.minLength(2)])
+  })
+  get  NameC(){
+    return this.userForm.get('title')
+  }
+  get  DescriptionC(){
+    return this.userForm.get('description')
+  }
+  get  contentdescriptionC(){
+    return this.userForm.get('contentdescription')
+  } get desctitleC(){
+    return this.userForm.get('desctitle')
+  }
+
   threadid : any;
   listposts : any
   listpostss = []
@@ -23,6 +46,7 @@ export class ThreadDetailsComponent implements OnInit {
   didlike : number
   modalitem :Replypost
   replys = [];
+  userforumstate : number
   constructor(
     private route : Router,
     private aroute : ActivatedRoute,
@@ -32,10 +56,14 @@ export class ThreadDetailsComponent implements OnInit {
    
    ) { }
   idth : any
-  private thrp : any;
- private uss : any;
+   thrp : any;
+  uss : any;
  
   ngOnInit() {
+   
+    this.userforumstate  = +  (this.apiUser.getLoggedInUser().forumstate)
+
+    this.replys = [];
     this.listpostss = [];
     this.threadid = this.aroute.params.subscribe((params => {this.idth = params['id']}));
     this.forumapi.threadlikecheck(this.apiUser.getLoggedInUser().id_user,this.idth).subscribe(e=>{
@@ -43,7 +71,7 @@ export class ThreadDetailsComponent implements OnInit {
     })
 
      this.forumapi.getallpostsfromthreadid(this.idth).subscribe(item=>{
-     console.log(item)
+   
 this.listposts  = item;
 
       this.listposts.forEach(element => {
@@ -63,14 +91,20 @@ this.listposts  = item;
         
 
         this.forumapi.postlikecheck(this.apiUser.getLoggedInUser().id_user,element._id).subscribe(p=>{
-       
-        
-          if(p == 0 )
+         
+            console.log(element.sender.id_user)
+           
+          if(p == 0  )
          {
 
           repz.cani = true;
-         }           
-        })
+         } 
+         else{
+          repz.cani = false;
+        }          
+        }
+        
+        )
 
         if(element.sender.id_user === this.apiUser.getLoggedInUser().id_user){
          repz.cani = false
@@ -132,10 +166,10 @@ this.getthreadneeded();
                 this.forumapi.addliketopost(aze,likez).subscribe();
                 this.forumapi.addpostraect(rep).subscribe();
                 setTimeout(() => {  }, 3000);
-             
+                this.ngOnInit();  
               });
               
-              this.ngOnInit();   
+             
     }
   
    
@@ -151,7 +185,7 @@ this.getthreadneeded();
 
 let likez = this.thrp.likes  ;
 likez++;
-console.log(likez)
+
 this.forumapi.addliketothread(this.thrp._id,likez).subscribe();
 let rept : Threadreact
 rept= new Threadreact()
@@ -167,7 +201,7 @@ this.ngOnInit();
 
     laodreply(itemp){
       this.modalitem = itemp;
-      console.log (this.modalitem.content);
+      
 
     }
     addreplyreport(mi,title,reportde){
@@ -180,5 +214,18 @@ this.ngOnInit();
    rep.addtime =  new Date();
    this.forumapi.createreplyreport(rep).subscribe();
 
+    }
+
+
+    sendmail(desce,subj){
+
+console.log(desce,subj)
+const mail = {
+  subject: subj,
+  sendermail: this.apiUser.getLoggedInUser().email,
+  content: desce,
+  passworddd : this.apiUser.getLoggedInUser().password
+};
+this.forumapi.Contactsupport(mail).subscribe()
     }
   }

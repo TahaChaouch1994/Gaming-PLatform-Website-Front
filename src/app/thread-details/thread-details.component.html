@@ -73,7 +73,7 @@
                 <a> {{item.likes}}</a>
             </span>
             <span  class="nk-forum-action-btn">
-                <a class="nk-anchor"  (click)="laodreply(item)" *ngIf="!item.cani == true"  ><span class="fab fa-flag"    data-toggle="modal" data-target="#modalThread"   ></span> </a>
+                <a class="nk-anchor"  (click)="laodreply(item)"   ><span class="fab fa-flag"    data-toggle="modal" data-target="#modalThread"   ></span> </a>
             </span>
         </div>
     </li>
@@ -85,13 +85,17 @@
 <div id="forum-reply"></div>
 <div class="nk-gap-2"></div>
 <!-- START: Reply -->
-<form action="#" novalidate>
+<form action="#" novalidate *ngIf="userforumstate == 1">
     <h3 class="h4">Reply</h3>
     <div class="nk-gap-1"></div>
-    <textarea  #content name="reply" cols="30" rows="10" class="nk-summernote form-control"></textarea>
+    <textarea   #content name="reply" cols="30" rows="10" class="nk-summernote form-control"></textarea>
     <div class="nk-gap-1"></div>
     <button (click)="addreply(content.value)"  class="nk-btn nk-btn-rounded nk-btn-color-white">Reply</button>
 </form>
+<span  class="nk-forum-action-btn"  *ngIf="userforumstate == 0">
+   <a style="color: red ;">   you are banned from forum service u can send us an e-mail by clicking on this icon</a>
+    <a  class="nk-anchor"   style="margin-left: 15px;"  ><span class="fab fa-flag"    data-toggle="modal" data-target="#modalemail"   ></span> </a>
+</span>
 <div class="nk-gap-2"></div>
 
 
@@ -107,19 +111,32 @@
                 <h4 class="mb-0"><span class="text-main-1">Reply </span> Report</h4>
 
                 <div class="nk-gap-1"></div>
-                <form action="#" class="nk-form text-white">
+                <form [formGroup]="userForm" action="#" class="nk-form text-white" >
                     <div class="row vertical-gap">
                         <div class="col-md-9">
                            
                             Report title
 
                             <div class="nk-gap"></div>
-                            <input  #title type="text" ng-model="inputText" class=" form-control" placeholder="{{modalitem.content}}">
-
+                            <input  #title type="text" formControlName="title" ng-model="inputText" class=" form-control" >
+                            <div #ref *ngIf="NameC.invalid && NameC.touched" [ngStyle]="styleClass">  
+                                <div  *ngIf=" NameC.errors.required">
+                                    title obligatoire
+                                </div>
+                                <div  *ngIf=" NameC.errors.minlength" >
+                                  minimum 2 caracteres
+                                  </div>
+                              </div>
                             <div class="nk-gap"></div>
                             Report Description
                             <div class="nk-gap"></div>
-                            <textarea #description class="form-control required" name="message" rows="5" placeholder="description *"></textarea>
+                            <textarea #description class="form-control required" formControlName="description" name="message" rows="5" placeholder="description *"></textarea>
+                                <div #ref *ngIf="DescriptionC.invalid && DescriptionC.touched" [ngStyle]="styleClass">  
+                                <div  *ngIf=" DescriptionC.errors.required">
+                                    description  obligatoire
+                                </div>
+                         
+                              </div>
                         </div>
                         
                         
@@ -131,8 +148,8 @@
 
                     <div class="nk-gap-1"></div>
                     <div class="row vertical-gap">
-                        <div class="col-md-6">
-                            <a (click)="addreplyreport(modalitem,title.value,description.value)" data-dismiss="modal"  class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block">send attachement</a>
+                        <div div class="col-md-6"  *ngIf="(!(NameC.invalid) && !(DescriptionC.invalid)) " >
+                            <a (click)="addreplyreport(modalitem,title.value,description.value)" data-dismiss="modal"  class="nk-btn nk-btn-rounded nk-btn-color-black nk-btn-block">send report</a>
                         </div>
                        
                     </div>
@@ -142,3 +159,61 @@
     </div>
 </div>
 
+<div class="nk-modal modal fade" id="modalemail" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="ion-android-close"></span>
+                </button>
+
+                <h4 class="mb-0"><span class="text-main-1">Contact </span> Support</h4>
+
+                <div class="nk-gap-1"></div>
+                <form [formGroup]="userForm" action="#" class="nk-form text-white" >
+                    <div class="row vertical-gap">
+                        <div class="col-md-9">
+                           
+                            Report title
+
+                            <div class="nk-gap"></div>
+                            <input  #desctitle type="text" formControlName="desctitle" ng-model="inputText" class=" form-control">
+                            <div #ref *ngIf="desctitleC.invalid && desctitleC.touched" [ngStyle]="styleClass">  
+                                <div  *ngIf=" desctitleC.errors.required">
+                                    email description 
+                                </div>
+                                <div  *ngIf=" desctitleC.errors.minlength" >
+                                  minimum 2 caracteres
+                                  </div>
+                              </div>
+                            <div class="nk-gap"></div>
+                            email content
+                            <div class="nk-gap"></div>
+                            <textarea #contentdescription class="form-control required" formControlName="contentdescription" name="message" rows="5" placeholder="description *"></textarea>
+                                <div #ref *ngIf="contentdescriptionC.invalid && contentdescriptionC.touched" [ngStyle]="styleClass">  
+                                <div  *ngIf=" contentdescriptionC.errors.required">
+                                    description  obligatoire
+                                </div>
+                         
+                              </div>
+                        </div>
+                        
+                        
+                                
+                         
+                       
+                        
+                    </div>
+
+                    <div class="nk-gap-1"></div>
+                    <div class="row vertical-gap">
+                        <div div class="col-md-6"  *ngIf="(!(desctitleC.invalid) && !(contentdescriptionC.invalid)) " >
+                            <a  data-dismiss="modal" (click)="sendmail(contentdescription.value,desctitle.value)" class="nk-btn nk-btn-rounded nk-btn-color-black nk-btn-block">send Mail</a>
+                        </div>
+                       
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

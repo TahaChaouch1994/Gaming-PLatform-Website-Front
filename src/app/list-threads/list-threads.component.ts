@@ -7,13 +7,37 @@ import { UserApiService } from '../services/user-api.service';
 import { ForumServicesService } from '../services/forum-services.service';
 import { Subreddits } from '../models/subreddits';
 import { Threadsview } from '../models/threadsview';
-
+import { FormGroup, FormControl, Validators} from '@angular/Forms';
 @Component({
   selector: 'app-list-threads',
   templateUrl: './list-threads.component.html',
   styleUrls: ['./list-threads.component.css']
 })
 export class ListThreadsComponent implements OnInit {
+  styleClass = {
+    'color' : 'red'
+  }
+  userForm = new FormGroup({
+    title : new FormControl('',[Validators.required,Validators.minLength(2)]),
+    description :new FormControl('',[Validators.required,Validators.minLength(2)]),
+    image : new FormControl('',[Validators.required]),
+    contentdescription :new FormControl('',[Validators.required,Validators.minLength(2)]),
+    desctitle :new FormControl('',[Validators.required,Validators.minLength(2)])
+  })
+  get  NameC(){
+    return this.userForm.get('title')
+  }
+  get  DescriptionC(){
+    return this.userForm.get('description')
+  }
+  get ImageC(){
+    return this.userForm.get('image')
+  }
+  get  contentdescriptionC(){
+    return this.userForm.get('contentdescription')
+  } get desctitleC(){
+    return this.userForm.get('desctitle')
+  }
   topicid : any;
   fileData: File = null;
   previewUrl:any = null;
@@ -23,25 +47,38 @@ export class ListThreadsComponent implements OnInit {
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
   avatarUrl;
-   tpc : Subreddits
+  userforumstate : number
+   tpc : any
   constructor(
    private route : Router,
    private aroute : ActivatedRoute,
    private apiUser: UserApiService,
    private forumapi : ForumServicesService,
-   
-   
+      
   ) { }
     idt : any
     fileToUpload: File = null;
+
   ngOnInit() {
+   
+   
+    console.log("hhhhhhhhhhhhhhhhhh")
+    this.userforumstate  = +  (this.apiUser.getLoggedInUser().forumstate)
+    console.log("hhhhhhhhhhhhhhhhhh")
+  
     this.topicid = this.aroute.params.subscribe((params => {this.idt = params['id']}));
    this. getlistthreadsbytopicid();
-    this.gettopicneeded(this.idt);}
+   this.forumapi.gettopicfrom(this.idt).subscribe(response => {
+
+   this.tpc = response
+     
+      
+    })
+  }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
    
-    console.log(this.fileToUpload);
+   
 }
 
 
@@ -91,13 +128,7 @@ reader.onload = (_event) => {
 
 gettopicneeded( idt){
   
-  this.forumapi.gettopicfrom(this.idt).subscribe(response => {
-    
-   this.tpc = response;
-   return this.tpc;
-   
-    
-  })
+  
 
 
 
@@ -192,4 +223,17 @@ const formData = new FormData();
     
 
   }
+
+
+  sendmail(desce,subj){
+
+    console.log(desce,subj)
+    const mail = {
+      subject: subj,
+      sendermail: this.apiUser.getLoggedInUser().email,
+      content: desce,
+      passworddd : this.apiUser.getLoggedInUser().password
+    };
+    this.forumapi.Contactsupport(mail).subscribe()
+        }
 }

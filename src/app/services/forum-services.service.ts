@@ -95,7 +95,12 @@ export class ForumServicesService {
           )
       }
 
-
+      Contactsupport(data :any): Observable<any> {
+        return this.http.post(this.base_path + "/contact/mail",JSON.stringify(data),this.httpOptions).pipe(
+          retry(1),
+          catchError(this.handleError)
+        )
+      }
 
       getallThreadsfromid(id): Observable<any> {
         return this.http

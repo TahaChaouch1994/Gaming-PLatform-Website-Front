@@ -137,6 +137,7 @@ export class LoginComponent implements OnInit
             user.lastName = response["lastName"];
             user.lastActive = new Date();
             user.activity = "ONLINE";
+            user.forumstate = response["forumstate"]
             localStorage.setItem("geov_user", JSON.stringify(user));
             this.apiUser.updateUserActvity(user).subscribe(secondResponse => {
               this.router.navigateByUrl("/").then(() => {
@@ -158,6 +159,7 @@ export class LoginComponent implements OnInit
             user.lastName = response["lastName"];
             user.lastActive = new Date();
             user.activity = "ONLINE";
+            user.forumstate = response["forumstate"]
             sessionStorage.setItem("geov_user", JSON.stringify(user));
             this.apiUser.updateUserActvity(user).subscribe(secondResponse => {
               this.router.navigateByUrl("/").then(() => {

@@ -1,5 +1,6 @@
   <div class="nk-widget nk-widget-highlighted">
-          <h4 class="nk-widget-title"><span><span class="text-main-1"></span> Subscription</span></h4></div>
+          <h4 class="nk-widget-title"><span><span class="text-main-1"></span> Subscription</span></h4>
+  </div>
           <div class="nk-widget-content">
              <div class="nk-post-by">
                 <img [src]="avatarUrl" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="35"> <a href="https://nkdev.info/"> </a>
@@ -38,14 +39,18 @@ Instantly unlock your first Sub Badge and show your support.
                         <table class="table">
                             <tr>
                               <th scope="col"> 1-year Subscriber </th>
-                              <th class="mat-dialog-actions">  <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="submitsubscribe3()">Subscribe  $40.99</button></th>
+                             <th class="mat-dialog-actions">  <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="submitsubscribe3()">Subscribe  $40.99</button></th>
                             </tr>
                         </table>
                     </mat-card>
              </div>
-             <div class="nk-gap-2"></div>
-            
+             <div class="alert" [class.visible]="isVisible"> 
+            <p>Are you sure you want to buy your Pro subscription for {{description}}</p> 
+              <th class="mat-dialog-actions"><tr><td> <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="yes()">yes</button></td>
+                <td> <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="no()">no</button></td></tr>
+            </div>
           </div>
+        
        
    
   

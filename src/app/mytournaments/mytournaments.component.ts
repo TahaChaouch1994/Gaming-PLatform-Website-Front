@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { TournamentService } from '../services/tournament.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { Tournament } from '../models/tournament';
+import { UserApiService } from '../services/user-api.service';
 
 @Component({
   selector: 'app-mytournaments',
@@ -11,13 +12,13 @@ import { Tournament } from '../models/tournament';
 })
 export class MytournamentsComponent implements OnInit {
 
-  constructor(private http: HttpClient,private tourService : TournamentService,private router: Router) { }
+  constructor(private http: HttpClient,private tourService : TournamentService,private router: Router,private userApi: UserApiService) { }
 
  public hell = [];
  public hell2 = [];
  public hell3 = [];
  public test =true;
- iduser = "5e4a89793d2c1f100cc86574";
+ iduser = this.userApi.getLoggedInUser().id_user;
 
 
   ngOnInit() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TournamentService } from '../services/tournament.service';
 import { Jointournament } from '../models/jointournament';
+import { UserApiService } from '../services/user-api.service';
 
 @Component({
   selector: 'app-get-tournament-by-key',
@@ -13,7 +14,7 @@ export class GetTournamentByKeyComponent implements OnInit {
 
 
 
-  seconduserId= "5e4a89793d2c1f100cc86574";
+  seconduserId= this.userApi.getLoggedInUser().id_user;
  // seconduserId= "5e4fff742770c90b8cf21258";
   //seconduserId= "5e514f23e4d2fc262d4b08f7";
   //seconduserId= "7e514f23e4d2fc262d4b08f7";
@@ -30,7 +31,7 @@ export class GetTournamentByKeyComponent implements OnInit {
   firstprivatekey= '7E465C95AF3B3741772865424973398A9A02A7680EADACD89CDC4ACD22A907B9';
   secondpublickey= '0xb1103661bA1736EC0C83931ce12851158b62875d';
   
-  constructor(private route: ActivatedRoute, private router: Router,private tourService : TournamentService) {
+  constructor(private route: ActivatedRoute, private router: Router,private tourService : TournamentService,private userApi: UserApiService ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.dataTournament;

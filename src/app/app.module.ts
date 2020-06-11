@@ -57,7 +57,7 @@ import { ChatMessageComponent } from './chat-message/chat-message.component';
 import { MyEmojiComponent } from './my-emoji/my-emoji.component';
 import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { MytournamentsComponent } from './mytournaments/mytournaments.component';

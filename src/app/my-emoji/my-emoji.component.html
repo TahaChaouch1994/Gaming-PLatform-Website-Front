@@ -19,25 +19,38 @@
    
      <div class="col">
        <button (click)="addgif()" class="nk-btn nk-btn-rounded nk-btn-color-main-1">addd photo</button>&nbsp;
-                         
-    <img [src]="uploader" onError="this.src='assets/images/team-1.jpg'">
+       <img [src]="uploader" onError="this.src='assets/images/team-1.jpg'">
+       <button (click)="telecharger()" data-dismiss="modal">telecharger</button>
      
      </div>
      <div class="col">
        <div class="file-upload">
-         <input type="file" name="image" ng2FileSelect [uploader]="uploader" accept="image/x-png,image/gif,image/jpeg" />
-         <button type="button" class="nk-btn nk-btn-rounded nk-btn-color-main-1" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-           Upload
-         </button>
+        <div class="form-group">
+          <input  type="file" name="image" (change)="fileProgress($event)" />
+      </div>
+      <div *ngIf="fileUploadProgress">
+          Upload progress: {{ fileUploadProgress }}
+      </div>
+      <div class="image-preview mb-3" *ngIf="previewUrl">
+          <img [src]="previewUrl" height="100" />                 
+      </div>
+
+      <div class="mb-3" *ngIf="uploadedFilePath">
+          {{uploadedFilePath}}
+      </div>
+      <button (click)="addimage()" data-dismiss="modal">ajouter image</button>
+     
        </div>
       </div>
    </div>
    <div class="row align-items-end">
  
      <div class="col">
-       <div class="pop"> <h5>image</h5> </div>
+    <td *ngFor="let emojimage of emojimages">  <div class="pop"><img height="50" width="50" src="http://localhost:1337/emoji/{{emojimage}}.gif"> </div></td>
  
      </div>
    
    </div>
+  <td><img  ></td>
+  
  </div>

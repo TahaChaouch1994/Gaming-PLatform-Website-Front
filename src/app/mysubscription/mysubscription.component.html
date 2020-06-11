@@ -3,7 +3,7 @@
     <li><span>Subscriptions</span></li>
 </ul>
 <div class="nk-gap-12">
-    <table class="table table-striped">
+    <table class="table table-dark">
         <thead>
         <tr>
           <th scope="col">Streamer </th>
@@ -13,13 +13,15 @@
         </thead>
         <tbody>
         <tr *ngFor="let Subscription of Subscriptions; index as i">
-         
-          <td class="orange">
-           
-            {{ Subscription.idstreamer }}
+      
+          <td>
+            <a [routerLink]="['/streamvideo']" [queryParams]="{id:Subscription.idstreamer}">
+            {{ Subscription.nomstreamer }}
+          </a>
           </td>
           <td>{{Subscription.dateex | date:'mediumDate'}}</td>
           <td>{{ Subscription.level }}</td>
+       
         </tr>
         </tbody>
       </table>

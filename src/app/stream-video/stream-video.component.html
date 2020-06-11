@@ -3,7 +3,7 @@
        <li class="nav-item">
           <a class="nav-link active" href="#profile-1-1" role="tab" data-toggle="tab">Stream</a>
        </li>
-       <li class="nav-item">
+       <li [hidden]="!monprofil" class="nav-item">
           <a class="nav-link" href="#profile-1-2" role="tab" data-toggle="tab">ADD chat images</a>
        </li>
     </ul>
@@ -19,9 +19,9 @@
                       <div class="nk-post-by">
                          <img [src]="avatarUrl" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="35"> <a href="https://nkdev.info/"> {{ user.username }}</a>
                          <div class="nk-post-categories">
-                            <button *ngIf="canSendRequest" (click)="addAsFriend()" class="nk-btn nk-btn-rounded nk-btn-color-main-1">{{ addFriendButtonText }}</button>&nbsp;
-                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="Follow()">{{btn_Follow}}</button>&nbsp;
-                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" (click)="Subscribe()">{{btn_Subscribe}}</button>
+                            <button *ngIf="canSendRequest"[hidden]="!inboundClick" (click)="addAsFriend()" class="nk-btn nk-btn-rounded nk-btn-color-main-1">{{ addFriendButtonText }}</button>&nbsp;
+                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="Follow()"[hidden]="!inboundClick" >{{btn_Follow}}</button>&nbsp;
+                            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" (click)="Subscribe()"[hidden]="!inboundClick">{{btn_Subscribe}}</button>
                          </div>
                       </div>
                       <div class="nk-gap-2"></div>
@@ -51,7 +51,74 @@
                    <h4 class="nk-widget-title"><span><span class="text-main-1">Chat du</span> Stream</span></h4>
                    <div class="nk-widget-content">
                             
-            <app-chat-message></app-chat-message>
+          
+
+<div class="container">
+   <div >
+       <div>
+           <div class="panel panel-primary">
+               <div class="panel-heading">
+                   <span class="glyphicon glyphicon-comment"></span>
+               </div>
+               <div class="panel-body">
+                   <ul class="chat">
+                       <li *ngFor="let x of msgList" class="left clearfix"><span class="chat-img pull-left">
+                           <img [src]="avatarchat" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="20">
+                       </span>
+                           <div class="chat-body clearfix">
+                               <div class="header">
+                                   <strong class="primary-font">{{x.user}}</strong> <small class="pull-right text-muted">
+                                       <span class="glyphicon glyphicon-time"></span>{{x.date}}</small>
+                               </div>
+                               <div *ngIf="x.type == 'text'"> <p>
+                                {{x.msg}}
+                               </p>
+                               </div>
+                               <div *ngIf="x.type == 'image'">
+                                   <img [src]=x.msg onError="this.src='assets/images/team-1.jpg'"width="50">
+                               </div>
+                           </div>
+                       </li>
+                      
+                   </ul>
+               </div>
+               <div class="panel-footer">
+                   <i class='attachment'
+                   (click)="toggled = !toggled"
+                   [(emojiPickerIf)]="toggled"
+                   [emojiPickerDirection]="'top'"
+                   (emojiPickerSelect)="handleSelection($event)">😄</i>
+                <i [hidden]="issubscribe"(click)="newemoji()">🔥</i>
+                
+                   <div class="input-group">
+
+                    <input [(ngModel)]="msg" id="btn-input" type="text" class="form-control input-sm" [ngModelOptions]="{standalone: true}"
+                       (keypress)="IsTyping()" placeholder="Write your message..."  [disabled]="isDisabled" (keyup.enter)="sendMessage()" />
+                       <span class="input-group-btn">
+                           <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" id="btn-chat"(click)="sendMessage()" >
+                               Send</button>
+                       </span>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <div class="alert" [class.visible]="isVisible" click="closealert()"> 
+       <div class="ex1">
+      <tr>
+           <td *ngFor="let emojimage of emojimages" >
+             <span (click)="sendImage(emojimage)">    <div class="pop"><img height="50" src="http://localhost:1337/emoji/{{emojimage}}.gif"> </div>
+           </span> 
+           </td>
+
+           
+       </tr>
+</div>
+       </div>
+ 
+</div>
+           
                    </div>
                 </div>
              </div>
@@ -66,6 +133,7 @@
              </div>
           </div>
        </div>
+
     </div>
  </div>
  

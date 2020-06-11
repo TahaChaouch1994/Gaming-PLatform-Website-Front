@@ -20,6 +20,9 @@
                                 <p>
                                  {{x.msg}}
                                 </p>
+                                <div *ngIf="x.type == 'image'">
+                                    <img [src]=x.msg onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="20">
+                                </div>
                             </div>
                         </li>
                        
@@ -31,6 +34,7 @@
                     [(emojiPickerIf)]="toggled"
                     [emojiPickerDirection]="'top'"
                     (emojiPickerSelect)="handleSelection($event)">😄</i>
+                    <i (click)="newemoji()">🔥</i>
                     <div class="input-group">
                         <input [(ngModel)]="msg" id="btn-input" type="text" class="form-control input-sm" [ngModelOptions]="{standalone: true}"
                         (keypress)="IsTyping()" placeholder="Write your message..."/>
@@ -43,4 +47,19 @@
             </div>
         </div>
     </div>
+
+    <div class="alert" [class.visible]="isVisible"> 
+        <div class="ex1">
+       <tr>
+            <td *ngFor="let image of images" >
+              <span (click)="sendImage(image)"> <img [src]="avatarUrl" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="20">
+                {{image}}
+            </span> 
+            </td>
+
+            
+        </tr>
+</div>
+        </div>
+  
 </div>

@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Subscription } from '../models/subscription';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubscribeApiService {
 
-  base_path = 'http://127.0.0.1:1337';
+  base_path = 'http://localhost:1337';
   
   constructor(private http: HttpClient) { }
  
@@ -95,6 +96,16 @@ export class SubscribeApiService {
         catchError(this.handleError)
       )
   }
+
+  checksubscription(iduser,idstreamer): Observable<Subscription[]>
+  {
+    return this.http
+    .get<Subscription[]>(this.base_path+"/subscribe/user/"+iduser+"/"+idstreamer, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
   subscribe(item): Observable<string> {
     return this.http
       .post<string>(this.base_path+"/profil/abonnement/", JSON.stringify(item), this.httpOptions)
@@ -103,6 +114,16 @@ export class SubscribeApiService {
         catchError(this.handleError)
       )
   }
+  
+  getUserbyId(id): Observable<User> {
+    return this.http
+    .get<User>(this.base_path+"/user/find?id="+id, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+  
 
 /*
   deleteFriend(user, friend): Observable<string>
@@ -113,5 +134,5 @@ export class SubscribeApiService {
         retry(1),
         catchError(this.handleError)
       )
-  }*/0
+  }*/
 }

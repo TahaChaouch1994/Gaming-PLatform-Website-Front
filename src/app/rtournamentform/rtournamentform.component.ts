@@ -3,6 +3,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {GameRegion} from './gameregion';
 import { TournamentService } from '../services/tournament.service';
 import { Router } from '@angular/router';
+import { UserApiService } from '../services/user-api.service';
+import { WalletApiService } from '../services/wallet-api.service';
 
 @Component({
   selector: 'app-rtournamentform',
@@ -40,7 +42,7 @@ export class RtournamentformComponent implements OnInit {
    message = this.http.get<any[]>('http://localhost:1337/tournament');
   
 
-  constructor(private http: HttpClient,private tourService : TournamentService,private router: Router) { }
+  constructor(private http: HttpClient,private tourService : TournamentService,private router: Router,  private userApi: UserApiService,private walletApi : WalletApiService ) { }
 
   ngOnInit() {
 
@@ -48,7 +50,7 @@ export class RtournamentformComponent implements OnInit {
   }
 
 
-  iduser="5e4a89793d2c1f100cc86574";
+  iduser= this.userApi.getLoggedInUser().id_user;
   gamename='League Of Legends';
   type='';
   tournamentname='';

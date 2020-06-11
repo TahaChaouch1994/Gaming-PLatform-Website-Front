@@ -129,6 +129,7 @@ const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
     FormsModule,  
     ReactiveFormsModule,
      HttpClientModule, 
+    
   
     NgxPaginationModule,
     UserIdleModule.forRoot({idle: 10, timeout: 20, ping: 120}),

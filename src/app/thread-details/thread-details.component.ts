@@ -11,6 +11,7 @@ import { Thread } from '../models/thread';
 import { Replypost } from '../models/replypost';
 import { Replyreport } from '../models/replyreport';
 import { FormGroup, FormControl, Validators} from '@angular/Forms';
+import { on } from 'cluster';
 @Component({
   selector: 'app-thread-details',
   templateUrl: './thread-details.component.html',
@@ -71,54 +72,54 @@ export class ThreadDetailsComponent implements OnInit {
     })
 
      this.forumapi.getallpostsfromthreadid(this.idth).subscribe(item=>{
-   
-this.listposts  = item;
+      console.log(item)
+        this.listposts  = item;
 
       this.listposts.forEach(element => {
         
-        let repz : Replypost
-        repz= new Replypost()
-        repz.id = element._id
+      /*   let repz : Replypost
+        repz= new Replypost() */
+        
+    /*     repz.id = element._id
         repz.replytime = element.replytime
           repz.content = element.content;
           repz.sender = element.sender
           repz.threadid= element.threadid;
           repz.likes = element.likes 
           repz.dislikes = element.dislikes 
-          repz.cani = false;
+      
 
-        let m : number ; 
-        
+        let m : number ;  */
+         console.log(element)
 
         this.forumapi.postlikecheck(this.apiUser.getLoggedInUser().id_user,element._id).subscribe(p=>{
-         
-            console.log(element.sender.id_user)
-           
-          if(p == 0  )
+          console.log(p.length , "teeeeeest")
+        
+           if((p.length == 0) && (element.sender.id_user != this.apiUser.getLoggedInUser().id_user)  )
          {
 
-          repz.cani = true;
+          element.cani = true;
          } 
          else{
-          repz.cani = false;
+          element.cani = false;
         }          
-        }
-        
-        )
-
         if(element.sender.id_user === this.apiUser.getLoggedInUser().id_user){
-         repz.cani = false
+          element.cani = false
+         
+         }
         
-        }
-        else{
-          repz.cani = true 
-        }
+    
+         console.log(this.listposts,"kiki")
+
+        
+      })
+
+      
           
-        this.listpostss.push(repz)
+     
         
       });
    
-      
      })
      
 this.getthreadneeded();
@@ -164,15 +165,47 @@ this.getthreadneeded();
                 rep.user = this.apiUser.getLoggedInUser().id_user
                 rep.post = item._id
                 this.forumapi.addliketopost(aze,likez).subscribe();
-                this.forumapi.addpostraect(rep).subscribe();
+                this.forumapi.addpostraect(rep).subscribe(afterlike=>{
+                  this.ngOnInit();  
+                });
                 setTimeout(() => {  }, 3000);
-                this.ngOnInit();  
+               
               });
               
              
     }
   
-   
+    dislikethread(aze){
+     
+      this.forumapi.getpostfromid(aze._id).subscribe(item=>{
+
+                let likez = item.likes  ;
+                likez--;
+                
+                let rep : Postreact
+                rep= new Postreact()
+                rep.user = this.apiUser.getLoggedInUser().id_user
+                rep.post = item._id
+                if(item.sender.id_user != this.apiUser.getLoggedInUser().id_user)
+                {
+                  console.log(aze._id)
+                this.forumapi.addliketopost(aze._id,likez).subscribe();
+                this.forumapi.postlikecheck(this.apiUser.getLoggedInUser().id_user,aze._id).subscribe(p=>{
+                  console.log(p[0]._id , "teeeeeest")
+                
+                this.forumapi.removepostreact(p[0]._id ).subscribe(afterlike=>{
+                  this.ngOnInit();  
+                });
+              })
+              }
+                setTimeout(() => {  }, 3000);
+           
+              });
+              
+              }
+            
+          
+    
     adddislike(aze){
      
 
@@ -219,7 +252,7 @@ this.ngOnInit();
 
     sendmail(desce,subj){
 
-console.log(desce,subj)
+
 const mail = {
   subject: subj,
   sendermail: this.apiUser.getLoggedInUser().email,

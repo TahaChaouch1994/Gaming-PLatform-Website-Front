@@ -5,6 +5,7 @@ import { TournamentService } from '../services/tournament.service';
 import { Router } from '@angular/router';
 import { UserApiService } from '../services/user-api.service';
 import { WalletApiService } from '../services/wallet-api.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-rtournamentform',
@@ -95,12 +96,12 @@ export class RtournamentformComponent implements OnInit {
 
 
 
-  justClick() {
+  justClick(pkey) {
     this.tournamentfee = parseInt(this.maxteams) * parseInt(this.entryfee)/2;
 
     this.http.get<any>('http://localhost:1337/tournament/createtournament/'+this.iduser+'/'+this.gamename+'/'+this.type+'/'+this.tournamentname+'/'+this.startdate+'/'+this.starttime+'/'+this.selectedDay+'/'+this.selectedMap+'/'+this.selectedFormat+'/'+this.entry+'/'+this.entryfee+'/'+this.tournamentfee+'/'+this.lastPrice+'/'+this.minteams+'/'+this.maxteams+'/'+this.createtype+'/'+this.codeAccess+'/'+this.reason).subscribe();
   
-   this.tourService.transactionESDtournament(this.firstpublickey,this.firstprivatekey,this.secondpublickey,this.tournamentfee+this.entryfee)
+   this.tourService.transactionESDtournament(this.firstpublickey,pkey,this.secondpublickey,this.tournamentfee+this.entryfee)
    .subscribe();
 
 
@@ -124,6 +125,9 @@ export class RtournamentformComponent implements OnInit {
     .subscribe(data => this.hel = data);
 
   }
+
+
+
 
  
 

@@ -183,9 +183,10 @@
                  title="Are you sure ?"
                  text="This Tournament will Cost you : {{lastPrice}}  USD."   
                  icon="question"
+                 input = "text"
                  [showCancelButton]="true"
                  [focusCancel]="true"
-                 (confirm)="justClick(file)"
+                 (confirm)="justClick($event)"
                  >
             </swal>
 

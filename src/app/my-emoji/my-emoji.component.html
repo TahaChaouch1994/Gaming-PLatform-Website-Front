@@ -18,9 +18,10 @@
    <div class="row align-items-center">
    
      <div class="col">
-       <button (click)="addgif()" class="nk-btn nk-btn-rounded nk-btn-color-main-1">addd photo</button>&nbsp;
-       <img [src]="uploader" onError="this.src='assets/images/team-1.jpg'">
-       <button (click)="telecharger()" data-dismiss="modal">telecharger</button>
+     
+       <img [src]="uploader" Height=200 onError="this.src='assets/images/teammate-1.png'">
+       <div>  <button (click)="addgif()">addd photo</button>&nbsp;</div>
+       <button (click)="telecharger()" data-dismiss="modal" class="nk-btn nk-btn-rounded nk-btn-color-main-1">telecharger</button>
      
      </div>
      <div class="col">
@@ -38,7 +39,7 @@
       <div class="mb-3" *ngIf="uploadedFilePath">
           {{uploadedFilePath}}
       </div>
-      <button (click)="addimage()" data-dismiss="modal">ajouter image</button>
+      <button (click)="addimage()" data-dismiss="modal"class="nk-btn nk-btn-rounded nk-btn-color-main-1">ajouter image</button>
      
        </div>
       </div>

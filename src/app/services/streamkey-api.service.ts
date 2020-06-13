@@ -57,7 +57,7 @@ export class StreamkeyApiService {
   getAllStreams(key): Observable<string>
   {
     return this.http
-    .get<string>("http://localhost:1338/api/streams", this.httpOptions)
+    .get<string>("http://149.202.41.135:1338/api/streams", this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

@@ -1,56 +1,51 @@
-  <div class="nk-widget nk-widget-highlighted">
-          <h4 class="nk-widget-title"><span><span class="text-main-1"></span> Subscription</span></h4>
-  </div>
-          <div class="nk-widget-content">
-             <div class="nk-post-by">
-                <img [src]="avatarUrl" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="35"> <a href="https://nkdev.info/"> </a>
-                    <br>  <br> <p>Subscriptions are a great way to directly support the streamers you love and get great benefits too!
-                    </p>  
-                    <h6><span class="text-main-1">Benefits</span></h6>
-                    <p>
+<div class="nk-widget nk-widget-highlighted">
+  <h4 class="nk-widget-title"><span><span class="text-main-1"></span> Subscription</span></h4></div>
+  <div class="nk-widget-content">
+     <div class="nk-post-by">
+        <img [src]="avatarUrl" onError="this.src='assets/images/team-1.jpg'" class="rounded-circle" width="35"> <a href="https://nkdev.info/"> </a>
+            <br>  <br> <p>Subscriptions are a great way to directly support the streamers you love and get great benefits too!
+            </p>  
+            <h6><span class="text-main-1">Benefits</span></h6>
+            <p>
 Chat during Subscriber-Only Mode.
 <br>
 Have  Exclusive Emotes
 <br>
 Instantly unlock your first Sub Badge and show your support.
-                    </p>
-                    <mat-card>
+            </p>
+            <mat-card>
 
 
-                        <table class="table">
-                            <tr>
-                              <th scope="col"> 1-Month Subscriber </th>
-                              <th class="mat-dialog-actions">  <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="submitsubscribe1()">Subscribe      $4.99</button></th>
-                            </tr>
-                        </table>
-                    </mat-card>
-                    <br>
-                    <mat-card>
-                        <table class="table">
-                            <tr>
-                              <th scope="col"> 6-Month Subscriber </th>
-                              <th class="mat-dialog-actions">  <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="submitsubscribe2()">Subscribe  $24.99</button></th>
-                            </tr>
-                        </table>
-                    </mat-card>
-                    <br>
-                    <mat-card>
+                <table class="table">
+                    <tr>
+                      <th scope="col"> 1-Month Subscriber </th>
+                      <th class="mat-dialog-actions">  <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="submitsubscribe1()">Subscribe      $4.99</button></th>
+                    </tr>
+                </table>
+            </mat-card>
+            <br>
+            <mat-card>
+                <table class="table">
+                    <tr>
+                      <th scope="col"> 6-Month Subscriber </th>
+                      <th class="mat-dialog-actions">  <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="submitsubscribe2()">Subscribe  $24.99</button></th>
+                    </tr>
+                </table>
+            </mat-card>
+            <br>
+            <mat-card>
 
-                        <table class="table">
-                            <tr>
-                              <th scope="col"> 1-year Subscriber </th>
-                             <th class="mat-dialog-actions">  <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="submitsubscribe3()">Subscribe  $40.99</button></th>
-                            </tr>
-                        </table>
-                    </mat-card>
-             </div>
-             <div class="alert" [class.visible]="isVisible"> 
-            <p>Are you sure you want to buy your Pro subscription for {{description}}</p> 
-              <th class="mat-dialog-actions"><tr><td> <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="yes()">yes</button></td>
-                <td> <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="no()">no</button></td></tr>
-            </div>
-          </div>
-        
-       
-   
-  
+                <table class="table">
+                    <tr>
+                      <th scope="col"> 1-year Subscriber </th>
+                      <th class="mat-dialog-actions">  <button class="nk-btn nk-btn-rounded nk-btn-color-main-1"(click)="submitsubscribe3()">Subscribe  $40.99</button></th>
+                    </tr>
+                </table>
+            </mat-card>
+     </div>
+     <div class="nk-gap-2"></div>
+    
+  </div>
+
+
+

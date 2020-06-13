@@ -27,6 +27,7 @@ export class StreamVideoComponent implements OnInit {
   msg: string = '';
   userId;
   messageblock;
+  currentuser;
   public isVisible: boolean = false;
   public issubscribe : boolean=false;
   public isDisabled:boolean=false;
@@ -69,6 +70,7 @@ username;
 
     this.route.queryParams.subscribe(params => {
       this.userId = params['id'];
+      this.currentuser=this.userApi.getLoggedInUser().id_user;
       this.avatarUrl = "http://localhost:1337/avatars/"+this.userId+".gif?"+(new Date()).getTime();
       this.avatarchat = "http://localhost:1337/avatars/"+this.userApi.getLoggedInUser().id_user+".jpg?"+(new Date()).getTime();
       let userstreamer=this.userApi.getLoggedInUser().id_user;
@@ -212,7 +214,7 @@ username;
               const videoElement =  <HTMLAudioElement>document.getElementById('videoElement');
               const flvPlayer = FlvJs.createPlayer({
                 type: 'flv',
-                url: 'http://localhost:1338/live/'+response["streamKey"]+'.flv'
+                url: 'http://149.202.41.135:1338/live/'+response["streamKey"]+'.flv'
               });
               flvPlayer.attachMediaElement(videoElement);
               flvPlayer.load();
@@ -273,9 +275,9 @@ username;
   }
   Follow()
   {
-   let currentUser = this.userApi.getLoggedInUser();
+   
     this.followreq.receiver = this.userId;
-    this.followreq.sender =currentUser.id_user;
+    this.followreq.sender =this.currentuser;
     if(this.btn_Follow === 'Follow') { 
      
       delete this.followreq._id;

@@ -69,6 +69,7 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
 import { KeybetmodalComponent } from './keybetmodal/keybetmodal.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { IndexComponent } from './index/index.component';
+import { PaymentSubscriptionComponent } from './payment-subscription/payment-subscription.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
 
@@ -114,7 +115,8 @@ const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
     GetTournamentByKeyComponent,
     SnackbarComponent,
     KeybetmodalComponent,
-    IndexComponent
+    IndexComponent,
+    PaymentSubscriptionComponent
   ],
   imports: [
     MatSnackBarModule,
@@ -150,7 +152,8 @@ const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
     FavorisComponent,
     SubscriptionRequestComponent,
     KeybetmodalComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    PaymentSubscriptionComponent,
   ],
   bootstrap: [AppComponent]
 })

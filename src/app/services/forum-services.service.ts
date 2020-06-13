@@ -185,8 +185,24 @@ export class ForumServicesService {
             catchError(this.handleError)
           )
       }
-
-
+     
+        removepostreact (item): Observable<any> {
+        return this.http
+        .post<string>(this.base_path+"/postreact/remove?id="+item, this.httpOptions)
+        .pipe(
+          retry(1),
+          catchError(this.handleError)
+        )
+      }
+    
+     /* removepostreact(item): Observable<any> {
+        return this.http
+          .post<any>(this.base_path+"/postreact/remove", JSON.stringify(item), this.httpOptions)
+          .pipe(
+            retry(1),
+            catchError(this.handleError)
+          )
+      }*/
       threadlikecheck(userid,threadid): Observable<any> {
         return this.http
           .get<any>(this.base_path+"/thread/checker?id="+userid+"&thread="+threadid, this.httpOptions)
@@ -197,6 +213,7 @@ export class ForumServicesService {
       }
 
       postlikecheck(userid,threadid): Observable<any> {
+        console.log("ahmed",threadid)
         return this.http
           .get<any>(this.base_path+"/post/checker?id="+userid+"&post="+threadid, this.httpOptions)
           .pipe(

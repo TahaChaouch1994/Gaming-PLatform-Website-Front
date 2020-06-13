@@ -45,7 +45,7 @@
 
 
 
-    <li *ngFor="let item of listpostss">
+    <li *ngFor="let item of listposts">
         <div class="nk-forum-topic-author">
             <a href="#">
                 <img src="http://localhost:1337/avatars/{{item.sender.id_user}}.jpg" alt="Witch Murder">
@@ -63,11 +63,11 @@
         </div>
         <div class="nk-forum-topic-footer">
             <span class="nk-forum-topic-date">{{item.replytime | date: 'short'}} {{ item.cani}}</span>
-            <span  class="nk-forum-action-btn">
-                <a class="nk-anchor" *ngIf="item.cani == true"  id="{{item._id}}" (click)="addlike(item.id)"><span class="fa fa-thumbs-up"></span> Like </a>
+            <span  class="nk-forum-action-btn" *ngIf="item.cani" >
+                <a class="nk-anchor"  id="{{item._id}}" (click)="addlike(item._id)"><span class="fa fa-thumbs-up"></span> Like </a>
             </span> 
-            <span  class="nk-forum-action-btn">
-                <a class="nk-anchor" *ngIf="item.cani == false"  ><span class="fab fa-gratipay"     ></span> </a>
+            <span  class="nk-forum-action-btn" *ngIf="!item.cani" >
+                <a class="nk-anchor"   (click)="dislikethread(item)" ><span class="fab fa-gratipay"     ></span> </a>
             </span>
             <span class="nk-forum-action-btn">
                 <a> {{item.likes}}</a>
